@@ -5,7 +5,7 @@ image: "/posts/ab-testing-title-img.png"
 tags: [AB Testing, Hypothesis Testing, Chi-Square, Python]
 ---
 
-In this project we apply Chi-Square Test For Independence (a Hypothesis Test) to assess the performance of two types of mailers that were sent out to promote a new service! 
+In this project, we apply the Chi-Square Test For Independence (a Hypothesis Test) to assess the performance of two types of mailers that were sent out to promote a new service! 
 
 # Table of contents
 
@@ -87,13 +87,13 @@ ___
 <br>
 # Data Overview & Preparation  <a name="data-overview"></a>
 
-In the client database, we have a *campaign_data* table which shows us which customers received each type of "Delivery Club" mailer, which customers were in the control group, and which customers joined the club as a result.
+In the client database, we have a *campaign_data* table which shows us which customers received each type of "Delivery Club" mailer, which customers were in the control group, and which customers joined the club.
 
-For this task, we are looking to find evidence that the Delivery Club signup rate for customers who received "Mailer 1" (low cost) was different to those who received "Mailer 2" (high cost) and thus from the *campaign_data* table we will just extract customers in those two groups, and exclude customers who were in the control group.
+For this task, we are looking to find evidence that the Delivery Club signup rate for customers who received "Mailer 1" (low cost) was different from those who received "Mailer 2" (high cost) and thus from the *campaign_data* table we will just extract customers in those two groups, and exclude customers who were in the control group.
 
 In the code below, we:
 
-* Load in the Python libraries we require for importing the data and performing the chi-square test (using scipy)
+* Load the Python libraries we require for importing the data and performing the chi-square test (using scipy)
 * Import the required data from the *campaign_data* table
 * Exclude customers in the control group, giving us a dataset with Mailer 1 & Mailer 2 customers only
 
@@ -146,7 +146,7 @@ ___
 <br>
 #### State Hypotheses & Acceptance Criteria For Test
 
-The very first thing we need to do in any form of Hypothesis Test is state our Null Hypothesis, our Alternate Hypothesis, and the Acceptance Criteria (more details on these in the section above)
+The very first thing we need to do in any form of Hypothesis Test is stating our Null Hypothesis, our Alternate Hypothesis, and the Acceptance Criteria (more details on these in the section above)
 
 In the code below we code these in explcitly & clearly so we can utilise them later to explain the results.  We specify the common Acceptance Criteria value of 0.05.
 
