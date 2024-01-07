@@ -13,7 +13,6 @@ Our client, a grocery retailer, hired a market research consultancy to append ma
     - [Context](#overview-context)
     - [Actions](#overview-actions)
     - [Results](#overview-results)
-    - [Growth/Next Steps](#overview-growth)
     - [Key Definition](#overview-definition)
 - [01. Data Overview](#data-overview)
 - [02. Modelling Overview](#modelling-overview)
