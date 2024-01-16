@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Image Manipulation with Python
-image: "/posts/camaro_rainbow.jpg"
+image: "/posts/camaro.jpg"
 tags: [Python, Image manipulation]
 ---
 
