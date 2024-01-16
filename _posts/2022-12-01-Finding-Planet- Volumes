@@ -22,41 +22,41 @@ Saturn: 58232	km
 Uranus: 25362 km
 Neptune: 24622 km
 
-First let's start by setting up an array that contains radii of planets.
+First, let's start by setting up an array that contains radii of planets.
 
 ```ruby
 radii = np.array([2439.7, 6051.8, 6371, 3389.7, 69911, 58232, 25362, 24622])
 ```
 
-The volume of sphere is calculated using the formula: 4/3*pi*r^3.
-We could create a loop that iterate through each planet and find the volume of all volumes. But, instead we will use Numpy to see how it can do the job in one swift motion.
+The volume of a sphere is calculated using the formula: 4/3*pi*r^3.
+We could create a loop that iterates through each planet and find the volume of all volumes. But, instead, we will use Numpy to see how it can do the job in one swift motion.
+
+```ruby
+Planet_Volumes=4/3*np.pi*radii**3
+```
+Pretty cool! We are instantly returned the volume of eight planets:
+```ruby
+print(Planet_Volumes)
+>>> [6.08272087e+10 9.28415346e+11 1.08320692e+12 1.63144486e+11 1.43128181e+15 8.27129915e+14 6.83343557e+13 6.25257040e+13]
+```
+But Let's check a cooler thing. I want to overwrite the radii with a one-dimensional array that will contain radii of 1000000 virtual planets between 0 and 1000 km.
+
+```ruby
+radii = np.random.randint(0,1000,1000000)
+```
+
+We will repeat the previous procedure to see how long it takes to apply the volume formula to 1000000 values in our array.
 
 ```ruby
 Planet_Volumes=4/3*np.pi*radii**3
 ```
 
-Let's also create a place where we can store any primes we discover.  A list will be perfect for this job
+Wow! That took no time at all. Fractions of seconds.
+That shows how impressive Numpy is with its mathematical calculations.
 
 ```ruby
-primes_list = []
+print(Planet_Volumes)
+>>> [3.34759213e+09 3.33038143e+08 4.66148014e+08 ... 4.13061327e+08 7.98644794e+06 3.76636713e+08]
 ```
 
-We're going to end up using a while loop to iterate through our list and check for primes, but before we construct that I always it valuable to code up the logic and iterate manually first.  This means I can check that it is working correctly before I set it off to run through everything on it's own
-
-So, we have our set of numbers (called number_range to check all integers between 2 and 20. Let's extract the first number from that set that we want to check as to whether it's a prime. When we check the value we're going to check if it is a prime...if it is, we're going to add it to our list called primes_list...if it isn't a prime we don't want to keep it
-
-There is a method which will remove an element from a list or set and provide that value to us, and that method is called *pop*
-
-```ruby
-print(number_range)
->>> {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
-```
-If we use pop, and assign this to the object called **prime** it will *pop* the first element from the set out of **number_range**, and into **prime**
-
-```ruby
-prime = number_range.pop()
-print(prime)
->>> 2
-print(number_range)
->>> {3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
-```
+In summary, we could use other methods to calculate the volumes of planets as well but using Numpy gave us a really clean and fast method.
