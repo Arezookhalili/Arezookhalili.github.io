@@ -76,7 +76,7 @@ plt.show()
 
 io.imsave('camaro_horizontal_flip.jpg', horizontal_flip)
 ```
-![alt text](/img/posts/camaro_horizontal_flip.png)
+![alt text](/img/posts/camaro_horizontal_flip.jpg)
 
 There is a method that shows us our image with different color channels. We extract the red, green, and blue versions of our image by zeroing out the other color channels instead of cropping them. For that, we create an array of zeros which is the same size as the camaro image, and then fill only the desired color channel with the values of the same color from the actual image. The next thing is to ensure that our data type is unit8 which is the type of data we often want when we deal with images in Numpy. 
 Let's start with the red version of camaro image:
@@ -118,7 +118,7 @@ plt.show()
 
 io.imsave('camaro_rainbow_hstack.jpg', camaro_rainbow)
 ```
-![alt text](/img/posts/camaro_rainbow_hstack.png)
+![alt text](/img/posts/camaro_rainbow_hstack.jpg)
 
 We then will follow similar steps to vertically stack our single-color images on top of each other.
 
@@ -129,7 +129,7 @@ plt.show()
 
 io.imsave('camaro_rainbow_vstack.jpg', camaro_rainbow)
 ```
-![alt text](/img/posts/camaro_rainbow_vstack.png)
+![alt text](/img/posts/camaro_rainbow_vstack.jpg)
 
 Now, we know that the very first value in our range is going to be a prime...as there is nothing smaller than it so therefore nothing else could possible divide evenly into it.  As we know it's a prime, let's add it to our list of primes...
 
