@@ -82,7 +82,7 @@ red[:,:,0]=camaro[:,:,0]
 plt.imshow(red)
 plt.show()
 ```
-![alt text](/img/posts/Blue%20Car.png)
+![alt text](/img/posts/Blue%20Car.png#center)
 
 Next, a green version of the image will be created:
 
@@ -100,8 +100,6 @@ blue=np.zeros(camaro.shape, dtype='uint8')
 blue[:,:,2]=camaro[:,:,2]                     
 plt.imshow(blue)
 plt.show()
-image: "/posts/Blue Car.jpg"
-
 ```
 If we use pop, and assign this to the object called **prime** it will *pop* the first element from the set out of **number_range**, and into **prime**
 
