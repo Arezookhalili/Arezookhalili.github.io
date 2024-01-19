@@ -5,7 +5,7 @@ image: "/posts/camaro.jpg"
 tags: [Python, Image manipulation]
 ---
 
-In this post I'm going to visualize working with arrays. for that, we will play with a Camaro car image and try to manipulate it and create new images!
+In this post, I'm going to visualize working with arrays. for that, we will play with a Camaro car image and try to manipulate it and create new images!
 
 Let's get into it!
 
@@ -77,7 +77,7 @@ io.imsave('camaro_horizontal_flip.jpg', horizontal_flip)
 ![alt text](/img/posts/camaro_horizontal_flip.jpg)
 
 There is a method that shows us our image with different color channels. We extract the red, green, and blue versions of our image by zeroing out the other color channels instead of cropping them. For that, we create an array of zeros which is the same size as the Camaro image, and then fill only the desired color channel with the values of the same color from the actual image. The next thing is to ensure that our data type is unit8 which is the type of data we often want when we deal with images in Numpy. 
-Let's start with the red version of Camaro image:
+Let's start with the red version of the Camaro image:
 
 ```ruby
 red=np.zeros(camaro.shape, dtype='uint8')    
@@ -135,4 +135,4 @@ io.imsave('camaro_rainbow_vstack.jpg', camaro_rainbow)
 ```
 ![alt text](/img/posts/camaro_rainbow_vstack.jpg)
 
-I think it is so impressive what we can do to images using Numpy alone! Although there are dedicated packages for image manipulation, but doing it in Numpy gives a nice visual example of what we are doing when we are working with arrays.
+I think it is so impressive what we can do to images using Numpy alone! Although there are dedicated packages for image manipulation, doing it in Numpy gives a nice visual example of what we are doing when we are working with arrays.
