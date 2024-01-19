@@ -34,6 +34,8 @@ Let's take a look at the structure of our image.
 camaro.shape
 ```
 
+It has a shape of 1200 rows and 1600 columns of pixels showing that our picture is wider than it is tall. Also, it is a three-dimensional array as it shows a color image. 
+
 Now, let's check our camaro image:
 
 ```ruby
@@ -55,9 +57,24 @@ Then, we save our image before proceeding to the next step.
 io.imsave('camaro_cropped.jpg', cropped)
 ```
 
-It has a shape of 1200 rows and 1600 columns of pixels showing that our picture is wider than it is tall. Also, it is a three-dimensional array as it shows a color image. 
+We're going to vertically and horizontally flip our image to get familiar with another toolkit.
 
-We're going to end up using a while loop to iterate through our list and check for primes, but before we construct that I always it valuable to code up the logic and iterate manually first.  This means I can check that it is working correctly before I set it off to run through everything on it's own
+```ruby
+vertical_flip=camaro[::-1,:,:]
+plt.imshow(vertical_flip)
+plt.show()
+
+io.imsave('camaro_vertical_flip.jpg', vertical_flip)
+
+horizontal_flip=camaro[:,::-1,:]
+plt.imshow(horizontal_flip)
+plt.show()
+
+io.imsave('camaro_horizontal_flip.jpg', horizontal_flip)
+```
+
+
+end up using a while loop to iterate through our list and check for primes, but before we construct that I always it valuable to code up the logic and iterate manually first.  This means I can check that it is working correctly before I set it off to run through everything on it's own
 
 So, we have our set of numbers (called number_range to check all integers between 2 and 20. Let's extract the first number from that set that we want to check as to whether it's a prime. When we check the value we're going to check if it is a prime...if it is, we're going to add it to our list called primes_list...if it isn't a prime we don't want to keep it
 
