@@ -82,7 +82,7 @@ red[:,:,0]=camaro[:,:,0]
 plt.imshow(red)
 plt.show()
 ```
-![alt text](/img/posts/lin-reg-feature-selection-plot.png "Linear Regression Feature Selection Plot")
+![alt text](/img/posts/Blue%20Car.png)
 
 Next, a green version of the image will be created:
 
