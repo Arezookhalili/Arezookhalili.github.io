@@ -2,7 +2,7 @@
 layout: post
 title: Image Manipulation with Python
 image: "/posts/camaro.jpg"
-tags: [Python, Image manipulation]
+tags: [Python, Numpy, Image manipulation]
 ---
 
 In this post, I'm going to visualize working with arrays. for that, we will play with a Camaro car image and try to manipulate it and create new images!
