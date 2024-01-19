@@ -13,18 +13,18 @@ Let's get into it!
 
 ---
 
-First let's start by setting up a variable that will act as the upper limit of numbers we want to search through. We'll start with 20, so we're essentially wanting to find all prime numbers that exist that are equal to or smaller than 20
+First, let's start by importing all the functionalities that we require. 
 
 ```ruby
-n = 20
+import numpy as np
+from skimage import io 
+import matplotlib.pyplot as plt
 ```
 
-The smallest true Prime number is 2, so we want to start by creating a list of numbers than need checking so every integer between 2 and what we set above as the upper bound which in this case was 20. We use n+1 as the range logic is not inclusive of the upper limit we set there
-
-Instead of using a list, we're going to use a set.  The reason for this is that sets have some special functions that will allow us to eliminate non-primes during our search.  You'll see what I mean soon...
+In the next step, we will import the image that we are going to work on. 
 
 ```ruby
-number_range = set(range(2, n+1))
+camaro = io.imread ("camaro.jpg")
 ```
 
 Let's also create a place where we can store any primes we discover.  A list will be perfect for this job
