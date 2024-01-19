@@ -112,13 +112,24 @@ plt.show()
 Now, Let's do something funny. We are going to use the stacking function to horizontally stack our single-color images beside each other.
 
 ```ruby
+camaro_rainbow=np.hstack((red,green,blue))    
+plt.imshow(camaro_rainbow)
+plt.show()
+
+io.imsave('camaro_rainbow_hstack.jpg', camaro_rainbow)
+```
+![alt text](/img/posts/camaro_rainbow_hstack.png)
+
+We then will follow similar steps to vertically stack our single-color images on top of each other.
+
+```ruby
 camaro_rainbow=np.vstack((red,green,blue))    
 plt.imshow(camaro_rainbow)
 plt.show()
 
-io.imsave('camaro_rainbow.jpg', camaro_rainbow)
+io.imsave('camaro_rainbow_vstack.jpg', camaro_rainbow)
 ```
-![alt text](/img/posts/camaro_rainbow.png)
+![alt text](/img/posts/camaro_rainbow_vstack.png)
 
 Now, we know that the very first value in our range is going to be a prime...as there is nothing smaller than it so therefore nothing else could possible divide evenly into it.  As we know it's a prime, let's add it to our list of primes...
 
