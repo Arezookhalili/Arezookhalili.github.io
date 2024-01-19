@@ -109,16 +109,16 @@ plt.show()
 ```
 ![alt text](/img/posts/Blue%20Car.png)
 
-
-If we use pop, and assign this to the object called **prime** it will *pop* the first element from the set out of **number_range**, and into **prime**
+Now, Let's do something funny. We are going to use the stacking function to horizontally stack our single-color images beside each other.
 
 ```ruby
-prime = number_range.pop()
-print(prime)
->>> 2
-print(number_range)
->>> {3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+camaro_rainbow=np.vstack((red,green,blue))    
+plt.imshow(camaro_rainbow)
+plt.show()
+
+io.imsave('camaro_rainbow.jpg', camaro_rainbow)
 ```
+![alt text](/img/posts/camaro_rainbow.png)
 
 Now, we know that the very first value in our range is going to be a prime...as there is nothing smaller than it so therefore nothing else could possible divide evenly into it.  As we know it's a prime, let's add it to our list of primes...
 
