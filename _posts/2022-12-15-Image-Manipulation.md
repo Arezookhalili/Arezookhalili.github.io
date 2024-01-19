@@ -21,17 +21,41 @@ from skimage import io
 import matplotlib.pyplot as plt
 ```
 
-In the next step, we will import the image that we are going to work on. 
+In the next step, we will import the image that we are going to work on. The image will be in the form of a Numpy array as images in a digital sense are just a series of numbers representing the intensity of each pixel. In a color image, we have intensity values for each of the three color channels red, green, and blue (RGB).
 
 ```ruby
 camaro = io.imread ("camaro.jpg")
+print(camaro)
 ```
 
-Let's also create a place where we can store any primes we discover.  A list will be perfect for this job
+Let's take a look at the structure of our image.
 
 ```ruby
-primes_list = []
+camaro.shape
 ```
+
+Now, let's check our camaro image:
+
+```ruby
+plt.imshow(camaro)
+plt.show()
+```
+
+Here, we want to slice the array to crop our image and keep the car only.
+
+```ruby
+cropped=camaro[350:1100,200:1400,:]         
+plt.imshow(cropped)
+plt.show()
+```
+
+Then, we save our image before proceeding to the next step.
+
+```ruby
+io.imsave('camaro_cropped.jpg', cropped)
+```
+
+It has a shape of 1200 rows and 1600 columns of pixels showing that our picture is wider than it is tall. Also, it is a three-dimensional array as it shows a color image. 
 
 We're going to end up using a while loop to iterate through our list and check for primes, but before we construct that I always it valuable to code up the logic and iterate manually first.  This means I can check that it is working correctly before I set it off to run through everything on it's own
 
