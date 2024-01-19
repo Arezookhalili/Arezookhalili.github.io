@@ -56,6 +56,7 @@ Then, we save our image before proceeding to the next step.
 ```ruby
 io.imsave('camaro_cropped.jpg', cropped)
 ```
+![alt text](/img/posts/camaro_cropped.png)
 
 We're going to vertically and horizontally flip our image to get familiar with another toolkit.
 
@@ -65,13 +66,17 @@ plt.imshow(vertical_flip)
 plt.show()
 
 io.imsave('camaro_vertical_flip.jpg', vertical_flip)
+```
+![alt text](/img/posts/Vertical Flip.png)
 
+```ruby
 horizontal_flip=camaro[:,::-1,:]
 plt.imshow(horizontal_flip)
 plt.show()
 
 io.imsave('camaro_horizontal_flip.jpg', horizontal_flip)
 ```
+![alt text](/img/posts/camaro_horizontal_flip.png)
 
 There is a method that shows us our image with different color channels. We extract the red, green, and blue versions of our image by zeroing out the other color channels instead of cropping them. For that, we create an array of zeros which is the same size as the camaro image, and then fill only the desired color channel with the values of the same color from the actual image. The next thing is to ensure that our data type is unit8 which is the type of data we often want when we deal with images in Numpy. 
 Let's start with the red version of camaro image:
@@ -82,7 +87,7 @@ red[:,:,0]=camaro[:,:,0]
 plt.imshow(red)
 plt.show()
 ```
-![alt text](/img/posts/Red%20Car.png#center)
+![alt text](/img/posts/Red%20Car.png)
 
 Next, a green version of the image will be created:
 
@@ -92,7 +97,7 @@ green[:,:,1]=camaro[:,:,1]
 plt.imshow(green)
 plt.show()
 ```
-![alt text](/img/posts/Green%20Car.png#center)
+![alt text](/img/posts/Green%20Car.png)
 
 The final image would be the blue version:
 
@@ -102,7 +107,7 @@ blue[:,:,2]=camaro[:,:,2]
 plt.imshow(blue)
 plt.show()
 ```
-![alt text](/img/posts/Blue%20Car.png#center)
+![alt text](/img/posts/Blue%20Car.png)
 
 
 If we use pop, and assign this to the object called **prime** it will *pop* the first element from the set out of **number_range**, and into **prime**
