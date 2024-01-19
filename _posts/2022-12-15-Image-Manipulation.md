@@ -73,16 +73,31 @@ plt.show()
 io.imsave('camaro_horizontal_flip.jpg', horizontal_flip)
 ```
 
-
-end up using a while loop to iterate through our list and check for primes, but before we construct that I always it valuable to code up the logic and iterate manually first.  This means I can check that it is working correctly before I set it off to run through everything on it's own
-
-So, we have our set of numbers (called number_range to check all integers between 2 and 20. Let's extract the first number from that set that we want to check as to whether it's a prime. When we check the value we're going to check if it is a prime...if it is, we're going to add it to our list called primes_list...if it isn't a prime we don't want to keep it
-
-There is a method which will remove an element from a list or set and provide that value to us, and that method is called *pop*
+There is a method that shows us our image with different color channels. We extract the red, green, and blue versions of our image by zeroing out the other color channels instead of cropping them. For that, we create an array of zeros which is the same size as the camaro image, and then fill only the desired color channel with the values of the same color from the actual image. The next thing is to ensure that our data type is unit8 which is the type of data we often want when we deal with images in Numpy. 
+Let's start with the red version of camaro image:
 
 ```ruby
-print(number_range)
->>> {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+red=np.zeros(camaro.shape, dtype='uint8')    
+red[:,:,0]=camaro[:,:,0]                     
+plt.imshow(red)
+plt.show()
+```
+Next, a green version of the image will be created:
+
+```ruby
+green=np.zeros(camaro.shape, dtype='uint8')    
+green[:,:,1]=camaro[:,:,1]                     
+plt.imshow(green)
+plt.show()
+```
+
+The final image would be the blue version:
+
+```ruby
+blue=np.zeros(camaro.shape, dtype='uint8')    
+blue[:,:,2]=camaro[:,:,2]                     
+plt.imshow(blue)
+plt.show()
 ```
 If we use pop, and assign this to the object called **prime** it will *pop* the first element from the set out of **number_range**, and into **prime**
 
