@@ -5,7 +5,7 @@ image: "/posts/classification-title-img.png"
 tags: [Customer Targeting, Machine Learning, Classification, Python]
 ---
 
-Our client, a grocery retailer, wants to utilise Machine Learning to reduce mailing costs, and improve ROI!
+Our client, a grocery retailer, wants to utilize Machine Learning to reduce mailing costs, and improve its Return on Investment (ROI)!
 
 # Table of contents
 
@@ -13,7 +13,6 @@ Our client, a grocery retailer, wants to utilise Machine Learning to reduce mail
     - [Context](#overview-context)
     - [Actions](#overview-actions)
     - [Results](#overview-results)
-    - [Growth/Next Steps](#overview-growth)
 - [01. Data Overview](#data-overview)
 - [02. Modelling Overview](#modelling-overview)
 - [03. Logistic Regression](#logreg-title)
@@ -30,37 +29,41 @@ ___
 
 ### Context <a name="overview-context"></a>
 
-Our client, a grocery retailer, sent out mailers in a marketing campaign for their new *delivery club*.  This cost customers $100 per year for membership, and offered free grocery deliveries, rather than the normal cost of $10 per delivery.
+Our client, a grocery retailer, sent out mailers in a marketing campaign for their new *delivery club*.  This cost customers $100 per year for membership and offered free grocery deliveries, rather than the normal cost of $10 per delivery.
 
-For this, they sent mailers to their entire customer base (apart from a control group) but this proved expensive.  For the next batch of communications they would like to save costs by *only* mailing customers that were likely to sign up.
+For this, they sent mailers to their entire customer base (apart from a control group) but this proved expensive. For the next batch of communications, they would like to save costs by *only* mailing customers that were likely to sign up.
 
-Based upon the results of the last campaign and the customer data available, we will look to understand the *probability* of customers signing up for the *delivery club*.  This would allow the client to mail a more targeted selection of customers, lowering costs, and improving ROI.
+Based on the results of the last campaign and the customer data available, we will look to understand the *probability* of customers signing up for the *delivery club*.  This would allow the client to mail a more targeted selection of customers, lowering costs, and improving ROI.
 
 Let's use Machine Learning to take on this task!
 <br>
 <br>
 ### Actions <a name="overview-actions"></a>
 
-We firstly needed to compile the necessary data from tables in the database, gathering key customer metrics that may help predict *delivery club* membership.
+We first needed to compile the necessary data from tables in the database, gathering key customer metrics that may help predict *delivery club* membership.
 
-Within our historical dataset from the last campaign, we found that 69% of customers did not sign up and 31% did.  This tells us that while the data isn't perfectly balanced at 50:50, it isn't *too* imbalanced either.  Even so, we make sure to not rely on classification accuracy alone when assessing results - also analysing Precision, Recall, and F1-Score.
+Within our historical dataset from the last campaign, we found that 69% of customers did not sign up and 31% did.  This tells us that while the data isn't perfectly balanced at 50:50, it isn't *too* imbalanced either. Even so, we make sure to not rely on classification accuracy alone when assessing results - also analyzing Precision, Recall, and F1-Score.
 
-As we are predicting a binary output, we tested four classification modelling approaches, namely:
+As we are predicting a binary output, we tested four classification modeling approaches, namely:
 
 * Logistic Regression
 * Decision Tree
 * Random Forest
 * K Nearest Neighbours (KNN)
 
-For each model, we will import the data in the same way but will need to pre-process the data based up the requirements of each particular algorithm.  We will train & test each model, look to refine each to provide optimal performance, and then measure this predictive performance based on several metrics to give a well-rounded overview of which is best.
+For each model, we will import the data in the same way but will need to pre-process the data based on the requirements of each particular algorithm. We will train & test each model, refine each to provide optimal performance, and then measure this predictive performance based on several metrics to give a well-rounded overview of which is best.
 <br>
 <br>
 
 ### Results <a name="overview-results"></a>
 
-The goal for the project was to build a model that would accurately predict the customers that would sign up for the *delivery club*.  This would allow for a much more targeted approach when running the next iteration of the campaign.  A secondary goal was to understand what the drivers for this are, so the client can get closer to the customers that need or want this service, and enhance their messaging.
+Here, we aimed to
+1. build a model that would accurately predict the customers that would sign up for the *delivery club*. This would allow for a much more targeted approach when running the next iteration of the campaign.
+2. understand what the drivers for this are, so the client can get closer to the customers who need or want this service, and enhance their messaging.
 
-Based upon these, the chosen the model is the Random Forest as it was a) the most consistently performant on the test set across classication accuracy, precision, recall, and f1-score, and b) the feature importance and permutation importance allows the client an understanding of the key drivers behind *delivery club* signups.
+Based upon these, the chosen model is the Random Forest as it was 
+a) the most consistently performant on the test set across classification accuracy, precision, recall, and f1-score. 
+b) the feature importance and permutation importance allow the client an understanding of the key drivers behind *delivery club* signups.
 
 <br>
 **Metric 1: Classification Accuracy**
@@ -95,47 +98,40 @@ Based upon these, the chosen the model is the Random Forest as it was a) the mos
 * Logistic Regression = 0.734
 <br>
 <br>
-### Growth/Next Steps <a name="overview-growth"></a>
-
-While predictive accuracy was relatively high - other modelling approaches could be tested, especially those somewhat similar to Random Forest, for example XGBoost, LightGBM to see if even more accuracy could be gained.
-
-From a data point of view, further variables could be collected, and further feature engineering could be undertaken to ensure that we have as much useful information available for predicting customer loyalty
-<br>
-<br>
 ___
 
 # Data Overview  <a name="data-overview"></a>
 
 We will be predicting the binary *signup_flag* metric from the *campaign_data* table in the client database.
 
-The key variables hypothesised to predict this will come from the client database, namely the *transactions* table, the *customer_details* table, and the *product_areas* table.
+The key variables hypothesized to predict this will come from the client database, namely the *transactions* table, the *customer_details* table, and the *product_areas* table.
 
-We aggregated up customer data from the 3 months prior to the last campaign.
+We aggregated customer data from the 3 months before the last campaign.
 
-After this data pre-processing in Python, we have a dataset for modelling that contains the following fields...
+After this data pre-processing in Python, we have a dataset for modeling that contains the following fields...
 <br>
 <br>
 
 | **Variable Name** | **Variable Type** | **Description** |
 |---|---|---|
 | signup_flag | Dependent | A binary variable showing if the customer signed up for the delivery club in the last campaign |
-| distance_from_store | Independent | The distance in miles from the customers home address, and the store |
+| distance_from_store | Independent | The distance in miles from the customer's home address, and the store |
 | gender | Independent | The gender provided by the customer |
-| credit_score | Independent | The customers most recent credit score |
-| total_sales | Independent | Total spend by the customer in ABC Grocery - 3 months pre campaign |
-| total_items | Independent | Total products purchased by the customer in ABC Grocery - 3 months pre campaign |
-| transaction_count | Independent | Total unique transactions made by the customer in ABC Grocery - 3 months pre campaign |
-| product_area_count | Independent | The number of product areas within ABC Grocery the customers has shopped into - 3 months pre campaign |
-| average_basket_value | Independent | The average spend per transaction for the customer in ABC Grocery - 3 months pre campaign |
+| credit_score | Independent | The customer's most recent credit score |
+| total_sales | Independent | Total spend by the customer in ABC Grocery - 3 months pre-campaign |
+| total_items | Independent | Total products purchased by the customer in ABC Grocery - 3 months pre-campaign |
+| transaction_count | Independent | Total unique transactions made by the customer in ABC Grocery - 3 months pre-campaign |
+| product_area_count | Independent | The number of product areas within ABC Grocery the customers have shopped into - 3 months pre-campaign |
+| average_basket_value | Independent | The average spend per transaction for the customer in ABC Grocery - 3 months pre-campaign |
 
 <br>
 # Modelling Overview  <a name="modelling-overview"></a>
 
 We will build a model that looks to accurately predict *signup_flag*, based upon the customer metrics listed above.
 
-If that can be achieved, we can use this model to predict signup & signup probability for future campaigns.  This information can be used to target those more likely to sign-up, reducing marketing costs and thus increasing ROI.
+If that can be achieved, we can use this model to predict signup & signup probability for future campaigns.  This information can be used to target those more likely to sign up, reducing marketing costs and thus increasing ROI.
 
-As we are predicting a binary output, we tested three classification modelling approaches, namely:
+As we are predicting a binary output, we tested three classification modeling approaches, namely:
 
 * Logistic Regression
 * Decision Tree
@@ -144,20 +140,7 @@ As we are predicting a binary output, we tested three classification modelling a
 <br>
 # Logistic Regression <a name="logreg-title"></a>
 
-We utlise the scikit-learn library within Python to model our data using Logistic Regression. The code sections below are broken up into 5 key sections:
-
-* Data Import
-* Data Preprocessing
-* Model Training
-* Performance Assessment
-* Optimal Threshold Analysis
-
-<br>
-### Data Import <a name="logreg-import"></a>
-
-Since we saved our modelling data as a pickle file, we import it.  We ensure we remove the id column, and we also ensure our data is shuffled.
-
-We also investigate the class balance of our dependent variable - which is important when assessing classification accuracy.
+We utilize the scikit-learn library within Python to model our data using Logistic Regression. 
 
 ```python
 
@@ -173,8 +156,31 @@ from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, r
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.feature_selection import RFECV
 
-# import modelling data
+```
+
+The code sections below are broken up into 5 key sections:
+
+* Data Import
+* Data Preprocessing
+* Model Training
+* Performance Assessment
+* Optimal Threshold Analysis
+
+<br>
+### Data Import <a name="logreg-import"></a>
+
+Since we saved our modeling data as a pickle file, we import it. 
+
+```python
+
+# import modeling data
 data_for_model = pickle.load(open("data/delivery_club_modelling.p", "rb"))
+
+```
+
+We then remove the id column, and shuffle the data.
+
+We also investigate the class balance of our dependent variable - which is important when assessing classification accuracy.
 
 # drop uneccessary columns
 data_for_model.drop("customer_id", axis = 1, inplace = True)
