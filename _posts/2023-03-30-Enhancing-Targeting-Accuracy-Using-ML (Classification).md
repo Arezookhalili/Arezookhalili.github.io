@@ -180,13 +180,19 @@ data_for_model = pickle.load(open("data/delivery_club_modelling.p", "rb"))
 
 We then remove the id column, and shuffle the data.
 
-We also investigate the class balance of our dependent variable - which is important when assessing classification accuracy.
+```python
 
 # drop uneccessary columns
 data_for_model.drop("customer_id", axis = 1, inplace = True)
 
 # shuffle data
 data_for_model = shuffle(data_for_model, random_state = 42)
+
+```
+
+We also investigate the class balance of our dependent variable - which is important when assessing classification accuracy.
+
+```python
 
 # assess class balance of dependent variable
 data_for_model["signup_flag"].value_counts(normalize = True)
