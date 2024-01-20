@@ -143,7 +143,6 @@ As we are predicting a binary output, we tested three classification modeling ap
 We utilize the scikit-learn library within Python to model our data using Logistic Regression. 
 
 ```python
-
 # import required packages
 import pandas as pd
 import pickle
@@ -155,7 +154,6 @@ from sklearn.model_selection import train_test_split, cross_val_score, KFold
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.feature_selection import RFECV
-
 ```
 
 The code sections below are broken up into 5 key sections:
