@@ -225,7 +225,7 @@ The ability of a Logistic Regression model to generalize well across *all* data 
 In this section, we use **.describe()** from Pandas to investigate the spread of values for each of our predictors. The results of this can be seen in the table below.
 
 ```python
-data_for_model.describe()
+outlier_investigation = data_for_model.describe()
 ```
 <br>
 
@@ -240,20 +240,16 @@ data_for_model.describe()
 | max | 400.97 | 0.88 | 7372.06 | 910.00 | 75.00 | 5.00 | 141.05  |
 
 <br>
-Based on this investigation, we see some *max* column values for several variables to be much higher than the *median* value.
-
-This is for columns *distance_from_store*, *total_sales*, and *total_items*
+Based on this investigation, we see that the *max* column value is much higher than the *median* value for the *distance_from_store*, *total_sales*, and *total_items* columns.
 
 For example, the median *distance_to_store* is 1.64 miles, but the maximum is over 400 miles!
 
 Because of this, we apply some outlier removal to facilitate generalization across the full dataset.
 
-We do this using the "boxplot approach" where we remove any rows where the values within those columns are outside of the interquartile range multiplied by 2.
+We do this using the "boxplot approach" where we remove any rows where the values within those columns are outside of the interquartile range multiplied by 2 (Usually interquartile is multiplied by 1.5 but we multiplied it by 2 to include a wider range of data).
 
 <br>
 ```python
-
-outlier_investigation = data_for_model.describe()
 outlier_columns = ["distance_from_store", "total_sales", "total_items"]
 
 # boxplot approach
@@ -270,26 +266,25 @@ for column in outlier_columns:
     print(f"{len(outliers)} outliers detected in column {column}")
     
     data_for_model.drop(outliers, inplace = True)
-
 ```
 
 <br>
 ##### Split Out Data For Modelling
 
-In the next code block we do two things, we firstly split our data into an **X** object which contains only the predictor variables, and a **y** object that contains only our dependent variable.
-
-Once we have done this, we split our data into training and test sets to ensure we can fairly validate the accuracy of the predictions on data that was not used in training. In this case, we have allocated 80% of the data for training, and the remaining 20% for validation. We make sure to add in the *stratify* parameter to ensure that both our training and test sets have the same proportion of customers who did, and did not, sign up for the *delivery club* - meaning we can be more confident in our assessment of predictive performance.
+Here, we split our data into an **X** object which contains only the predictor (input) variables, and a **y** object which contains only our dependent (output) variable.
 
 <br>
 ```python
-
-# split data into X and y objects for modelling
+# Split data into X and y objects for modeling
 X = data_for_model.drop(["signup_flag"], axis = 1)
 y = data_for_model["signup_flag"]
+```
 
-# split out training & test sets
+Once We found our **X** and **y**, we split our data into training and test sets to ensure we can fairly validate the accuracy of the predictions on data that was not used in training. In this case, we have allocated 80% of the data for training, and the remaining 20% for validation. We make sure to add in the *stratify* parameter to ensure that both our training and test sets have the same proportion of customers who did, and did not, sign up for the *delivery club* - meaning we can be more confident in our assessment of predictive performance.
+
+```python
+# Split out training & test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42, stratify = y)
-
 ```
 
 <br>
@@ -311,7 +306,6 @@ For ease, after we have applied One Hot Encoding, we turn our training and test 
 
 <br>
 ```python
-
 # list of categorical variables that need encoding
 categorical_vars = ["gender"]
 
@@ -1352,14 +1346,13 @@ For ease, after we have applied One Hot Encoding, we turn our training and test 
 
 <br>
 ```python
-
 # list of categorical variables that need encoding
 categorical_vars = ["gender"]
 
-# instantiate OHE class
+# instantiate One Hot Encoder class
 one_hot_encoder = OneHotEncoder(sparse=False, drop = "first")
 
-# apply OHE
+# apply One Hot Encoder
 X_train_encoded = one_hot_encoder.fit_transform(X_train[categorical_vars])
 X_test_encoded = one_hot_encoder.transform(X_test[categorical_vars])
 
@@ -1374,7 +1367,6 @@ X_train.drop(categorical_vars, axis = 1, inplace = True)
 X_test_encoded = pd.DataFrame(X_test_encoded, columns = encoder_feature_names)
 X_test = pd.concat([X_test.reset_index(drop=True), X_test_encoded.reset_index(drop=True)], axis = 1)
 X_test.drop(categorical_vars, axis = 1, inplace = True)
-
 ```
 
 <br>
