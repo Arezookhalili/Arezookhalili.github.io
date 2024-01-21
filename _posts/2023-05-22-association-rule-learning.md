@@ -252,7 +252,6 @@ apriori_rules = list(apriori_rules)
 apriori_rules[0]
 
 RelationRecord(items=frozenset({'America White', 'American Rose'}), support=0.020745724698626296, ordered_statistics=[OrderedStatistic(items_base=frozenset({'American Rose'}), items_add=frozenset({'America White'}), confidence=0.5323741007194245, lift=3.997849299507762)])
-
 ```
 <br>
 The output from the algorithm is in the form of a generator. We covert this to a list as this is easier to manipulate & analyze.  
@@ -273,7 +272,6 @@ apriori_rules_df = pd.DataFrame({"product1" : product1,
                                  "support" : support,
                                  "confidence": confidence,
                                  "lift" : lift})
-
 ```
 <br>
 A sample of this data (the first 5 product pairs - not in any order) can be seen below:
