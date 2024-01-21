@@ -269,7 +269,7 @@ for column in outlier_columns:
 ```
 
 <br>
-##### Split Out Data For Modelling
+##### Split Out Data For Modeling
 
 Here, we split our data into an **X** object which contains only the predictor (input) variables, and a **y** object which contains only our dependent (output) variable.
 
@@ -300,26 +300,26 @@ One Hot Encoding can be thought of as a way to represent categorical variables a
 
 We also drop one of the new columns using the parameter *drop = "first"*. We do this to avoid the *dummy variable trap* where our newly created encoded columns perfectly predict each other - and we run the risk of breaking the assumption that there is no multicollinearity, a requirement or at least an important consideration for some models, Linear Regression being one of them! Multicollinearity occurs when two or more input variables are *highly* correlated with each other, it is a scenario we attempt to avoid as in short, while it won't neccessarily affect the predictive accuracy of our model, it can make it difficult to trust the statistics around how well the model is performing, and how much each input variable is truly having.
 
-In the code, we also make sure to apply *fit_transform* to the training set, but only *transform* to the test set. This means the One Hot Encoding logic will *learn and apply* the "rules" from the training data, but only *apply* them to the test data. This is important in order to avoid *data leakage* where the test set *learns* information about the training data, and means we can't fully trust model performance metrics!
+We then apply *fit_transform* to the training set, but only *transform* to the test set. This means the One Hot Encoding logic will *learn and apply* the "rules" from the training data, but only *apply* them to the test data. This is important in order to avoid *data leakage* where the test set *learns* information about the training data.
 
-For ease, after we have applied One Hot Encoding, we turn our training and test objects back into Pandas Dataframes, with the column names applied.
+After applying One Hot Encoding, we turn our training and test objects back into Pandas Dataframes, with the column names applied.
 
 <br>
 ```python
-# list of categorical variables that need encoding
+# List of categorical variables that need encoding
 categorical_vars = ["gender"]
 
-# instantiate OHE class
+# Instantiate OHE class
 one_hot_encoder = OneHotEncoder(sparse=False, drop = "first")
 
-# apply OHE
+# Apply OHE
 X_train_encoded = one_hot_encoder.fit_transform(X_train[categorical_vars])
 X_test_encoded = one_hot_encoder.transform(X_test[categorical_vars])
 
-# extract feature names for encoded columns
+# Extract feature names for encoded columns
 encoder_feature_names = one_hot_encoder.get_feature_names_out(categorical_vars)
 
-# turn objects back to pandas dataframe
+# Turn objects back to pandas dataframe
 X_train_encoded = pd.DataFrame(X_train_encoded, columns = encoder_feature_names)
 X_train = pd.concat([X_train.reset_index(drop=True), X_train_encoded.reset_index(drop=True)], axis = 1)
 X_train.drop(categorical_vars, axis = 1, inplace = True)
@@ -327,7 +327,6 @@ X_train.drop(categorical_vars, axis = 1, inplace = True)
 X_test_encoded = pd.DataFrame(X_test_encoded, columns = encoder_feature_names)
 X_test = pd.concat([X_test.reset_index(drop=True), X_test_encoded.reset_index(drop=True)], axis = 1)
 X_test.drop(categorical_vars, axis = 1, inplace = True)
-
 ```
 
 <br>
@@ -345,29 +344,26 @@ For our task we applied a variation of Reursive Feature Elimination called *Recu
 
 <br>
 ```python
-
-# instantiate RFECV & the model type to be utilised
+# Instantiate RFECV & the model type to be utilised
 clf = LogisticRegression(random_state = 42, max_iter = 1000)
 feature_selector = RFECV(clf)
 
-# fit RFECV onto our training & test data
+# Fit RFECV onto our training & test data
 fit = feature_selector.fit(X_train,y_train)
 
-# extract & print the optimal number of features
+# Extract & print the optimal number of features
 optimal_feature_count = feature_selector.n_features_
 print(f"Optimal number of features: {optimal_feature_count}")
 
-# limit our training & test sets to only include the selected variables
+# Limit our training & test sets to only include the selected variables
 X_train = X_train.loc[:, feature_selector.get_support()]
 X_test = X_test.loc[:, feature_selector.get_support()]
-
 ```
 
 <br>
 The below code then produces a plot that visualises the cross-validated classification accuracy with each potential number of features
 
 ```python
-
 plt.style.use('seaborn-poster')
 plt.plot(range(1, len(fit.cv_results_['mean_test_score']) + 1), fit.cv_results_['mean_test_score'], marker = "o")
 plt.ylabel("Classification Accuracy")
@@ -375,7 +371,6 @@ plt.xlabel("Number of Features")
 plt.title(f"Feature Selection using RFECV \n Optimal number of features is {optimal_feature_count} (at score of {round(max(fit.cv_results_['mean_test_score']),4)})")
 plt.tight_layout()
 plt.show()
-
 ```
 
 <br>
