@@ -5,7 +5,7 @@ image: "/posts/association-rules-title-img.png"
 tags: [Association Rule Learning, Python]
 ---
 
-In this project we use Association Rule Learning to analyse the transactional relationships & dependencies between products in the alcohol section of a grocery store.
+In this project, we use Association Rule Learning to analyze the transactional relationships & dependencies between products in the alcohol section of a grocery store.
 
 # Table of contents
 
@@ -13,7 +13,6 @@ In this project we use Association Rule Learning to analyse the transactional re
     - [Context](#overview-context)
     - [Actions](#overview-actions)
     - [Results](#overview-results)
-    - [Growth/Next Steps](#overview-growth)
 - [01. Data Overview](#data-overview)
 - [02. Apriori Overview](#apriori-overview)
 - [03. Data Preparation](#apriori-data-prep)
@@ -35,11 +34,11 @@ They have provided us a sample of 3,500 alcohol transactions - our task is fairl
 <br>
 ### Actions <a name="overview-actions"></a>
 
-Based upon the tasks at hand - we apply Association Rule Learning, specifically *Apriori* to examine & analyse the strength of relationship between different products within the transactional data.
+Based upon the tasks at hand - we apply Association Rule Learning, specifically *Apriori* to examine & analyze the strength of the relationship between different products within the transactional data.
 
-We firstly installed the apyori package, which contains all of the required functionality for this task.
+We first installed the Apyori package, which contains all of the required functionality for this task.
 
-We then needed to bring in the sample data, and get it into the right format for the Apriori algorithm to deal with.
+We then needed to bring in the sample data and get it into the right format for the Apriori algorithm to deal with.
 
 From there we apply the Apriori algorithm to provide us with several different relationship metrics, namely:
 
@@ -48,24 +47,24 @@ From there we apply the Apriori algorithm to provide us with several different r
 * Expected Confidence
 * Lift
 
-These metrics examine product relationships in different ways, so we utilise each to put forward ideas that address each of the tasks at hand.  You can read more about these metrics, and the Apriori algorithm in the relevant section below.
+These metrics examine product relationships in different ways, so we utilize each to put forward ideas that address each of the tasks at hand.  You can read more about these metrics, and the Apriori algorithm in the relevant section below.
 
 <br>
 <br>
 
 ### Results <a name="overview-results"></a>
 
-Interestingly, the strongest relationship existed between two products labelled as "gifts" - this is useful information for the category managers as they may want to ensure that gift products are available in one section of the aisle, rather than existing in their respective product types.
+Interestingly, the strongest relationship existed between two products labeled as "gifts" - this is useful information for the category managers as they may want to ensure that gift products are available in one section of the aisle, rather than existing in their respective product types.
 
 We also saw some strong relationships between French wines, and other French wines - which again is extremely useful for category managers who are thinking about the best way to lay out the products - having sections by country rather than necessarily by type might make it easier for customers to find what they are after.
 
-Another interesting association is between products labelled "small".  At this point, we don't know exactly what that means - but it is certainly something to take back to the client as they may be able to make more sense of it, and turn it into an actionable insight!
+Another interesting association is between products labeled "small".  At this point, we don't know exactly what that means - but it is certainly something to take back to the client as they may be able to make more sense of it, and turn it into an actionable insight!
 
-We propose to also build a "search engine" for category managers where they can look-up products by keyword in the product association table.
+We propose to also build a "search engine" for category managers where they can look up products by keyword in the product association table.
 
 As an example - we search for any products that associate strongly with "New Zealand" products. There appeared to be *some* relationship between New Zealand wines and other New Zealand wines, but what was also interesting was that New Zealand wines seemed to be more associated with French & South American wines than they were with Australian Wines.
 
-New Zealand & Australia are often grouped together, but in terms of wine this wouldn't make sense - perhaps because of the difference climates the wines are very different and thus it wouldn't make sense to group wines by geographical proximity, but by preference instead.  This is only a hypothesis for now - we will need to take this back to the client and get their category experts to help us interpret it!
+New Zealand & Australia are often grouped, but in terms of wine this wouldn't make sense - perhaps because of the different climates the wines are very different and thus it wouldn't make sense to group wines by geographical proximity, but by preference instead.  This is only a hypothesis for now - we will need to take this back to the client and get their category experts to help us interpret it!
 
 <br>
 <br>
@@ -73,9 +72,9 @@ New Zealand & Australia are often grouped together, but in terms of wine this wo
 
 As this is first & foremost an exploratory project, we will take back the results to the client Category Managers & discuss the results, our views on how these insights can be actioned best, and any considerations that need to be taken into account when interpreting.
 
-From there we will recommend applying this same logic to all other categories, as well as potentially across the full-product range.
+From there we will recommend applying this same logic to all other categories, as well as potentially across the full product range.
 
-We will also propose the build of the "Keyword Search Engine" which will help Category Managers extract and utilise the insights held within the data.
+We will also propose the building of the "Keyword Search Engine" which will help Category Managers extract and utilize the insights held within the data.
 
 <br>
 <br>
@@ -90,7 +89,7 @@ In the code below, we import Pandas, as well as the apriori algorithm from the a
 <br>
 ```python
 
-# import required Python packages
+# Import required Python packages
 import pandas as pd
 from apyori import apriori
 
@@ -131,9 +130,9 @@ ___
 <br>
 # Apriori Overview  <a name="apriori-overview"></a>
 
-Association Rule Learning is an approach that discovers the strength of relationships between different data-points.  It is commonly utilised to understand which products are frequently (or infrequently) purchased together.
+Association Rule Learning is an approach that discovers the strength of relationships between different data points.  It is commonly utilized to understand which products are frequently (or infrequently) purchased together.
 
-In a business sense this can provide some really interesting, and useful information that can help optimise:
+In a business sense this can provide some really interesting, and useful information that can help optimize:
 
 * Product Arrangement/Placement (making the customer journey more efficient)
 * Product Recommendations (customers who purchased product A also purchased product B)
@@ -148,21 +147,21 @@ In Apriori there are four key metrics, namely:
 * Expected Confidence
 * Lift
 
-Each of these metrics help us understand items, and their relationship with other items in their own way.
+Each of these metrics helps us understand items and their relationship with other items in their way.
 
 <br>
 ##### Support
 
-Support is extremely intuitive, it simply tells us the percentage of all transactions that contain *both* Item A and Item B.  To calculate this we’d just count up the transactions that include both items, and divide this by the total number of transactions.
+Support is extremely intuitive, it simply tells us the percentage of all transactions that contain *both* Item A and Item B.  To calculate this we’d just count up the transactions that include both items and divide this by the total number of transactions.
 
 You can think of Support as a baseline metric that helps us understand how common or popular this particular *pair* of items is.
 
 <br>
 ##### Confidence
 
-Confidence takes us a little bit further than Support, and looks more explcitly at the *relationship* between the two items.
+Confidence takes us a little bit further than Support and looks more explicitly at the *relationship* between the two items.
 
-It asks "of all transactions that *included item A*, what proportion also included item B?"  
+It asks "Of all transactions that *included item A*, what proportion also included item B?"  
 
 In other words, here we are counting up the number of transactions that contained *both items A and B* and then rather than dividing by *all transactions* like we did for Support, we instead divide this by the *total number of transactions that contained item A*.
 
@@ -173,7 +172,7 @@ A high score for Confidence can mean a strong product relationship - but not alw
 
 Expected Confidence is quite simple, it is the percentage of *all transactions* that *contained item B*.
 
-This is important as it provides indication of what the Confidence *would be* if there were no relationship between the items.  We can use Expected Confidence, along with Confidence to calculate our final (and most powerful) metric - Lift!
+This is important as it indicates what the Confidence *would be* if there were no relationship between the items.  We can use Expected Confidence, along with Confidence to calculate our final (and most powerful) metric - Lift!
 
 <br>
 ##### Lift
@@ -182,25 +181,25 @@ Lift is the factor by which the Confidence, exceeds the Expected Confidence.  In
 
 We calculate Lift by dividing Confidence by Expected Confidence.
 
-A Lift score *greater than 1* indicates that items A & B appear together *more often* than expected, and conversely a Lift score *less then 1* indicates that items A & B appear together *less often* than expected.
+A Lift score *greater than 1* indicates that items A & B appear together *more often* than expected, and conversely a Lift score *less than 1* indicates that items A & B appear together *less often* than expected.
 
 <br>
 ##### In Practice
 
-While above we're just discussing two products (Item A & Item B) - in reality this score would be calculated between *all* pairs of products, and we could then sort these by Lift score (for example) and see exactly what the strongest or weakest relationships were - and this information would guide our decisions regarding product layout, recommendations for customers, or promotions.
+While above we're just discussing two products (Item A & Item B) - in reality, this score would be calculated between *all* pairs of products, and we could then sort these by Lift score (for example) and see exactly what the strongest or weakest relationships were - and this information would guide our decisions regarding product layout, recommendations for customers, or promotions.
 
 <br>
 ##### An Important Consideration
 
-Something to consider when assessing the results of Apriori is that, Item/Product relationships that have a *high Lift score* but also have a *low Support score* should be interpreted with caution!
+Something to consider when assessing the results of Apriori is that Item/Product relationships that have a *high Lift score* but also have a *low Support score* should be interpreted with caution!
 
-In other words, if we sorted all Item relationships by descending Lift score, the one that comes out on top might initially seem very impressive and it may appear that there is a very strong relationship between the two items.  Always take into account the Support metric - it could be that this relationship is only taking place by chance due to the rarity of the item set.
+In other words, if we sorted all Item relationships by descending Lift score, the one that comes out on top might initially seem very impressive and there may be a very strong relationship between the two items.  Always take into account the Support metric - it could be that this relationship is only taking place by chance due to the rarity of the item set.
 
 ___
 <br>
 # Data Preparation  <a name="apriori-data-prep"></a>
 
-As mentioned in the Data Overview section above, the *apyori* library that we are using does not want the data in table format, it instead wants it passed in as a *list of lists* so we will need to modify it here.  
+As mentioned in the Data Overview section above, the *apyori* library that we are using does not want the data in a table format, it instead wants it passed in as a *list of lists* so we will need to modify it here.  
 
 In the code below, we:
 
@@ -210,17 +209,16 @@ In the code below, we:
 
 <br>
 ```python
-
-# drop ID column
+# Drop ID column
 alcohol_transactions.drop("transaction_id", axis = 1, inplace = True)
 
-# modify data for apriori algorithm
+# Modify data for apriori algorithm
 transactions_list = []
 for index, row in alcohol_transactions.iterrows():
     transaction = list(row.dropna())
     transactions_list.append(transaction)
     
-# print out first 10 lists from master list
+# Print out first 10 lists from master list
 print(transactions_list[:10])
 
 [['Premium Lager', 'Iberia'],
@@ -233,7 +231,6 @@ print(transactions_list[:10])
  ['Brandy/Cognac'],
  ['Small Sizes White', 'Bottled Ale'],
  ['White Uk', 'Spirits Mixers', 'Sparkling', 'German', 'Australian Red', 'American Red']]
-
 ```
 <br>
 
@@ -253,8 +250,7 @@ This algorithm allows us to specify the association rules that we want.  We set:
 * A minimum & maximum length of 2 meaning we're only focusing on product *pairs* rather than larger sets
 
 ```python
-
-# apply the apriori algorthm and specify required parameters
+# Apply the apriori algorithm and specify the required parameters
 apriori_rules = apriori(transactions_list,
                         min_support = 0.003,
                         min_confidence = 0.2,
@@ -262,30 +258,29 @@ apriori_rules = apriori(transactions_list,
                         min_length = 2,
                         max_length = 2)
 
-# convert the output to a list
+# Convert the output to a list
 apriori_rules = list(apriori_rules)
 
-# print out the first element
+# Print out the first element
 apriori_rules[0]
 
 RelationRecord(items=frozenset({'America White', 'American Rose'}), support=0.020745724698626296, ordered_statistics=[OrderedStatistic(items_base=frozenset({'American Rose'}), items_add=frozenset({'America White'}), confidence=0.5323741007194245, lift=3.997849299507762)])
 
 ```
 <br>
-The output from the algorithm is in the form of a generator. We covert this to a list as this is easier to manipulate & analyse.  
+The output from the algorithm is in the form of a generator. We covert this to a list as this is easier to manipulate & analyze.  
 
-Based upon the parameters we set when applying the algorithm, we get 132 product pairs.  We print out the first element from the list to see what the output looks like, and while this contains all the key information we need - to make it easier to analyse (and more accessible & useable for stakeholders) - in the next code snippet, we extract the key elements and use list comprehension to re-work this data to exist as a Pandas DataFrame.
+Based on the parameters we set when applying the algorithm, we get 132 product pairs.  We print out the first element from the list to see what the output looks like, and while this contains all the key information we need - to make it easier to analyze (and more accessible & useable for stakeholders) - in the next code snippet, we extract the key elements and use list comprehension to re-work this data to exist as a Pandas DataFrame.
 
 ```python
-
-# extract each piece of information
+# Extract each piece of information
 product1 = [list(rule[2][0][0])[0] for rule in apriori_rules]
 product2 = [list(rule[2][0][1])[0] for rule in apriori_rules]
 support = [rule[1] for rule in apriori_rules]
 confidence = [rule[2][0][2] for rule in apriori_rules]
 lift = [rule[2][0][3] for rule in apriori_rules]
 
-# compile into a single dataframe
+# Compile into a single dataframe
 apriori_rules_df = pd.DataFrame({"product1" : product1,
                                  "product2" : product2,
                                  "support" : support,
