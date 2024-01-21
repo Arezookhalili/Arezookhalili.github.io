@@ -200,7 +200,6 @@ post_period = ["2020-07-01","2020-09-30"]
 
 # Apply the algorithm
 ci = CausalImpact(causal_impact_df, pre_period, post_period)
-
 ```
 <br>
 We can use the created object (called ci above) to examine & plot the results.
@@ -308,7 +307,6 @@ of the underlying intervention.
 
 The probability of obtaining this effect by chance is very small (Bayesian one-sided tail-area probability p = 0.0). This means the causal effect can be considered statistically
 significant.
-
 ```
 <br>
 So, this is the same information as we saw above but put into a written report which can go straight to the client.
