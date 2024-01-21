@@ -83,14 +83,6 @@ The use of Transfer Learning with the VGG16 architecture was also a great succes
 
 <br>
 <br>
-### Growth/Next Steps <a name="overview-growth"></a>
-
-The proof of concept was successful, we have shown that we can get very accurate predictions albeit on a small number of classes.  We need to showcase this to the client, discuss what it is that makes the network more robust, and then look to test our best networks on a larger array of classes.
-
-Transfer Learning has been a big success, and was the best-performing network in terms of classification accuracy on the Test Set - however, we still only trained for a small number of epochs so we can push this even further.  It would be worthwhile testing other available pre-trained networks such as ResNet, Inception, and the DenseNet networks.
-
-<br>
-<br>
 
 ___
 
@@ -225,7 +217,6 @@ model.summary()
 ```
 <br>
 The below shows us more clearly our baseline architecture:
-
 ```
 
 Model: "sequential"
@@ -301,7 +292,7 @@ The ModelCheckpoint callback that has been put in place means that we do not jus
 As we saved our training process to the *history* object, we can now analyze the performance (Classification Accuracy, and Loss) of the network epoch by epoch.
 
 ```python
-import matplotlib.pyplot as plt
+Import matplotlib.pyplot as plt
 
 # plot validation results
 fig, ax = plt.subplots(2, 1, figsize=(15,15))
@@ -315,7 +306,7 @@ ax[0].legend()
 ax[1].legend()
 plt.show()
 
-# get best epoch performance for validation accuracy
+# Get best epoch performance for validation accuracy
 max(history.history['val_accuracy'])
 ```
 <br>
@@ -424,7 +415,6 @@ predictions_df = pd.DataFrame({"actual_label" : actual_labels,
                                "filename" : filenames})
 
 predictions_df['correct'] = np.where(predictions_df['actual_label'] == predictions_df['predicted_label'], 1, 0)
-
 ```
 <br>
 After running the code above, we end up with a Pandas DataFrame containing prediction data for each test set image. A random sample of this can be seen in the table below:
@@ -460,7 +450,6 @@ Using our DataFrame, we can calculate our overall Test Set classification accura
 # Overall test set accuracy
 test_set_accuracy = predictions_df['correct'].sum() / len(predictions_df)
 print(test_set_accuracy)
-
 ```
 <br>
 Our baseline network achieves a **75% Classification Accuracy** on the Test Set.  It will be interesting to see how much improvement we can this with additions & refinements to our network.
@@ -483,7 +472,6 @@ print(confusion_matrix)
 This results in the following output:
 
 ```
-
 actual_label     apple  avocado  banana  kiwi  lemon  orange
 predicted_label                                             
 apple              0.8      0.0     0.0   0.1    0.0     0.1
@@ -492,7 +480,6 @@ banana             0.0      0.0     0.2   0.1    0.0     0.0
 kiwi               0.0      0.0     0.1   0.7    0.0     0.0
 lemon              0.2      0.0     0.7   0.0    1.0     0.1
 orange             0.0      0.0     0.0   0.1    0.0     0.8
-
 ```
 <br>
 Along the top are our *actual* classes and down the side are our *predicted* classes - so by counting *down* the columns we can get the Classification Accuracy (%) for each class, and we can see where it is getting confused.
@@ -606,7 +593,6 @@ The standout insight for the baseline network was that Bananas have only a 20% C
 Running the same code from the baseline section on results for our updated network, we get the following output:
 
 ```
-
 actual_label     apple  avocado  banana  kiwi  lemon  orange
 predicted_label                                             
 apple              0.8      0.0     0.0   0.0    0.0     0.0
@@ -615,7 +601,6 @@ banana             0.0      0.0     0.7   0.0    0.0     0.0
 kiwi               0.2      0.0     0.0   0.7    0.0     0.1
 lemon              0.0      0.0     0.2   0.0    1.0     0.0
 orange             0.0      0.0     0.0   0.1    0.0     0.9
-
 ```
 <br>
 Along the top are our *actual* classes and down the side are our *predicted* classes - so by counting *down* the columns we can get the Classification Accuracy (%) for each class, and we can see where it is getting confused.
@@ -743,7 +728,6 @@ The standout insight for the baseline network was that Bananas have only a 20% C
 Running the same code from the baseline section on results for our updated network, we get the following output:
 
 ```
-
 actual_label     apple  avocado  banana  kiwi  lemon  orange
 predicted_label                                             
 apple              0.9      0.0     0.0   0.0    0.0     0.0
@@ -752,7 +736,6 @@ banana             0.1      0.0     0.8   0.0    0.0     0.0
 kiwi               0.0      0.0     0.0   0.9    0.0     0.0
 lemon              0.0      0.0     0.2   0.0    1.0     0.0
 orange             0.0      0.0     0.0   0.1    0.0     1.0
-
 ```
 <br>
 Along the top are our *actual* classes and down the side are our *predicted* classes - so by counting *down* the columns we can get the Classification Accuracy (%) for each class, and we can see where it is getting confused.
@@ -1050,7 +1033,6 @@ Our 95% Test Set accuracy at an *overall* level tells us that we don't have too 
 Running the same code from the baseline section on results for our updated network, we get the following output:
 
 ```
-
 actual_label     apple  avocado  banana  kiwi  lemon  orange
 predicted_label                                             
 apple              0.9      0.0     0.0   0.0    0.0     0.0
@@ -1059,7 +1041,6 @@ banana             0.0      0.0     0.9   0.0    0.0     0.0
 kiwi               0.0      0.0     0.0   0.9    0.0     0.0
 lemon              0.0      0.0     0.0   0.0    1.0     0.0
 orange             0.0      0.0     0.0   0.1    0.0     1.0
-
 ```
 <br>
 Along the top are our *actual* classes and down the side are our *predicted* classes - so by counting *down* the columns we can get the Classification Accuracy (%) for each class, and we can see where it is getting confused.
@@ -1151,15 +1132,15 @@ validation_set = validation_generator.flow_from_directory(directory = validation
 
 Keras makes the use of VGG16 very easy. We will download the *bottom* of the VGG16 network (everything up to the Dense Layers) and add in what we need to apply the *top* of the model to our fruit classes.
 
-We then need to specify that we *do not* want the imported layers to be re-trained, we want their parameters values to be frozen.
+We then need to specify that we *do not* want the imported layers to be re-trained, we want their parameter values to be frozen.
 
-The original VGG16 network architecture contains two massive Dense Layers near the end, each with 4096 neurons.  Since our task of classiying 6 types of fruit is more simplistic than the original 1000 ImageNet classes, we reduce this down and instead implement two Dense Layers with 128 neurons each, followed by our output layer.
+The original VGG16 network architecture contains two massive Dense Layers near the end, each with 4096 neurons.  Since our task of classifying 6 types of fruit is more simplistic than the original 1000 ImageNet classes, we reduce this down and instead implement two Dense Layers with 128 neurons each, followed by our output layer.
 
 ```python
 # Network architecture
 vgg = VGG16(input_shape = (img_width, img_height, num_channels), include_top = False)
 
-# freeze all layers (they won't be updated during training)
+# Freeze all layers (they won't be updated during training)
 for layer in vgg.layers:
     layer.trainable = False
 
@@ -1172,7 +1153,7 @@ output = Dense(num_classes, activation = 'softmax')(dense2)
 
 model = Model(inputs = vgg.inputs, outputs = output)
 
-# compile network
+# Compile network
 model.compile(loss = 'categorical_crossentropy',
               optimizer = 'adam',
               metrics = ['accuracy'])
@@ -1184,7 +1165,7 @@ model.summary()
 The below shows us our final architecture:
 
 ```
-_________________________________________________________________
+______________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
 input_1 (InputLayer)         [(None, 224, 224, 3)]     0         
@@ -1283,7 +1264,6 @@ Our 98% Test Set accuracy at an *overall* level tells us that we don't have too 
 Running the same code from the baseline section on results for our updated network, we get the following output:
 
 ```
-
 actual_label     apple  avocado  banana  kiwi  lemon  orange
 predicted_label                                             
 apple              1.0      0.0     0.0   0.0    0.0     0.0
@@ -1292,7 +1272,6 @@ banana             0.0      0.0     1.0   0.0    0.0     0.0
 kiwi               0.0      0.0     0.0   1.0    0.0     0.0
 lemon              0.0      0.0     0.0   0.0    0.9     0.0
 orange             0.0      0.0     0.0   0.0    0.1     1.0
-
 ```
 <br>
 Along the top are our *actual* classes and down the side are our *predicted* classes - so by counting *down* the columns we can get the Classification Accuracy (%) for each class, and we can see where it is getting confused.
@@ -1333,5 +1312,3 @@ ___
 # Growth & Next Steps <a name="growth-next-steps"></a>
 
 The proof of concept was successful, we have shown that we can get very accurate predictions albeit in a small number of classes.  We need to showcase this to the client, discuss what it is that makes the network more robust, and then look to test our best networks on a larger array of classes.
-
-Transfer Learning has been a big success, and was the best-performing network in terms of classification accuracy on the Test Set - however, we still only trained for a small number of epochs so we can push this even further.  It would be worthwhile testing other available pre-trained networks such as ResNet, Inception, and the DenseNet networks.
