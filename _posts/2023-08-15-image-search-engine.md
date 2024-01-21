@@ -211,6 +211,7 @@ Total params: 14,714,688
 Trainable params: 14,714,688
 Non-trainable params: 0
 _________________________________________________________________
+
 ```
 <br>
 If we hadn't added that last parameter of "pooling = avg" then the final layer would have been that MaxPoolingLayer of shape 7 by 7 by 512. Instead, however, the Global Average Pooling logic was added, and this means we get that single array that is of size 512.  In other words, all of the feature maps from that final Max Pooling layer are summarised down into one vector of 512 numbers, and for each image, these numbers will represent its features. This feature vector is what we will be using to compare our base set of images, to any given search image to assess the similarity!
@@ -235,7 +236,7 @@ def preprocess_image(filepath):
     
     return image
 
-# image featurisation function
+# Image featurisation function
 def featurise_image(image):
     
     feature_vector = model.predict(image)
@@ -245,7 +246,7 @@ def featurise_image(image):
 <br>
 The *preprocess_image* function does the following:
 
-* Receives the filepath of an image
+* Receives the file path of an image
 * Loads the image in
 * Turns the image into an array
 * Adds in the "batch" dimension for the array that Keras is expecting
@@ -263,9 +264,9 @@ The *featurise_image* function does the following:
 
 In the code below, we:
 
-* Specify the directory of the base-set of images
-* Set up empty list to append our image filenames (for future lookup)
-* Set up empty array to append our base-set feature vectors
+* Specify the directory of the base set of images
+* Set up an empty list to append our image filenames (for future lookup)
+* Set up an empty array to append our base-set feature vectors
 
 ```python
 # Source directory for base images
