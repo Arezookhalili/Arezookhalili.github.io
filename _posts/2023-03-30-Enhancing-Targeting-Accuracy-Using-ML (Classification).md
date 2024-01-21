@@ -143,7 +143,7 @@ As we are predicting a binary output, we tested three classification modeling ap
 We utilize the scikit-learn library within Python to model our data using Logistic Regression. 
 
 ```python
-# import required packages
+# Import required packages
 import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
@@ -207,7 +207,7 @@ For Logistic Regression we have certain data preprocessing steps that need to be
 ##### Missing Values
 
 ```python
-# remove rows where values are missing
+# Remove rows where values are missing
 data_for_model.isna().sum()
 ```
 
@@ -252,7 +252,7 @@ We do this using the "boxplot approach" where we remove any rows where the value
 ```python
 outlier_columns = ["distance_from_store", "total_sales", "total_items"]
 
-# boxplot approach
+# Boxplot approach
 for column in outlier_columns:
     
     lower_quartile = data_for_model[column].quantile(0.25)
@@ -309,10 +309,10 @@ After applying One Hot Encoding, we turn our training and test objects back into
 # List of categorical variables that need encoding
 categorical_vars = ["gender"]
 
-# Instantiate OHE class
+# Instantiate One Hot Encoder class
 one_hot_encoder = OneHotEncoder(sparse=False, drop = "first")
 
-# Apply OHE
+# Apply One Hot Encoder
 X_train_encoded = one_hot_encoder.fit_transform(X_train[categorical_vars])
 X_test_encoded = one_hot_encoder.transform(X_test[categorical_vars])
 
@@ -428,7 +428,6 @@ plt.xlabel("Predicted Class")
 for (i, j), corr_value in np.ndenumerate(conf_matrix):
     plt.text(j, i, corr_value, ha = "center", va = "center", fontsize = 20)
 plt.show()
-
 ```
 
 <br>
@@ -1299,7 +1298,7 @@ X_test_encoded = one_hot_encoder.transform(X_test[categorical_vars])
 # Extract feature names for encoded columns
 encoder_feature_names = one_hot_encoder.get_feature_names_out(categorical_vars)
 
-# Tturn objects back to the pandas dataframe
+# Turn objects back to the pandas dataframe
 X_train_encoded = pd.DataFrame(X_train_encoded, columns = encoder_feature_names)
 X_train = pd.concat([X_train.reset_index(drop=True), X_train_encoded.reset_index(drop=True)], axis = 1)
 X_train.drop(categorical_vars, axis = 1, inplace = True)
@@ -1413,11 +1412,9 @@ To assess how well our model is predicting new data - we use the trained model o
 In the code below we create one object to hold the binary 1/0 predictions, and another to hold the actual prediction probabilities for the positive class (which is based upon the majority class within the k nearest neighbors)
 
 ```python
-
-# predict on the test set
+# Predict on the test set
 y_pred_class = clf.predict(X_test)
 y_pred_prob = clf.predict_proba(X_test)[:,1]
-
 ```
 
 <br>
