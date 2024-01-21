@@ -88,14 +88,12 @@ Our initial dataset contains 3,500 transactions, each of which shows the alcohol
 In the code below, we import Pandas, as well as the apriori algorithm from the apyori library, and we bring the raw data into Python.
 <br>
 ```python
-
 # Import required Python packages
 import pandas as pd
 from apyori import apriori
 
-# import the sample data
+# Import the sample data
 alcohol_transactions = pd.read_csv("data/sample_data_apriori.csv")
-
 ```
 <br>
 
@@ -312,17 +310,15 @@ ___
 <br>
 #### Associated Products
 
-Now we have our data in a useable format - let's look at the product pairs with the *strongest* relationships - we can do this by sorting our Lift column, in descending order.
+Now we have our data in a usable format - let's look at the product pairs with the *strongest* relationships - we can do this by sorting our Lift column, in descending order.
 
 ```python
-
-# sort pairs by descending Lift
+# Sort pairs by descending Lift
 apriori_rules_df.sort_values(by = "lift", ascending = False, inplace = True)
-
 ```
 
 <br>
-In the table below, we can see the ten highest product relationships, based upon Lift
+In the table below, we can see the ten highest product relationships, based on Lift
 <br>
 <br>
 
@@ -341,11 +337,11 @@ In the table below, we can see the ten highest product relationships, based upon
 | Small Sizes Wht Othr | Small Sizes White | 0.003 | 0.414 | 6.176 |
 
 <br>
-Interestingly, the strongest relationship exists between two products labelled as "gifts" - this is useful information for the category managers as they may want to ensure that gift products are available in one section of the aisle, rather than existing in their respective product types.
+Interestingly, the strongest relationship exists between two products labeled as "gifts" - this is useful information for the category managers as they may want to ensure that gift products are available in one section of the aisle, rather than existing in their respective product types.
 
 We also see some strong relationships between French wines, and other French wines - which again is extremely useful for category managers who are thinking about the best way to lay out the products - having sections by country rather than necessarily by type might make it easier for customers to find what they are after.
 
-Another interesting association is between products labelled "small".  At this point, we don't know exactly what that means - but it is certainly something to take back to the client as they may be able to make more sense of it, and turn it into an actionable insight!
+Another interesting association is between products labeled "small".  At this point, we don't know exactly what that means - but it is certainly something to take back to the client as they may be able to make more sense of it, and turn it into an actionable insight!
 
 <br>
 #### Search Tool For Category Managers
@@ -357,13 +353,11 @@ An example of how this might work would be to test a hypothesis around New Zeala
 The code below uses a string function to pull back all rows in the DataFrame where *product1* contains the words "New Zealand"
 
 ```python
-
-# search based upon text
+# Search based upon text
 apriori_rules_df[apriori_rules_df["product1"].str.contains("New Zealand")]
-
 ```
 <br>
-The results of this search, in order of descending Lift are as follows:
+The results of this search, in order of descending Lift, are as follows:
 <br>
 <br>
 
@@ -388,7 +382,7 @@ The results of this search, in order of descending Lift are as follows:
 <br>
 There appears to be *some* relationship between New Zealand wines and other New Zealand wines, but what is also interesting is that New Zealand wines seem to be more associated with French & South American wines than they are with Australian Wines.
 
-New Zealand & Australia are often grouped together, but in terms of wine this wouldn't make sense - perhaps because of the difference climates the wines are very different and thus it wouldn't make sense to group wines by geographical proximity, but by preference instead.  This is only a hypothesis for now - we will need to take this back to the client and get their category experts to help us interpret it!
+New Zealand & Australia are often grouped together, but in terms of wine this wouldn't make sense - perhaps because of the different climates the wines are very different and thus it wouldn't make sense to group wines by geographical proximity, but by preference instead.  This is only a hypothesis for now - we will need to take this back to the client and get their category experts to help us interpret it!
 
 ___
 <br>
@@ -396,6 +390,6 @@ ___
 
 As this was first & foremost an exploratory project, we will take back the results to the client Category Managers & discuss the results, our views on how these insights can be actioned best, and any considerations that need to be taken into account when interpreting.
 
-From there we will recommend applying this same logic to all other categories, as well as potentially across the full-product range.
+From there we will recommend applying this same logic to all other categories, as well as potentially across the full product range.
 
-We will also propose the build of the "Keyword Search Engine" which will help Category Managers extract and utilise the insights held within the data.
+We will also propose the build of the "Keyword Search Engine" which will help Category Managers extract and utilize the insights held within the data.
