@@ -139,7 +139,11 @@ To start with, we simply use the generators to rescale the raw pixel values (ran
 # Image generators
 training_generator = ImageDataGenerator(rescale = 1./255)
 validation_generator = ImageDataGenerator(rescale = 1./255)
-
+```
+<br>
+We will then send the image batches from our hard drive to the network.
+<br>
+```python
 # Image flows
 training_set = training_generator.flow_from_directory(directory = training_data_dir,
                                                       target_size = (img_width, img_height),
