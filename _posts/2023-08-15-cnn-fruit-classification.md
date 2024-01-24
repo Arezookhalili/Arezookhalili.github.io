@@ -5,7 +5,7 @@ image: "/posts/cnn-fruit-classification-title-img.png"
 tags: [Deep Learning, CNN, Data Science, Computer Vision, Python]
 ---
 
-In this project, we build & optimize a Convolutional Neural Network to classify images of fruits, to help a grocery retailer enhance & scale their sorting & delivery processes. 
+In this project, we would like to help a grocery retailer enhance and scale their sorting and delivery processes through building & optimizing a Convolutional Neural Network to classify images of fruits. 
 
 # Table of contents
 
@@ -30,11 +30,7 @@ ___
 
 ### Context <a name="overview-context"></a>
 
-Our client had an interesting proposal and requested our help to assess whether it was viable.
-
-At a recent tech conference, they spoke to a contact from a robotics company that creates robotic solutions that help other businesses scale and optimize their operations.
-
-Their representative mentioned that they had built a prototype for a robotic sorting arm that could be used to pick up and move products off a platform.  It would use a camera to "see" the product and could be programmed to move that particular product into a designated bin, for further processing.
+A robotics company informed our client that they had built a prototype for a robotic sorting arm that could be used to pick up and move products off a platform.  It would use a camera to "see" the product and could be programmed to move that particular product into a designated bin, for further processing.
 
 The only thing they hadn't figured out was how to identify each product using the camera so that the robotic arm could move it to the right place.
 
@@ -122,7 +118,11 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Activation, Flatten, Dense
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.callbacks import ModelCheckpoint
+```
 
+We specify that we will resize the images down to 128 x 128 pixels and that we will pass in 32 images at a time (known as the batch size) for training.
+<br>
+```python
 # Data flow parameters
 training_data_dir = 'data/training'
 validation_data_dir = 'data/validation'
@@ -131,7 +131,11 @@ img_width = 128
 img_height = 128
 num_channels = 3
 num_classes = 6
-
+```
+<br>
+To start with, we simply use the generators to rescale the raw pixel values (ranging between 0 and 255) to float values that exist between 0 and 1.  The reason we do this is mainly to help Gradient Descent find an optimal, or near optional solution each time much more efficiently - in other words, it means that the features that are learned in the depths of the network are of a similar magnitude, and the learning rate that is applied to descend the loss or cost function across many dimensions, is somewhat proportionally similar across all dimensions - and long story short, means training time is faster as Gradient Descent can converge faster each time!
+<br>
+```python
 # Image generators
 training_generator = ImageDataGenerator(rescale = 1./255)
 validation_generator = ImageDataGenerator(rescale = 1./255)
@@ -148,10 +152,6 @@ validation_set = validation_generator.flow_from_directory(directory = validation
                                                                       class_mode = 'categorical')
 ```
 <br>
-We specify that we will resize the images down to 128 x 128 pixels and that we will pass in 32 images at a time (known as the batch size) for training.
-
-To start with, we simply use the generators to rescale the raw pixel values (ranging between 0 and 255) to float values that exist between 0 and 1.  The reason we do this is mainly to help Gradient Descent find an optimal, or near optional solution each time much more efficiently - in other words, it means that the features that are learned in the depths of the network are of a similar magnitude, and the learning rate that is applied to descend the loss or cost function across many dimensions, is somewhat proportionally similar across all dimensions - and long story short, means training time is faster as Gradient Descent can converge faster each time!
-
 We will add more logic to the training set generator to apply Image Augmentation.
 
 With this pipeline in place, our images will be extracted, in batches of 32, from our hard drive, where they're being stored and sent into our model for training!
