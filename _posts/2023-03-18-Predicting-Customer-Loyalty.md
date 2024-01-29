@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Predicting Customer Loyalty for A Grocery Retailer Using ML
+title: Predicting Customer Loyalty for a Grocery Retailer Using ML
 image: "/posts/regression-title-img.png"
 tags: [Customer Loyalty, Machine Learning, Regression, Python]
 ---
