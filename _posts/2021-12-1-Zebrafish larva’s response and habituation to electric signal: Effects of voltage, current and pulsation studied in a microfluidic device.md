@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Simple Microfluidic Sensor for Detection of Microplastics in Water
+title: Effects of Electric Voltage, Current, and Pulsation on Zebrafish Larva’s Behavioral Response
 image: "/posts/Microplastics.png"
 tags: [Data Analysis, Statistical Analysis, Microplastic Detection]
 ---
@@ -38,4 +38,4 @@ __
 This project leveraged DC electrophoretic force and electrical resistance measurement in a simple microchannel for real-time, on-site detection of 1-10 µm microplastics.
 __
 
-Published Work in Peer-Reviewed Scientific Journal (New J. of Chemistry, 2023): [Simple microfluidic device for simultaneous extraction and detection of microplastics in water using DC electrical signal](https://pubs.rsc.org/en/content/articlelanding/2023/nj/d2nj06268b/unauth)
+Published Work in Peer-Reviewed Scientific Journal (Sensors and Actuators A: Physical, 2021): [Zebrafish larva’s response and habituation to electric signal: Effects of voltage, current and pulsation studied in a microfluidic device](https://pubs.rsc.org/en/content/articlelanding/2023/nj/d2nj06268b/unauth](https://www.sciencedirect.com/science/article/abs/pii/S0924424721005355)https://www.sciencedirect.com/science/article/abs/pii/S0924424721005355)
