@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Investigating Zebrafish Motor Behavior Alteration in a Lab-on-chip Model of Parkinson's Disease
-image: "/posts/Panx1.jpg"
+image: "/posts/Panx1.png"
 tags: [Data Analysis, Statistical Analysis, Behavioral Study, Neurodegenerative Mechanism Investigation]
 ---
 
