@@ -11,7 +11,7 @@ __
 
 # Methods  <a name="data-overview"></a>
 
-# Behavioral screening  
+### Behavioral screening  
 
 The behavioral experiments were performed with a polydimethylsiloxane (PDMS) microfluidics device, complemented with key auxiliary components such as syringe pumps, a sourcemeter, and an upright Leica stereomicroscope with a camera to enable manipulation, stimulation, and imaging of zebrafish larvae.
 During an experiment, a larva was transferred into the device and head-immobilized while its tail was free to move. Following a 1-minute recovery period, an electric stimulus was applied for 20 seconds using the sourcemeter, and the larva's locomotor response was recorded with a camera on the Leica stereomicroscope. The tested larva was removed from the device via the outlet before repeating the experiment to reach the designated sample sizes for each condition.
