@@ -11,26 +11,26 @@ __
 
 # Methods  <a name="data-overview"></a>
 
-### Behavioral screening  
+### 1. Behavioral screening  
 
 The behavioral experiments were performed with a polydimethylsiloxane (PDMS) microfluidics device, complemented with key auxiliary components such as syringe pumps, a sourcemeter, and an upright Leica stereomicroscope with a camera to enable manipulation, stimulation, and imaging of zebrafish larvae.
 During an experiment, a larva was transferred into the device and head-immobilized while its tail was free to move. Following a 1-minute recovery period, an electric stimulus was applied for 20 seconds using the sourcemeter, and the larva's locomotor response was recorded with a camera on the Leica stereomicroscope. The tested larva was removed from the device via the outlet before repeating the experiment to reach the designated sample sizes for each condition.
 
-2. Video and Image Analysis: 
+### 2. Video and Image Analysis: 
 
 For analyzing tail movement, the point tracking feature in the open-source Kinovea software (www.kinovea.org, France) was utilized. Each video frame was checked to ensure that the software was accurately tracking the tail tip. 
 In low-resolution frames where the tail tip was blurred as a result of fast movement, we manually adjusted or selected the tip position. The tail position data was saved in.xml format and the electric-induced response duration (RD) and tail beat frequency (TBF) phenotypes were analyzed in Microsoft Excel (Microsoft Corp., WA, USA). 
 RD was defined as the time from the start of tail movement until the zebrafish activities ceased. The start time was at the point that the electric current was applied because there was no delay in response to the stimulus. 
 TBF represents the number of full tail movement cycles divided by the total RD, with small tail flicks excluded. The tail was required to pass a threshold of ± 0.25 mm from the centerline to produce a quarter-strike cycle for each pass. Therefore, four quarter strikes resulted in a complete cycle with bilateral and unilateral tail turns equated to one and a half cycles, respectively.
 
-3. Statistical Processing:
+### Statistical Processing:
    
 Applied common statistical methods to understand data distribution and identify significant differences.
 Utilized the Shapiro–Wilk test to assess the normality of distribution for behavioral data.
 Employed a Mann–Whitney test for non-normally distributed data.
 Used a Pair Wise Fixed Reallocation Randomisation Test for statistical significance in RT-qPCR data.
 
-4. Sample Size Determination:
+### Sample Size Determination:
 
 Utilized G*Power 3.1 software for power analysis to determine sample sizes.
 Considered an effect size of 0.5, a significance level of 0.05, and a power of 80%.
