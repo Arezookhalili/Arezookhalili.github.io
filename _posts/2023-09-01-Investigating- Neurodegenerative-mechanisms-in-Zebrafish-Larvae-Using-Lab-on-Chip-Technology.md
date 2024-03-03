@@ -23,14 +23,14 @@ In low-resolution frames where the tail tip was blurred as a result of fast move
 RD was defined as the time from the start of tail movement until the zebrafish activities ceased. The start time was at the point that the electric current was applied because there was no delay in response to the stimulus. 
 TBF represents the number of full tail movement cycles divided by the total RD, with small tail flicks excluded. The tail was required to pass a threshold of ± 0.25 mm from the centerline to produce a quarter-strike cycle for each pass. Therefore, four quarter strikes resulted in a complete cycle with bilateral and unilateral tail turns equated to one and a half cycles, respectively.
 
-### Statistical Processing:
+### 3. Statistical Processing:
    
 Applied common statistical methods to understand data distribution and identify significant differences.
 Utilized the Shapiro–Wilk test to assess the normality of distribution for behavioral data.
 Employed a Mann–Whitney test for non-normally distributed data.
 Used a Pair Wise Fixed Reallocation Randomisation Test for statistical significance in RT-qPCR data.
 
-### Sample Size Determination:
+### 4. Sample Size Determination:
 
 Utilized G*Power 3.1 software for power analysis to determine sample sizes.
 Considered an effect size of 0.5, a significance level of 0.05, and a power of 80%.
