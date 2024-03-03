@@ -53,4 +53,4 @@ __
 
 # Further Information  <a name="data-overview"></a>
 
-Published Work in Peer-Reviewed Scientific Journal (J. of Neuroscience Research, Sep. 2023): [Loss of Panx1 function in zebrafish alters motor behavior in a lab-on-chip model of Parkinson's disease](https://onlinelibrary.wiley.com/doi/full/10.1002/jnr.25241)
+Published Work in Peer-Reviewed Scientific Journal (J. of Neuroscience Research, 2023): [Loss of Panx1 function in zebrafish alters motor behavior in a lab-on-chip model of Parkinson's disease](https://onlinelibrary.wiley.com/doi/full/10.1002/jnr.25241)
