@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Effects of Electric Voltage, Current, and Pulsation on Zebrafish Larva’s Behavioral Response
-image: "/posts/Microplastics.png"
+image: "/posts/Habituation.png"
 tags: [Data Analysis, Statistical Analysis, Microplastic Detection]
 ---
 
