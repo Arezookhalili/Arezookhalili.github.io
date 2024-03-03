@@ -39,4 +39,6 @@ This project leveraged DC electrophoretic force and electrical resistance measur
 
 __
 
+# Further Information  <a name="data-overview"></a>
+
 Published Work in Peer-Reviewed Scientific Journal (New J. of Chemistry, 2023): [Simple microfluidic device for simultaneous extraction and detection of microplastics in water using DC electrical signal](https://pubs.rsc.org/en/content/articlelanding/2023/nj/d2nj06268b/unauth)
