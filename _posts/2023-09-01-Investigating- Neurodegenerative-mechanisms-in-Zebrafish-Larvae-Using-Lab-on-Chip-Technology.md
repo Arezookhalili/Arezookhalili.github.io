@@ -2,7 +2,7 @@
 layout: post
 title: Investigating Zebrafish Motor Behavior Alteration in a Lab-on-chip Model of Parkinson's Disease
 image: "/posts/Panx1.png"
-tags: [Data Analysis, Statistical Analysis, Behavioral Study, Neurodegenerative Mechanism Investigation]
+tags: [Data Analysis, Statistical Analysis, Neurobehavioral Study]
 ---
 
 In this project, I utilized advanced statistical processing and experimental design techniques to investigate neurodegenerative mechanisms in zebrafish larvae. Leveraging a lab-on-chip approach and a widely recognized model of PD (the 6-OHDA model), the project aimed to study behavioral and molecular responses, providing valuable insights into the early stages of neurodegeneration. 
