@@ -49,4 +49,6 @@ __
 Currently, there is no standard treatment for PD; Therefore, finding relevant factors underlying the pathophysiological progression of this disease is required for translational research addressing this severe health problem. Starting this discovery process early in life before the typical clinical symptoms of PD manifest would be the most likely approach toward prevention. 
 In summary, the key findings of this study have the potential to foster new lines of research, representing a view into the earliest insults driving a vertebrate toward PD.
 
-Further information: https://onlinelibrary.wiley.com/doi/full/10.1002/jnr.25241
+[GitHub Pages](https://pages.github.com/)
+
+Published Work in Peer-Reviewed Scientific Journal (Sep. 2023): [Loss of Panx1 function in zebrafish alters motor behavior in a lab-on-chip model of Parkinson's disease](https://onlinelibrary.wiley.com/doi/full/10.1002/jnr.25241)
