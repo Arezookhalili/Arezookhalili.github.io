@@ -5,8 +5,8 @@ image: "/posts/Panx1.png"
 tags: [Data Analysis, Statistical Analysis, Behavioral Study, Neurodegenerative Mechanism Investigation]
 ---
 
-In this project, I utilized advanced statistical processing and experimental design techniques to investigate neurodegenerative mechanisms in zebrafish larvae. Leveraging a lab-on-chip approach and a widely recognized model of PD (the 6-OHDA model), the project aimed to study behavioral and molecular responses, providing valuable insights into the early stages of neurodegeneration.
-
+In this project, I utilized advanced statistical processing and experimental design techniques to investigate neurodegenerative mechanisms in zebrafish larvae. Leveraging a lab-on-chip approach and a widely recognized model of PD (the 6-OHDA model), the project aimed to study behavioral and molecular responses, providing valuable insights into the early stages of neurodegeneration. 
+Zebrafish larvae electric-induced behavioral responses were recorded. Then the recorded videos were analyzed to extract the required quantifying parameters. Data were cleaned and outliers were filtered. Next, the data were visualized, and statistical analysis was performed to discern any statistically significant differences between the means of the under-study groups.
 __
 
 # Methods  <a name="data-overview"></a>
