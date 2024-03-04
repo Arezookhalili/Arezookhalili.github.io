@@ -2,7 +2,7 @@
 layout: post
 title: Effects of Electric Voltage, Current, and Pulsation on Zebrafish Larva’s Behavioral Response
 image: "/posts/Habituation.png"
-tags: [Data Analysis, Statistical Analysis, Behavioral Analysis]
+tags: [Data Analysis, Statistical Analysis, Physical Parameters' Effect]
 ---
 
 In this project, we utilized data analysis and statistical processing to understand the electric response of semi-mobile zebrafish larvae in a microfluidic environment. The effects of several physical parameters including electric field direction, voltage magnitude, and repeated exposure to electric current pulses on zebrafish behavior were investigated.
