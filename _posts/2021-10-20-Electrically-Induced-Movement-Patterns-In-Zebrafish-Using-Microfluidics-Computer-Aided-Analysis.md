@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Computer-Aided Analysis of Electric-Induced Tail Patterns in Zebrafish Larvae
-image: "/posts/Movement Pattern.png"
+image: "/posts/Movement_Pattern.png"
 tags: [Data Analysis, Statistical Analysis, Computer-Aided Movement Pattern Detection]
 ---
 
