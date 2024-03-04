@@ -1,11 +1,12 @@
 ---
 layout: post
-title: Simultaneous Screening of Zebrafish Larvae Cardiac and Respiratory Functions: A microfluidic Multi-phenotypic Approach
+title: Simultaneous Screening of Zebrafish Larvae Cardiac and Respiratory Functions: A Microfluidic Multi-phenotypic Approach
 image: "/posts/Fin.png"
 tags: [Data Analysis, Statistical Analysis, Multi-phenotypic Screening]
 ---
 
 This project revolves around the development and analysis of a novel quadruple-fish microfluidic chip designed for simultaneous monitoring of cardiac and respiratory functions of zebrafish larvae. Leveraging multi-phenotypic screening and data analytics, the quadruple-fish microfluidic chip allows for efficient bi-directional imaging, providing insights into the impact of chemical stimuli on heart rate (HR) and fin beat frequency (FBF). The project demonstrates the sensitivity of the proposed technique in detecting cardiac and respiratory dysfunctions induced by ethanol and cadmium chloride, establishing its relevance in data-driven behavioral screening.
+
 __
 
 # Methodology  <a name="data-overview"></a>
