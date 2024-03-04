@@ -2,7 +2,7 @@
 layout: post
 title: Computer-Aided Analysis of Electric-Induced Tail Patterns in Zebrafish Larvae
 image: "/posts/Movement Pattern.png"
-tags: [Data Analysis, Statistical Analysis, Movement Pattern Detection]
+tags: [Data Analysis, Statistical Analysis, Computer-Aided Movement Pattern Detection]
 ---
 
 This project introduces an innovative approach for analyzing electric-induced behavioral responses of zebrafish larvae using a microfluidic device and a MATLAB script. The methodology allows the extraction of specific tail movement patterns, such as J- and C-bends, providing a deeper understanding of how electric stimuli modulate zebrafish locomotion. This technique holds significance for diverse biological applications, shedding light on sensory-motor systems and neural circuit involvement in generating distinct movement patterns.
