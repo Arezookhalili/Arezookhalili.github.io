@@ -19,7 +19,7 @@ Gathered data on electric-induced zebrafish larvae' tail movement.
 
 ### 2. Video analysis:
 
-Videos were analysed and J- and C-like patterns were detected
+Videos were analysed and J- and C-like patterns were detected.
 
 __
 
