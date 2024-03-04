@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Simultaneous 
+title: Simultaneous Screening of Zebrafish Larvae Cardiac and Respiratory Functions: 
 image: "/posts/Fin.png"
 tags: [Data Analysis, Statistical Analysis, Multi-phenotypic Screening]
 ---
