@@ -1,3 +1,10 @@
+---
+layout: post
+title: Clothing E-Commerce Sales Analysis
+image: "/posts/LR.png"
+tags: [Linear Regression, Machine Learning, Python]
+---
+
 # Linear Regression Project
 I got some contract work with an E-commerce company based in New York City that sells clothing online but they also have in-store style and clothing advice sessions. Customers come into the store, have sessions/meetings with a personal stylist, then they can go home and order either on a mobile app or website for the clothes they want.
 
