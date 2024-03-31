@@ -309,9 +309,10 @@ sns.jointplot(x='Time on App',y='Yearly Amount Spent',data=customers)
 
 
 
+
+![alt text](/img/posts/output_15_1.png)
     
-![png](output_15_1.png)
-    
+   
 
 
 ### Conclusion: More time on App, more money spent.
@@ -329,8 +330,9 @@ sns.jointplot(x='Time on App',y='Length of Membership',data=customers)
 
 
 
-    
-![png](output_17_1.png)
+
+![alt text](/img/posts/output_17_1.png)
+
     
 
 
@@ -349,8 +351,9 @@ sns.pairplot(customers)
 
 
 
-    
-![png](output_19_1.png)
+
+![alt text](/img/posts/output_19_1.png)
+
     
 
 
@@ -420,8 +423,9 @@ plt.ylabel('Predicted Y')
 
 
 
-    
-![png](output_32_1.png)
+
+![alt text](/img/posts/output_32_1.png)
+
     
 
 
