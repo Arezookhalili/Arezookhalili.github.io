@@ -291,8 +291,7 @@ sns.jointplot(x='Time on Website',y='Yearly Amount Spent',data=customers)
 
 
 
-    
-/posts/output_13_1.png
+![alt text](/img/posts/output_13_1.png)
     
 
 
