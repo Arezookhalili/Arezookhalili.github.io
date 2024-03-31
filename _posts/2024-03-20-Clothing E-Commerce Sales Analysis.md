@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Clothing E-Commerce Sales Analysis
-image: "/posts/images.jpeg"
+image: "/posts/title.png"
 tags: [Linear Regression, Machine Learning, Python]
 ---
 
