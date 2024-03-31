@@ -292,7 +292,7 @@ sns.jointplot(x='Time on Website',y='Yearly Amount Spent',data=customers)
 
 
     
-![png](output_13_1.png)
+/posts/output_13_1.png
     
 
 
