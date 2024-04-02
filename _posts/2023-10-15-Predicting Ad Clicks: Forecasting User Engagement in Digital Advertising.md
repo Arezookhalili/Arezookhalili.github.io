@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Predicting Ad Clicks, Forecasting User Engagement in Digital Advertising
+title: Predicting Ad Clicks- Forecasting User Engagement in Digital Advertising
 image: "/posts/clf.png"
 tags: [Logistic Regression, Machine Learning, Python]
 ---
