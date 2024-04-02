@@ -312,8 +312,7 @@ plt.xlabel('Age')
 
 
 
-    
-![png](output_10_1.png)
+![alt text](/img/posts/output_10_1.png)
     
 
 
@@ -332,8 +331,8 @@ sns.jointplot(data=ad_data, x= 'Age', y= 'Area Income')
 
 
 
-    
-![png](output_12_1.png)
+
+![alt text](/img/posts/output_12_1.png)
     
 
 
@@ -352,8 +351,9 @@ sns.jointplot(x='Daily Time Spent on Site',y='Daily Internet Usage',data=ad_data
 
 
 
-    
-![png](output_14_1.png)
+
+![alt text](/img/posts/output_14_1.png)
+
     
 
 
@@ -372,8 +372,8 @@ sns.pairplot(ad_data,hue='Clicked on Ad')
 
 
 
-    
-![png](output_16_1.png)
+
+![alt text](/img/posts/output_16_1.png)
     
 
 
@@ -470,8 +470,9 @@ plt.show()
     
 
 
-    
-![png](output_28_2.png)
+
+![alt text](/img/posts/output_28_2.png)
+
     
 
 
