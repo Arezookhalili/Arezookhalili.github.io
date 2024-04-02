@@ -1,9 +1,11 @@
 ---
 layout: post
-title: Predicting Ad Clicks: Forecasting User Engagement in Digital Advertising
+title: Predicting Ad Clicks, Forecasting User Engagement in Digital Advertising
 image: "/posts/clf.png"
 tags: [Logistic Regression, Machine Learning, Python]
 ---
+
+
 
 In this project, we will try to create a model that will predict whether or not a particular internet user will click on an ad based off the features of that user. For that, we will be working with a fake advertising data set, indicating whether or not a particular internet user clicked on an Advertisement.
 
