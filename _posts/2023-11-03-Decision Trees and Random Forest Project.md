@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Predictive Modeling for LendingClub- Investing in Borrowers' Repayment Probability
-image: "/posts/clf.png"
+image: "/posts/DSC.png"
 tags: [Decision Trees, Random Forest, Machine Learning, Python]
 ---
 
