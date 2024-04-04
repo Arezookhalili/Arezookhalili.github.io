@@ -1,3 +1,12 @@
+
+"Predictive Modeling for LendingClub: Investing in Borrowers' Repayment Probability"
+
+
+
+
+
+
+
 For this project, we will be exploring publicly available data from [LendingClub.com](www.lendingclub.com). Lending Club connects people who need money (borrowers) with people who have money (investors). An investor would want to invest in people who showed a profile of having a high probability of paying you back. We will try to create a model that will help predict this.
 
 Lending club had a [very interesting year in 2016](https://en.wikipedia.org/wiki/Lending_Club#2016), so let's check out some of their data and keep the context in mind. This data is from before they even went public.
