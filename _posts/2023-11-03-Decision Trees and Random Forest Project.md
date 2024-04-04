@@ -403,9 +403,8 @@ plt.xlabel('FICO')
 
 
 
-    
-![png](output_10_1.png)
-    
+![alt text](/img/posts/output_10_1.png)
+     
 
 
 ### We can see more people in the data set have credit policy of 1 than 0. Also, people with lower fisco have credit policy of 0.
@@ -432,8 +431,8 @@ plt.xlabel('FICO')
 
 
 
-    
-![png](output_13_1.png)
+![alt text](/img/posts/output_13_1.png)
+
     
 
 
@@ -456,8 +455,9 @@ sns.countplot(loans, x= 'purpose', hue = 'not.fully.paid')
 
 
 
-    
-![png](output_16_1.png)
+
+![alt text](/img/posts/output_16_1.png)
+
     
 
 
@@ -476,8 +476,8 @@ sns.jointplot(loans, x='fico', y='int.rate')
 
 
 
-    
-![png](output_18_1.png)
+![alt text](/img/posts/output_18_1.png)
+
     
 
 
