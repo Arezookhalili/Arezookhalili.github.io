@@ -1,6 +1,6 @@
 ---
 layout: post
-title: University Classification: Applying KMeans Clustering to Distinguish Between Private and Public Institutions
+title: University Classification- Applying KMeans Clustering to Distinguish Between Private and Public Institutions
 image: "/posts/Uni.png"
 tags: [K Means Clustering, Machine Learning, Python]
 ---
