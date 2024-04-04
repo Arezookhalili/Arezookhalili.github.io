@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Predictive Modeling for LendingClub- Investing in Borrowers' Repayment Probability
+title: University Classification: Applying KMeans Clustering to Distinguish Between Private and Public Institutions
 image: "/posts/Uni.png"
 tags: [K Means Clustering, Machine Learning, Python]
 ---
@@ -474,8 +474,8 @@ sns.lmplot(x='Room.Board',y='Grad.Rate',data=df, hue='Private',
 
 
 
-    
-![png](output_10_1.png)
+![alt text](/img/posts/output_10_1.png)
+  
     
 
 
@@ -496,8 +496,8 @@ sns.lmplot(x='Outstate',y='F.Undergrad',data=df, hue='Private',
 
 
 
+![alt text](/img/posts/output_12_1.png)
     
-![png](output_12_1.png)
     
 
 
