@@ -1,14 +1,8 @@
-___
-
-<a href='http://www.pieriandata.com'> <img src='../Pierian_Data_Logo.png' /></a>
-___
-# Random Forest Project 
-
-For this project we will be exploring publicly available data from [LendingClub.com](www.lendingclub.com). Lending Club connects people who need money (borrowers) with people who have money (investors). Hopefully, as an investor you would want to invest in people who showed a profile of having a high probability of paying you back. We will try to create a model that will help predict this.
+For this project, we will be exploring publicly available data from [LendingClub.com](www.lendingclub.com). Lending Club connects people who need money (borrowers) with people who have money (investors). An investor would want to invest in people who showed a profile of having a high probability of paying you back. We will try to create a model that will help predict this.
 
 Lending club had a [very interesting year in 2016](https://en.wikipedia.org/wiki/Lending_Club#2016), so let's check out some of their data and keep the context in mind. This data is from before they even went public.
 
-We will use lending data from 2007-2010 and be trying to classify and predict whether or not the borrower paid back their loan in full. You can download the data from [here](https://www.lendingclub.com/info/download-data.action) or just use the csv already provided. It's recommended you use the csv provided as it has been cleaned of NA values.
+We will use lending data from 2007-2010 and try to classify and predict whether or not the borrower paid back their loan in full. 
 
 Here are what the columns represent:
 * credit.policy: 1 if the customer meets the credit underwriting criteria of LendingClub.com, and 0 otherwise.
@@ -25,9 +19,7 @@ Here are what the columns represent:
 * delinq.2yrs: The number of times the borrower had been 30+ days past due on a payment in the past 2 years.
 * pub.rec: The borrower's number of derogatory public records (bankruptcy filings, tax liens, or judgments).
 
-# Import Libraries
-
-**Import the usual libraries for pandas and plotting. You can import sklearn later on.**
+# Import Required Packages
 
 
 ```python
@@ -38,16 +30,14 @@ import seaborn as sns
 %matplotlib inline
 ```
 
-## Get the Data
-
-** Use pandas to read loan_data.csv as a dataframe called loans.**
+## Getting the Data
 
 
 ```python
 loans = pd.read_csv('loan_data.csv')
 ```
 
-** Check out the info(), head(), and describe() methods on loans.**
+** Checkking out the info(), head(), and describe() methods on loans.**
 
 
 ```python
@@ -389,11 +379,9 @@ loans.head()
 
 # Exploratory Data Analysis
 
-Let's do some data visualization! We'll use seaborn and pandas built-in plotting capabilities, but feel free to use whatever library you want. Don't worry about the colors matching, just worry about getting the main idea of the plot.
+Let's do some data visualization! We'll use seaborn and pandas built-in plotting capabilities. 
 
-** Create a histogram of two FICO distributions on top of each other, one for each credit.policy outcome.**
-
-*Note: This is pretty tricky, feel free to reference the solutions. You'll probably need one line of code for each histogram, I also recommend just using pandas built in .hist()*
+** Creating a histogram of two FICO distributions on top of each other, one for each credit.policy outcome.**
 
 
 ```python
@@ -422,7 +410,7 @@ plt.xlabel('FICO')
 
 ### We can see more people in the data set have credit policy of 1 than 0. Also, people with lower fisco have credit policy of 0.
 
-** Create a similar figure, except this time select by the not.fully.paid column.**
+** Creating a similar figure, except this time select by the not.fully.paid column.**
 
 
 ```python
@@ -449,9 +437,9 @@ plt.xlabel('FICO')
     
 
 
-### Similar trend can be seen for both not fully paid =0 and =1. Some spikes are also visible at certain points that might be attributed to the fico policy
+### A similar trend can be seen for both not fully paid =0 and =1. Some spikes are also visible at certain points that might be attributed to the fico policy
 
-** Create a countplot using seaborn showing the counts of loans by purpose, with the color hue defined by not.fully.paid. **
+** Creating a countplot using seaborn showing the counts of loans by purpose, with the color hue defined by not.fully.paid. **
 
 
 ```python
@@ -493,11 +481,9 @@ sns.jointplot(loans, x='fico', y='int.rate')
     
 
 
-### As fico score increases, you will have better credit score and you are paying lower ineterest rates
+### As fico score increases, we will have better credit score and you are paying lower ineterest rates
 
-# Setting up the Data
-
-Let's get ready to set up our data for our Random Forest Classification Model!
+# Setting up the Data for our Random Forest Classification Model!
 
 **Check loans.info() again.**
 
@@ -531,9 +517,9 @@ loans.info()
 
 ## Categorical Features
 
-Notice that the **purpose** column as categorical
+The **purpose** column is categorical
 
-That means we need to transform them using dummy variables so sklearn will be able to understand them. Let's do this in one clean step using pd.get_dummies.
+Therefore, we need to transform them using OneHotEncoder.
 
 Let's show you a way of dealing with these columns that can be expanded to multiple categorical features if necessary.
 
@@ -604,9 +590,7 @@ loans.info()
 
 ## Train Test Split
 
-Now its time to split our data into a training set and a testing set!
-
-** Use sklearn to split your data into a training set and a testing set as we've done in the past.**
+Now it's time to split our data into a training set and a testing set!
 
 
 ```python
@@ -624,14 +608,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random
 
 Let's start by training a single decision tree first!
 
-** Import DecisionTreeClassifier**
+** Importing DecisionTreeClassifier**
 
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
 ```
 
-**Create an instance of DecisionTreeClassifier() called dtree and fit it to the training data.**
+**Creating an instance of DecisionTreeClassifier() called dtree and fit it to the training data.**
 
 
 ```python
@@ -651,7 +635,7 @@ dtree.fit(X_train,y_train)
 
 
 ## Predictions and Evaluation of Decision Tree
-**Create predictions from the test set and create a classification report and a confusion matrix.**
+**Creating predictions from the test set and creating a classification report and a confusion matrix.**
 
 
 ```python
@@ -690,9 +674,9 @@ print(confusion_matrix(y_test,y_predict))
 
 ## Training the Random Forest model
 
-Now its time to train our model!
+Now it's time to train our model!
 
-**Create an instance of the RandomForestClassifier class and fit it to our training data from the previous step.**
+**Creating an instance of the RandomForestClassifier class and fitting it to our training data from the previous step.**
 
 
 ```python
@@ -718,16 +702,16 @@ rfc.fit(X_train,y_train)
 
 ## Predictions and Evaluation
 
-Let's predict off the y_test values and evaluate our model.
+Let's predict the y_test values and evaluate our model.
 
-** Predict the class of not.fully.paid for the X_test data.**
+** Predicting the class of not.fully.paid for the X_test data.**
 
 
 ```python
 y_predict = rfc.predict(X_test)
 ```
 
-**Now create a classification report from the results. Do you get anything strange or some sort of warning?**
+**Now creating a classification report from the results.**
 
 
 ```python
@@ -750,7 +734,7 @@ print(classification_report(y_test,y_predict))
     
     
 
-**Show the Confusion Matrix for the predictions.**
+**Showing the Confusion Matrix for the predictions.**
 
 
 ```python
@@ -761,4 +745,4 @@ print(confusion_matrix(y_test,y_predict))
      [ 301    4]]
     
 
-### Neither random forest nor the decision tree did very well, more feature engineering is needed.
+### Neither the random forest nor the decision tree did very well, more feature engineering is needed.
