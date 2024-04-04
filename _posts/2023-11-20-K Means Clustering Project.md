@@ -1,4 +1,11 @@
-For this project we will attempt to use KMeans Clustering to cluster Universities into to two groups, Private and Public.
+---
+layout: post
+title: Predictive Modeling for LendingClub- Investing in Borrowers' Repayment Probability
+image: "/posts/Uni.png"
+tags: [K Means Clustering, Machine Learning, Python]
+---
+
+For this project, we will attempt to use KMeans Clustering to use the data we have to cluster Universities into two groups, Private and Public.
 
 ___
 
@@ -24,7 +31,7 @@ We will use a data frame with 777 observations on the following 18 variables.
 * Expend Instructional expenditure per student
 * Grad.Rate Graduation rate
 
-## Import Required Packages
+## Importing Required Packages
 
 
 ```python
@@ -35,14 +42,14 @@ import seaborn as sns
 %matplotlib inline
 ```
 
-## Get the Data
+## Getting the Data
 
 
 ```python
 df = pd.read_csv('College_Data',index_col=0)
 ```
 
-### Cheking the dataset
+### Checking the dataset
 
 
 ```python
