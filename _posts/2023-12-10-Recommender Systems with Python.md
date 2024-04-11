@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Movie Recommendation System- Finding Similar Movies
-image: "/posts/Uni.png"
+image: "/posts/movie.png"
 tags: [Recommender Systems, Machine Learning, Python]
 ---
 
@@ -448,7 +448,7 @@ ratings['num of ratings'].hist(bins=70)
 
 
     
-![png](output_18_1.png)
+![alt text](/img/posts/output_18_1.png)
     
 
 
@@ -466,8 +466,8 @@ ratings['rating'].hist(bins=70)
 
 
 
-    
-![png](output_19_1.png)
+![alt text](/img/posts/output_19_1.png)
+
     
 
 
@@ -484,8 +484,9 @@ sns.jointplot(x='rating',y='num of ratings',data=ratings,alpha=0.5)
 
 
 
-    
-![png](output_20_1.png)
+
+![alt text](/img/posts/output_20_1.png)
+
     
 
 
