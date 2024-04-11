@@ -9,7 +9,7 @@ LendingClub is a US peer-to-peer lending company, headquartered in San Francisco
 
 We will be using a subset of the LendingClub DataSet obtained from Kaggle: https://www.kaggle.com/wordsforthewise/lending-club
 
-Given historical data on loans given out with information on whether or not the borrower defaulted (charge-off), can we build a model thatcan predict wether or not a borrower will pay back their loan? This way in the future when we get a new potential customer we can assess whether or not they are likely to pay back the loan. 
+Given historical data on loans given out with information on whether or not the borrower defaulted (charge-off), can we build a model that can predict whether or not a borrower will pay back their loan? This way in the future when we get a new potential customer we can assess whether or not they are likely to pay back the loan. 
 
 The "loan_status" column contains our label.
 
@@ -707,7 +707,7 @@ sns.heatmap(df.corr(), annot=True, cmap='YlGnBu')
     
 
 
-### We noticed almost perfect correlation between loan amount and "installment" features. Let's explore these features further. For that, we will first find their description and then draw a scatterplot between them.
+### We noticed an almost perfect correlation between the loan amount and "installment" features. Let's explore these features further. For that, we will first find their description and then draw a scatterplot between them.
 
 
 ```python
@@ -753,7 +753,7 @@ sns.scatterplot(y='loan_amnt', x='installment', data=df)
 
 #### A perfect correlation is noticed between these two features.
 
-### Let's see if there is any relationship between the loan status and the amount of loan. For that, we will create a boxplot.
+### Let's see if there is any relationship between the loan status and the amount of the loan. For that, we will create a boxplot.
 
 
 ```python
@@ -853,7 +853,7 @@ df.groupby('loan_status')['loan_amnt'].describe()
 
 
 
-#### The average loan amount of charged off group is a little higher than fully paid ones which makes sense as higher loan amounts are more difficult to pay off.
+#### The average loan amount of the group is a little higher than fully paid ones which makes sense as higher loan amounts are more difficult to pay off.
 
 ### Let's explore the Grade and SubGrade columns that LendingClub attributes to the loans and check the unique possible grades and subgrades.
 
@@ -930,7 +930,7 @@ sns.countplot(x='sub_grade', data=df, order=Subgrade_order, palette='coolwarm')
     
 
 
-#### A decrease in number of loans can be seen in the number of loans when we move from sub_grades A to G which makes sense as we move towards riskier groups.
+#### A decrease in the number of loans can be seen when we move from sub_grades A to G which makes sense as we move towards riskier groups.
 
 ### Let's check all loans made per subgrade separated based on the loan_status. 
 
@@ -953,7 +953,7 @@ sns.countplot(x='sub_grade', data=df, order=Subgrade_order, hue='loan_status', p
     
 
 
-### It looks like F and G subgrades don't get paid back that often. Let's isloate those and recreate the countplot just for those subgrades.
+### It looks like F and G subgrades don't get paid back that often. Let's isolate those and recreate the countplot just for those subgrades.
 
 
 ```python
@@ -984,7 +984,7 @@ sns.countplot(x='sub_grade', data=df, order=F_and_G_sub_grade_order, hue='loan_s
     
 
 
-#### As shown in the above figure, the number of fully paid loans is almost equal to the number of charged off ones for grades F and G.
+#### As shown in the above figure, the number of fully paid loans is almost equal to the number of charged-off ones for grades F and G.
 
 ### Let's create a new column called 'loan_repaid' which will contain a 1 if the loan status was "Fully Paid" and a 0 if it was "Charged Off".**
 
@@ -1120,7 +1120,7 @@ df.corr()['loan_repaid'].sort_values().drop('loan_repaid').plot(kind='bar')
     
 
 
-#### We can see that interet rate has the highest negative correlation with loan_repaid which totally makes sense as higher interest rate makes it more difficult to repay the loan.
+#### We can see that interest rate has the highest negative correlation with loan_repaid which totally makes sense as higher interest rate makes it more difficult to repay the loan.
 
 ---
 # Part 2: Data PreProcessing
@@ -1304,7 +1304,7 @@ df.head()
 
 # Missing Data
 
-### Let's explore missing data columns. We use a variety of factors to decide whether or not they would be useful, to see if we should keep, discard, or fill in the missing data.
+### Let's explore missing data columns. We use a variety of factors to decide whether or not they would be useful, and to see if we should keep, discard, or fill in the missing data.
 
 ## Length of the dataframe:
 
@@ -1517,7 +1517,7 @@ sns.countplot(data=df, x='emp_length', order=emp_length_order)
     
 
 
-#### It seems that majority of people who took loan have been worked for more than 10 years which makes sense as you have to have a kind of job security to be able to repay the loan.
+#### It seems that the majority of people who took loan have been working for more than 10 years which makes sense as you have to have a kind of job security to be able to repay the loan.
 
 ### Let's plot out the countplot with a hue separating Fully Paid vs Charged Off
 
@@ -1540,9 +1540,9 @@ sns.countplot(data=df, x='emp_length', order=emp_length_order, hue= 'loan_status
     
 
 
-#### For people with more than 10+ years employment length, the number of fully paid loans is much higher than charged off ones.
+#### For people with more than 10+ years of employment length, the number of fully paid loans is much higher than charged-off ones.
 
-### Let's find the percentage of charge offs per category to see what percent of people per employment category didn't pay back their loan. It may help us to understand if there is a strong relationship between employment length and being charged off.
+### Let's find the percentage of charge-offs per category to see what percent of people per employment category didn't pay back their loan. It may help us to understand if there is a strong relationship between employment length and being charged off.
 
 
 ```python
@@ -1835,7 +1835,7 @@ df['mort_acc'].fillna(value=df_acc['mort_acc_mean'], inplace=True)
 df.isna().sum()
 ```
 
-### revol_util and the pub_rec_bankruptcies have missing data points, but they account for less than 0.5% of the total data. Therfore, we will remove the rows that are missing those values in those columns.
+### revol_util and the pub_rec_bankruptcies have missing data points, but they account for less than 0.5% of the total data. Therefore, we will remove the rows that are missing those values in those columns.
 
 
 ```python
@@ -1914,7 +1914,7 @@ df['term'].value_counts()
 
 
 
-#### term feature has just 2 values of 36 and 60 month. Let's remove month and simply convert the categorical data to numeric one.
+#### term feature has just 2 values of 36 and 60 months. Let's remove the month and simply convert the categorical data to numeric one.
 
 
 ```python
@@ -1946,7 +1946,7 @@ df['term'].value_counts()
 df = df.drop('grade', axis=1)
 ```
 
-### sub_grade feature: We will keep it to convert it to numeric featue later on.
+### sub_grade feature: We will keep it to convert it to a numeric feature later on.
 
 ### home_ownership feature
 
@@ -2008,7 +2008,7 @@ df['issue_d'].value_counts()
 
 
 
-#### This would be data leakage as we wouldn't know beforehand whether or not a loan would be issued when using our model, so in theory we wouldn't have an issue_date. Let's drop this feature.
+#### This would be data leakage as we wouldn't know beforehand whether or not a loan would be issued when using our model, so in theory, we wouldn't have an issue_date. Let's drop this feature.
 
 
 ```python
