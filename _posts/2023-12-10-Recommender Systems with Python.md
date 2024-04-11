@@ -1,3 +1,10 @@
+---
+layout: post
+title: Movie Recommendation System- Finding Similar Movies
+image: "/posts/Uni.png"
+tags: [Recommender Systems, Machine Learning, Python]
+---
+
 In this project, we will focus on providing a basic recommendation system by suggesting items that are most similar to a particular item, in this case, movies. It tells us what movies/items are most similar to our movie choice.
 
 
