@@ -421,8 +421,9 @@ sns.countplot(x='loan_status', data=df)
 
 
 
-    
-![png](output_9_1.png)
+
+![alt text](/img/posts/output_9_1.png)
+
     
 
 
@@ -444,8 +445,8 @@ sns.histplot(data=df,x='loan_amnt', bins=40)
 
 
 
-    
-![png](output_12_1.png)
+
+![alt text](/img/posts/output_12_1.png)
     
 
 
@@ -702,8 +703,8 @@ sns.heatmap(df.corr(), annot=True, cmap='YlGnBu')
 
 
 
-    
-![png](output_16_2.png)
+
+![alt text](/img/posts/output_16_2.png)
     
 
 
@@ -746,8 +747,8 @@ sns.scatterplot(y='loan_amnt', x='installment', data=df)
 
 
 
-    
-![png](output_21_1.png)
+
+![alt text](/img/posts/output_21_1.png)
     
 
 
@@ -768,8 +769,8 @@ sns.boxplot(data=df, x='loan_status', y='loan_amnt')
 
 
 
-    
-![png](output_24_1.png)
+
+![alt text](/img/posts/output_24_1.png)
     
 
 
@@ -882,8 +883,8 @@ sns.countplot(x='grade', hue='loan_status', data=df)
 
 
 
-    
-![png](output_33_1.png)
+
+![alt text](/img/posts/output_33_1.png)
     
 
 
@@ -902,8 +903,8 @@ sns.countplot(x='grade', hue='loan_status', data=df, order=grade_order)
 
 
 
-    
-![png](output_35_1.png)
+
+![alt text](/img/posts/output_35_1.png)
     
 
 
@@ -925,8 +926,8 @@ sns.countplot(x='sub_grade', data=df, order=Subgrade_order, palette='coolwarm')
 
 
 
-    
-![png](output_38_1.png)
+
+![alt text](/img/posts/output_38_1.png)
     
 
 
@@ -948,8 +949,8 @@ sns.countplot(x='sub_grade', data=df, order=Subgrade_order, hue='loan_status', p
 
 
 
-    
-![png](output_41_1.png)
+
+![alt text](/img/posts/output_41_1.png)
     
 
 
@@ -979,8 +980,8 @@ sns.countplot(x='sub_grade', data=df, order=F_and_G_sub_grade_order, hue='loan_s
 
 
 
-    
-![png](output_45_1.png)
+
+![alt text](/img/posts/output_45_1.png)
     
 
 
@@ -1115,8 +1116,8 @@ df.corr()['loan_repaid'].sort_values().drop('loan_repaid').plot(kind='bar')
 
 
 
-    
-![png](output_52_2.png)
+
+![alt text](/img/posts/output_52_2.png)
     
 
 
@@ -1512,8 +1513,8 @@ sns.countplot(data=df, x='emp_length', order=emp_length_order)
 
 
 
-    
-![png](output_74_1.png)
+
+![alt text](/img/posts/output_74_1.png)
     
 
 
@@ -1535,8 +1536,8 @@ sns.countplot(data=df, x='emp_length', order=emp_length_order, hue= 'loan_status
 
 
 
-    
-![png](output_77_1.png)
+
+![alt text](/img/posts/output_77_1.png)
     
 
 
@@ -1578,8 +1579,8 @@ charged_off_percentage.plot(kind='bar')
 
 
 
-    
-![png](output_84_1.png)
+
+![alt text](/img/posts/output_84_1.png)
     
 
 
@@ -2470,8 +2471,8 @@ loss.plot()
 
 
 
-    
-![png](output_176_1.png)
+
+![alt text](/img/posts/output_176_1.png)
     
 
 
