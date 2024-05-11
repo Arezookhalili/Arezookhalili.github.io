@@ -50,7 +50,7 @@ We used a 3 months pre-period for the algorithm to model, and 3 months post-peri
 
 ### Results <a name="overview-results"></a>
 
-We saw a 41.1% uplift in sales for those customers who joined the Delivery Club, over and above what we believe they would have spent, had the club not been in existence.  This was across the three-month post-period, and the uplift was deemed to be significantly significant (@ 95%).
+We observed a 41.1% increase in sales among customers who joined the Delivery Club compared to what we estimated they would have spent without the club. This increase was observed over a three-month period following enrollment and was deemed statistically significant at a confidence level of 95%.
 
 <br>
 <br>
