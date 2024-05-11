@@ -80,6 +80,7 @@ In the code below, we:
 
 <br>
 ```python
+
 # Import required Python packages
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import MinMaxScaler
