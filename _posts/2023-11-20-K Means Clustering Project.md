@@ -9,9 +9,12 @@ For this project, we will attempt to use KMeans Clustering to use the data we ha
 
 ___
 
-## The Data
+# Project Overview  <a name="overview-main"></a>
 
-We will use a data frame with 777 observations on the following 18 variables.
+### Context <a name="overview-context"></a>
+
+We would like to create a model that allows us to use a few features of Universities to cluster them into two groups of Private and Public. Information about the children who have had corrective spine surgery is in the dataset 'College_Data'. The College dataset has 777 rows and 18 columns named as:
+
 * Private A factor with levels No and Yes indicating private or public university
 * Apps Number of applications received
 * Accept Number of applications accepted
