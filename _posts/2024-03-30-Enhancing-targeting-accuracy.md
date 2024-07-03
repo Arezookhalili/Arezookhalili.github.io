@@ -84,10 +84,10 @@ Oversampling: Using SMOTE (Synthetic Minority Over-sampling Technique) to genera
 
 I implemented both undersampling and oversampling techniques, but oversampling appears to be more favorable as it ensures no data is lost.
 
-<br>
+
 ___
 
-
+<br>
 ### Modelling Overview  <a name="modelling-overview"></a>
 
 We built a model that looked to accurately predict fraud transaction.
@@ -98,6 +98,7 @@ As we were predicting a binary output, we tested three classification modeling a
 * Decision Tree
 * Random Forest
 
+<br>
 ### Import Required Packagess
 
 ```python
@@ -117,6 +118,7 @@ from sklearn.preprocessing import StandardScaler
 from imblearn.over_sampling import SMOTE
 ```
 
+<br>
 ### Get the Data
 
 ** Read the 'Creditcard.csv file into a dataframe **
@@ -126,6 +128,7 @@ from imblearn.over_sampling import SMOTE
 data = pd.read_csv("creditcard.csv")
 ```
 
+<br>
 ### Data Preprocessing
 
 
@@ -179,7 +182,6 @@ data['Class'].value_counts()
 From the last step in the above code, I saw that **0.2% of the data were in class 1 and the rest of them were in class 0**. This showed me a clear class imbalance. I made sure to not rely on classification accuracy alone when assessing results - also analyzing Precision, Recall, and F1-Score.
 
 <br>
-
 ### Create Input and Output Variables
 
 
@@ -188,7 +190,7 @@ X = data.drop(['Class'], axis = 1)
 y = data['Class']
 ```
 
-
+<br>
 ### Train Test Split
 
 Train_test_split was used to split our data into a training set and a testing set.
@@ -198,6 +200,7 @@ Train_test_split was used to split our data into a training set and a testing se
 X_train, X_test, y_train, y_test = train_test_split (X, y, test_size = 0.2, random_state = 42)
 ```
 
+<br>
 ### Model Training and Assessment
 
 Three classifiers were trained and evaluated:
@@ -243,6 +246,7 @@ for name, clf in classifier.items():
     print(f'\n F1_score: {f1}')
 ```
 
+<br>
 ### Handling Class Imbalance
 
 The dataset includes two classes of data: class 1 represents fraudulent transactions, while class 0 represents normal transactions:
@@ -255,6 +259,7 @@ normal.shape
 fraud.shape
 ```
 
+<br>
 #### Undersampling
 
 ```python
@@ -302,6 +307,7 @@ for name, clf in classifier.items():
     print(f'\n F1_score: {f1}')
 ```
 
+<br>
 #### Oversampling
 
 ```python
@@ -380,7 +386,7 @@ Running this code resulted in:
 
 These are all higher than what we saw without resampling! Random forest and decision tree offers very smilar metrics.
 
-
+<br>
 ### Save Model
 
 ```python
@@ -390,6 +396,7 @@ rfc.fit(X_res, y_res)
 pickle.dump(rfc, open('Credit Card Fraud Detection/credit_card_model.p', 'wb'))   
 ```
 
+<br>
 ### Fraud Detection (Prediction)
 
 An example prediction is provided using the saved model to classify a new transaction.
@@ -406,8 +413,8 @@ else:
     print ('Fraud Transaction')
 ```
 ___
-<br>
 
+<br>
 # Growth & Next Steps <a name="growth-next-steps"></a>
 
 We could look to tune the hyperparameters of the Random Forest, notably regularisation parameters such as tree depth, as well as potentially training on a higher number of Decision Trees in the Random Forest.
