@@ -500,8 +500,9 @@ sns.lmplot(x='Outstate',y='F.Undergrad',data=df, hue='Private',
 ![alt text](/img/posts/output_10_2.png)
     
     
+As Outstate (out-of-state tuition) increases, there is a noticeable decrease in the F.Undergrad (number of full-time students) attending private universities.
 
-
+<br>
 #### Finding if there is a school with a graduation rate of higher than 100%. What is the name of that school?
 
 
@@ -578,6 +579,8 @@ df[df['Grad.Rate']>100]
 
 
 
+
+<br> 
 ** Setting that school's graduation rate to 100 so it makes sense.
 
 
@@ -585,12 +588,7 @@ df[df['Grad.Rate']>100]
 df['Grad.Rate']['Cazenovia College'] = 100
 ```
 
-    C:\Users\arezo\AppData\Local\Temp\ipykernel_36440\2087630962.py:1: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame
-    
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      df['Grad.Rate']['Cazenovia College'] = 100
-    
+      
 
 
 ```python
