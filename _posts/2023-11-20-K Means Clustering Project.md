@@ -463,7 +463,8 @@ df.describe()
 
 It's time to create some data visualizations!
 
-** Creating a scatterplot of Grad.Rate versus Room.Board where the points are colored by the Private column. **
+<br>
+### Creating a scatterplot of Grad.Rate versus Room.Board where the points are colored by the Private column.
 
 
 ```python
@@ -483,8 +484,8 @@ sns.lmplot(x='Room.Board',y='Grad.Rate',data=df, hue='Private',
   
 There is a clear correlation between increasing room and board costs (room.board) and higher graduation rates (Grad.Rate).     
 
-
-**Creating a scatterplot of F.Undergrad versus Outstate where the points are colored by the Private column.**
+<br>
+### Creating a scatterplot of F.Undergrad versus Outstate where the points are colored by the Private column
 
 
 ```python
@@ -492,11 +493,6 @@ sns.set_style('whitegrid')
 sns.lmplot(x='Outstate',y='F.Undergrad',data=df, hue='Private',
            palette='coolwarm',height=6,aspect=1,fit_reg=False)
 ```
-
-
-
-
-    <seaborn.axisgrid.FacetGrid at 0x18751a10df0>
 
 
 
