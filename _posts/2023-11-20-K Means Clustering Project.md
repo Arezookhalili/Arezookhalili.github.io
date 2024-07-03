@@ -702,9 +702,9 @@ X = df.drop('Private', axis = 1)
 ```python
 kmeans.fit(X)
 ```
- 
 
-** What are the cluster center vectors?**
+<br> 
+#### Finding the cluster center vectors
 
 
 ```python
@@ -727,11 +727,13 @@ kmeans.cluster_centers_
 
 
 
+<br>
 ## Evaluation
 
-There is no perfect way to evaluate clustering if you don't have the labels, however since this is just an exercise, we do have the labels, so we take advantage of this to evaluate our clusters.
+There is no perfect way to evaluate clustering if you don't have the labels, however since this is just an exercise, we do have the labels, so I take advantage of this to evaluate my clusters.
 
-** Creating a new column for df called 'Cluster', which is a 1 for a Private school, and a 0 for a public school.**
+<br>
+### Creating a new column for df called 'Cluster', which is a 1 for a Private school, and a 0 for a public school
 
 
 ```python
