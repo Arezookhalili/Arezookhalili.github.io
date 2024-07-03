@@ -78,9 +78,8 @@ Based upon these, the chosen model is the Random Forest as it was the most consi
 
 The project addresses class imbalance using:
 
-Undersampling: Reducing the majority class to balance the dataset.
-
-Oversampling: Using SMOTE (Synthetic Minority Over-sampling Technique) to generate synthetic samples for the minority class.
+* Undersampling: Reducing the majority class to balance the dataset.
+* Oversampling: Using SMOTE (Synthetic Minority Over-sampling Technique) to generate synthetic samples for the minority class.
 
 I implemented both undersampling and oversampling techniques, but oversampling appears to be more favorable as it ensures no data is lost.
 
