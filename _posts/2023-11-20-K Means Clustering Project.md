@@ -43,6 +43,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.cluster import KMeans
 ```
   
 <br>
@@ -673,43 +674,33 @@ df[df['Grad.Rate']>100]
 
 
 
+<br>
 ## K Means Cluster Creation
 
 Now it is time to create the Cluster labels!
 
-** Importing KMeans from SciKit Learn.**
 
-
-```python
-from sklearn.cluster import KMeans
-```
-
-** Creating an instance of a K Means model with 2 clusters.**
+### Creating an instance of a K Means model with 2 clusters
 
 
 ```python
 kmeans = KMeans(n_clusters=2)
 ```
 
-** Creating input variable.**
+### Creating input variable
 
 
 ```python
 X = df.drop('Private', axis = 1)
 ```
 
-**Fit the model to all the data except for the Private label.**
+### Fit the model to all the data except for the Private label
 
 
 ```python
 kmeans.fit(X)
 ```
-
-    C:\Users\arezo\anaconda3\lib\site-packages\sklearn\cluster\_kmeans.py:870: FutureWarning: The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the value of `n_init` explicitly to suppress the warning
-      warnings.warn(
-    C:\Users\arezo\anaconda3\lib\site-packages\sklearn\cluster\_kmeans.py:1382: UserWarning: KMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can avoid it by setting the environment variable OMP_NUM_THREADS=4.
-      warnings.warn(
-    
+ 
 
 
 
