@@ -18,7 +18,7 @@ Here, I created a fraud detection system using Python and widely-used machine le
 ### Project Structure <a name="Project-Structure"></a>
 
 creditcard.csv: The dataset containing transaction details and fraud labels (The dataset used in this project is available on Kaggle).
-<br>
+
 Credit Card Fraud Detection.py: The main script containing data preprocessing, model training, evaluation, and model saving.
 
 credit_card_model.p: The serialized Random Forest model saved using pickle.
@@ -35,22 +35,18 @@ As I was predicting a binary output, I tested three classification modeling appr
 
 I imported the data, defined models using a dictionary, trained & tested each model, and then measured this predictive performance based on several metrics to give a well-rounded overview of which was the best.
 I also used undersampling and oversampling techniques to address the class imbalance problem inherent in credit card fraud datasets.
-<br>
-<br>
 
 ### Results <a name="overview-results"></a>
 
 Here, I aimed to build a model that would accurately predict the fraud transaction.
 Based upon these, the chosen model is the Random Forest as it was the most consistently performant on the test set across classification accuracy, precision, recall, and f1-score. 
 
-<br>
 **Metric 1: Classification Accuracy**
 
 * Random Forest = 0.99
 * Decision Tree = 0.99
 * Logistic Regression = 0.99
 
-<br>
 **Metric 2: Precision**
 
 * Random Forest = 0.90
