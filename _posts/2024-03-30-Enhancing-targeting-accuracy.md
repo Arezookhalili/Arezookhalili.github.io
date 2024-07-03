@@ -42,8 +42,7 @@ I also used undersampling and oversampling techniques to address the class imbal
 <br>
 ### Results <a name="overview-results"></a>
 
-Here, I aimed to build a model that would accurately predict the fraud transaction.
-Based upon these, the chosen model is the Random Forest as it was the most consistently performant on the test set across classification accuracy, precision, recall, and f1-score. 
+Here, I aimed to build a model that would accurately predict the fraud transaction.For that, I calculated the abovementioned metrics for all three models.
 
 <br>
 **Metric 1: Classification Accuracy**
@@ -72,6 +71,9 @@ Based upon these, the chosen model is the Random Forest as it was the most consi
 * Random Forest = 0.82
 * Logistic Regression = 0.72
 * Decision Tree = 0.7
+
+Based upon these, the chosen model is the Random Forest as it was the most consistently performant on the test set across classification accuracy, precision, recall, and F1-score. 
+
 
 <br>
 ### Handling Class Imbalance
