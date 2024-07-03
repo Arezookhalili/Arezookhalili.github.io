@@ -204,16 +204,16 @@ X_train, X_test, y_train, y_test = train_test_split (X, y, test_size = 0.2, rand
 
 Three classifiers were trained and evaluated:
 
-Logistic Regression
-Decision Tree Classifier
-Random Forest Classifier
+* Logistic Regression
+* Decision Tree Classifier
+* Random Forest Classifier
 
 Each model's performance was evaluated using the following metrics:
 
-Accuracy
-Precision
-Recall
-F1-Score
+* Accuracy
+* Precision
+* Recall
+* F1-Score
 
 ```python
 classifier = {
