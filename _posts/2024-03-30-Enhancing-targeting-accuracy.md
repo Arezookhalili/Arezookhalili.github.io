@@ -265,11 +265,8 @@ fraud.shape
 normal.sample = normal.sample(n=473)
 
 # Create new undersampled dataset
-
 new_data  = pd.concat([normal.sample, fraud], ignore_index=True)
-
 new_data.head()
-
 new_data['Class'].value_counts()
 
 X = new_data.drop(['Class'], axis = 1)
@@ -283,9 +280,7 @@ classifier = {
        'RandomForestClassifier': RandomForestClassifier(random_state = 42)}               
 
 for name, clf in classifier.items():
-    
     print(f'\n==========={name}==========')
-    
     clf.fit(X_train, y_train)
     y_pred_class = clf.predict(X_test)
 
@@ -328,9 +323,7 @@ classifier = {
        'RandomForestClassifier': RandomForestClassifier(random_state = 42)}              
 
 for name, clf in classifier.items():
-    
     print(f'\n==========={name}==========')
-    
     clf.fit(X_train, y_train)
     y_pred_class = clf.predict(X_test)
 
