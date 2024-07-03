@@ -72,6 +72,7 @@ Here, I aimed to build a model that would accurately predict the fraud transacti
 * Logistic Regression = 0.72
 * Decision Tree = 0.7
 
+<br>
 Based upon these, the chosen model is the Random Forest as it was the most consistently performant on the test set across classification accuracy, precision, recall, and F1-score. 
 
 
