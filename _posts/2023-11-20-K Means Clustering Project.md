@@ -464,7 +464,7 @@ df.describe()
 It's time to create some data visualizations!
 
 <br>
-### Creating a scatterplot of Grad.Rate versus Room.Board where the points are colored by the Private column.
+#### Creating a scatterplot of Grad.Rate versus Room.Board where the points are colored by the Private column.
 
 
 ```python
@@ -485,7 +485,7 @@ sns.lmplot(x='Room.Board',y='Grad.Rate',data=df, hue='Private',
 There is a clear correlation between increasing room and board costs (room.board) and higher graduation rates (Grad.Rate).     
 
 <br>
-### Creating a scatterplot of F.Undergrad versus Outstate where the points are colored by the Private column
+#### Creating a scatterplot of F.Undergrad versus Outstate where the points are colored by the Private column
 
 
 ```python
@@ -497,12 +497,12 @@ sns.lmplot(x='Outstate',y='F.Undergrad',data=df, hue='Private',
 
 
 
-![alt text](/img/posts/output_12_1.png)
+![alt text](/img/posts/output_10_2.png)
     
     
 
 
-** Finding if there is a school with a graduation rate of higher than 100%. What is the name of that school?**
+#### Finding if there is a school with a graduation rate of higher than 100%. What is the name of that school?
 
 
 ```python
