@@ -89,9 +89,9 @@ ___
 <br>
 ### Modelling Overview  <a name="modelling-overview"></a>
 
-We built a model that looked to accurately predict fraud transaction.
+I built a model that looked to accurately predict fraud transaction.
 
-As we were predicting a binary output, we tested three classification modeling approaches, namely:
+As I was predicting a binary output, I tested three classification modeling approaches, namely:
 
 * Logistic Regression
 * Decision Tree
@@ -120,7 +120,7 @@ from imblearn.over_sampling import SMOTE
 <br>
 ### Get the Data
 
-** Read the 'Creditcard.csv file into a dataframe **
+Read the 'Creditcard.csv file into a dataframe.
 
 
 ```python
@@ -152,7 +152,6 @@ data.info()
 data.isna().sum()
 
 # Standardisation
-
 scale_standard = StandardScaler()
 
 # Convert the Result from Array to DataFrame
