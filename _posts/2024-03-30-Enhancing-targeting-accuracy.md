@@ -10,6 +10,7 @@ tags: [Fraud Detection, Machine Learning, Classification, Python]
 ### Context <a name="overview-context"></a>
 
 Welcome to the Credit Card Fraud Detection Project! 
+
 Credit card fraud poses a major threat to both financial institutions and consumers. As online transactions become more prevalent, identifying fraudulent activities has become more complex. 
 
 Here, I created a fraud detection system using Python and widely-used machine learning libraries like scikit-learn. The primary goal was to build a robust fraud detection system using Random Forest, Logistic Regression, and Decision Tree classifiers. This project also addresses the class imbalance problem inherent in credit card fraud datasets.
@@ -17,8 +18,10 @@ Here, I created a fraud detection system using Python and widely-used machine le
 ### Project Structure <a name="Project-Structure"></a>
 
 creditcard.csv: The dataset containing transaction details and fraud labels (The dataset used in this project is available on Kaggle).
+<br>
 Credit Card Fraud Detection.py: The main script containing data preprocessing, model training, evaluation, and model saving.
-credit_card_model.p: The serialized Random Forest model saved using pickle.## Import Libraries.
+
+credit_card_model.p: The serialized Random Forest model saved using pickle.
 
 ### Actions <a name="overview-actions"></a>
 
@@ -70,10 +73,12 @@ Based upon these, the chosen model is the Random Forest as it was the most consi
 
 <br>
 
-Handling Class Imbalance
+### Handling Class Imbalance
+
 The project addresses class imbalance using:
 
 Undersampling: Reducing the majority class to balance the dataset.
+
 Oversampling: Using SMOTE (Synthetic Minority Over-sampling Technique) to generate synthetic samples for the minority class.
 
 I implemented both undersampling and oversampling techniques, but oversampling appears to be more favorable as it ensures no data is lost.
