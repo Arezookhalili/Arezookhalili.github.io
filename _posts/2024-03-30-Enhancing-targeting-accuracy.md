@@ -168,6 +168,7 @@ data = data.drop_duplicates()
 data.shape
 ```
 
+<br>
 I also investigated the class balance of the dependent variable - which is important when assessing classification accuracy.
 
 
