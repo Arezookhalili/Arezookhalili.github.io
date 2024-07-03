@@ -7,6 +7,7 @@ tags: [Fraud Detection, Machine Learning, Classification, Python]
 
 # Project Overview  <a name="overview-main"></a>
 
+<br>
 ### Context <a name="overview-context"></a>
 
 Welcome to the Credit Card Fraud Detection Project! 
@@ -15,6 +16,7 @@ Credit card fraud poses a major threat to both financial institutions and consum
 
 Here, I created a fraud detection system using Python and widely-used machine learning libraries like scikit-learn. The primary goal was to build a robust fraud detection system using Random Forest, Logistic Regression, and Decision Tree classifiers. This project also addresses the class imbalance problem inherent in credit card fraud datasets.
 
+<br>
 ### Project Structure <a name="Project-Structure"></a>
 
 creditcard.csv: The dataset containing transaction details and fraud labels (The dataset used in this project is available on Kaggle).
@@ -23,6 +25,7 @@ Credit Card Fraud Detection.py: The main script containing data preprocessing, m
 
 credit_card_model.p: The serialized Random Forest model saved using pickle.
 
+<br>
 ### Actions <a name="overview-actions"></a>
 
 I first needed to compile the necessary data from tables in the database.
@@ -36,17 +39,20 @@ As I was predicting a binary output, I tested three classification modeling appr
 I imported the data, defined models using a dictionary, trained & tested each model, and then measured this predictive performance based on several metrics to give a well-rounded overview of which was the best.
 I also used undersampling and oversampling techniques to address the class imbalance problem inherent in credit card fraud datasets.
 
+<br>
 ### Results <a name="overview-results"></a>
 
 Here, I aimed to build a model that would accurately predict the fraud transaction.
 Based upon these, the chosen model is the Random Forest as it was the most consistently performant on the test set across classification accuracy, precision, recall, and f1-score. 
 
+<br>
 **Metric 1: Classification Accuracy**
 
 * Random Forest = 0.99
 * Decision Tree = 0.99
 * Logistic Regression = 0.99
-
+  
+<br>
 **Metric 2: Precision**
 
 * Random Forest = 0.90
@@ -68,7 +74,6 @@ Based upon these, the chosen model is the Random Forest as it was the most consi
 * Decision Tree = 0.7
 
 <br>
-
 ### Handling Class Imbalance
 
 The project addresses class imbalance using:
