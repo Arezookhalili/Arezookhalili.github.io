@@ -5,7 +5,7 @@ image: "/posts/Uni.png"
 tags: [K Means Clustering, Machine Learning, Python]
 ---
 
-For this project, we will attempt to use KMeans Clustering to use the data we have to cluster Universities into two groups, Private and Public.
+For this project, I will attempt to employ KMeans Clustering cluster Universities into two groups of Private and Public, using the data that I have.
 
 ___
 
@@ -13,7 +13,7 @@ ___
 
 ### Context <a name="overview-context"></a>
 
-We would like to create a model that allows us to use a few features of Universities to cluster them into two groups of Private and Public. Information about the children who have had corrective spine surgery is in the dataset 'College_Data'. The College dataset has 777 rows and 18 columns named as:
+I would like to create a model that allows me to use a few features of universities to cluster them into two groups of Private and Public. Information about the universities is in the dataset 'College_Data'. The College dataset has 777 rows and 18 columns named as:
 
 * Private: A factor with levels No and Yes indicating private or public university
 * Apps: Number of applications received
@@ -33,7 +33,8 @@ We would like to create a model that allows us to use a few features of Universi
 * perc.alumni: Pct. alumni who donate
 * Expend: Instructional expenditure per student
 * Grad.Rate: Graduation rate
-
+  
+<br>
 ## Importing Required Packages
 
 
@@ -42,16 +43,17 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-%matplotlib inline
 ```
-
+  
+<br>
 ## Getting the Data
 
 
 ```python
 df = pd.read_csv('College_Data',index_col=0)
 ```
-
+  
+<br>
 ### Checking the dataset
 
 
@@ -455,8 +457,9 @@ df.describe()
 </div>
 
 
-
-## EDA
+  
+<br>
+## Exploratory Data Analysis (EDA)
 
 It's time to create some data visualizations!
 
@@ -472,14 +475,13 @@ sns.lmplot(x='Room.Board',y='Grad.Rate',data=df, hue='Private',
 
 
 
-    <seaborn.axisgrid.FacetGrid at 0x187511d2f80>
 
 
 
 
 ![alt text](/img/posts/output_10_1.png)
   
-    
+There is a clear correlation between increasing room and board costs (room.board) and higher graduation rates (Grad.Rate).     
 
 
 **Creating a scatterplot of F.Undergrad versus Outstate where the points are colored by the Private column.**
