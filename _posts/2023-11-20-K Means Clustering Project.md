@@ -8,6 +8,8 @@ tags: [K Means Clustering, Machine Learning, Python]
 For this project, I will attempt to employ KMeans Clustering cluster Universities into two groups of Private and Public, using the data that I have.
 
 KMeans clustering is an unsupervised learning algorithm. In this project, although the data includes labels (Private or Public), the labels were used only for evaluation purposes after clustering. KMeans itself does not use these labels during its clustering process, making it suitable for exploring patterns and structures within the data without prior classification information.
+
+
 ___
 
 # Project Overview  <a name="overview-main"></a>
