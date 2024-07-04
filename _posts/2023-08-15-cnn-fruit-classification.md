@@ -5,7 +5,7 @@ image: "/posts/cnn-fruit-classification-title-img.png"
 tags: [Deep Learning, CNN, Data Science, Computer Vision, Python]
 ---
 
-In this project, we would like to help a grocery retailer enhance and scale their sorting and delivery processes through building & optimizing a Convolutional Neural Network to classify images of fruits. 
+In this project, I would like to help a grocery retailer enhance and scale their sorting and delivery processes through building & optimizing a Convolutional Neural Network to classify images of fruits. 
 
 # Table of contents
 
@@ -30,42 +30,39 @@ ___
 
 ### Context <a name="overview-context"></a>
 
-A robotics company informed our client that they had built a prototype for a robotic sorting arm that could be used to pick up and move products off a platform.  It would use a camera to "see" the product and could be programmed to move that particular product into a designated bin, for further processing.
+A robotics company informed a grocery store that they had built a prototype for a robotic sorting arm that could be used to pick up and move products off a platform. It would use a camera to "see" the product and could be programmed to move that particular product into a designated bin, for further processing.
 
 The only thing they hadn't figured out was how to identify each product using the camera so that the robotic arm could move it to the right place.
 
-We were asked to put forward a proof of concept on this - and were given some sample images of fruits from their processing platform.
+I was asked to put forward a proof of concept on this - and was given some sample images of fruits from their processing platform.
 
 If this was successful and put into place on a larger scale, the client would be able to enhance their sorting & delivery processes.
 
 <br>
-<br>
 ### Actions <a name="overview-actions"></a>
 
-We utilize the *Keras* Deep Learning library for this task.
+I utilized the *Keras* Deep Learning library for this task.
 
-We start by creating our pipeline for feeding training & validation images in batches, from our local directory, into the network.  We investigate & quantify predictive performance epoch by epoch on the validation set, and then also on a held-back test set.
+I started by creating a pipeline for feeding training & validation images in batches, from my local directory, into the network. I investigated & quantified predictive performance epoch by epoch on the validation set, and then also on a held-back test set.
 
-Our baseline network is simple but gives us a starting point to refine.  This network contains **2 Convolutional Layers**, each with **32 filters** and subsequent **Max Pooling** Layers.  We have a **single Dense (Fully Connected) layer** following flattening with **32 neurons** followed by our output layer.  We apply the **relu** activation function on all layers and use the **adam** optimizer.
+My baseline network was simple but gave me a starting point to refine. This network contained **2 Convolutional Layers**, each with **32 filters** and subsequent **Max Pooling** Layers.  I had a **single Dense (Fully Connected) layer** following flattening with **32 neurons** followed by an output layer. I applied the **relu** activation function on all layers and used the **adam** optimizer.
 
-Our first refinement is to add **Dropout** to tackle the issue of overfitting which is prevalent in the baseline network performance.  We use a **dropout rate of 0.5**.
+My first refinement was to add **Dropout** to tackle the issue of overfitting which was prevalent in the baseline network performance. I used a **dropout rate of 0.5**.
 
-We then add **Image Augmentation** to our data pipeline to increase the variation of input images for the network to learn from, resulting in more robust results as well as addressing overfitting.
+I then added **Image Augmentation** to my data pipeline to increase the variation of input images for the network to learn from, resulting in more robust results as well as addressing overfitting.
 
-With these additions in place, we utilize *keras-tuner* to optimize our network architecture & tune the hyperparameters.  The best network from this testing contains **3 Convolutional Layers**, each followed by **Max Pooling** Layers.  The first Convolutional Layer has **96 filters**, and the second & third have **64 filters**.  The output of this third layer is flattened and passed to a **single Dense (Fully Connected) layer** with **160 neurons**.  The Dense Layer has **Dropout** applied with a **dropout rate of 0.5**.  The output from this is passed to the output layer.  Again, we apply the **relu** activation function on all layers and use the **adam** optimizer.
+With these additions in place, I utilized *keras-tuner* to optimize my network architecture & tune the hyperparameters. The best network from this testing contained **3 Convolutional Layers**, each followed by **Max Pooling** Layers. The first Convolutional Layer had **96 filters**, and the second & third had **64 filters**. The output of this third layer was flattened and passed to a **single Dense (Fully Connected) layer** with **160 neurons**. The Dense Layer had **Dropout** applied with a **dropout rate of 0.5**. The output from this was passed to the output layer.  Again, I applied the **relu** activation function on all layers and used the **adam** optimizer.
 
-Finally, we utilize **Transfer Learning** to compare our network's results against that of the pre-trained **VGG16** network.
+Finally, I utilized **Transfer Learning** to compare my network's results against that of the pre-trained **VGG16** network.
 
 <br>
-<br>
-
 ### Results <a name="overview-results"></a>
 
-We have made some huge strides in terms of making our network's predictions more accurate, and more reliable on new data.
+I  made some huge strides in terms of making my network's predictions more accurate, and more reliable on new data.
 
-Our baseline network suffered badly from overfitting - the addition of both Dropout & Image Augmentation eliminated this almost entirely.
+My baseline network suffered badly from overfitting - the addition of both Dropout & Image Augmentation eliminated this almost entirely.
 
-In terms of Classification Accuracy on the Test Set, we saw:
+In terms of Classification Accuracy on the Test Set, I saw:
 
 * Baseline Network: **75%**
 * Baseline + Dropout: **85%**
@@ -73,11 +70,10 @@ In terms of Classification Accuracy on the Test Set, we saw:
 * Optimised Architecture + Dropout + Image Augmentation: **95%**
 * Transfer Learning Using VGG16: **98%**
 
-Tuning the network architecture with Keras-Tuner gave us a great boost, but was also very time-intensive - however if this time investment results in improved accuracy then it is time well spent.
+Tuning the network architecture with Keras-Tuner gave me a great boost, but was also very time-intensive - however if this time investment results in improved accuracy then it is time well spent.
 
-The use of Transfer Learning with the VGG16 architecture was also a great success, in only 10 epochs we were able to beat the performance of our smaller, custom networks which were training over 50 epochs.  From a business point of view, we also need to consider the overheads of (a) storing the much larger VGG16 network file, and (b) any increased latency on inference.
+The use of Transfer Learning with the VGG16 architecture was also a great success, in only 10 epochs, I was able to beat the performance of my smaller, custom networks which were training over 50 epochs. From a business point of view, I also needed to consider the overheads of (a) storing the much larger VGG16 network file, and (b) any increased latency on inference.
 
-<br>
 <br>
 
 ___
