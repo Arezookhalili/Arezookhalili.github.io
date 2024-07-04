@@ -74,15 +74,14 @@ Tuning the network architecture with Keras-Tuner gave me a great boost, but was 
 
 The use of Transfer Learning with the VGG16 architecture was also a great success, in only 10 epochs, I was able to beat the performance of my smaller, custom networks which were training over 50 epochs. From a business point of view, I also needed to consider the overheads of (a) storing the much larger VGG16 network file, and (b) any increased latency on inference.
 
-<br>
-
 ___
 
+<br>
 # Data Overview  <a name="data-overview"></a>
 
-To build out this proof of concept, the client has provided us with some sample data. This is made up of images of six different types of fruit, sitting on the landing platform in the warehouse.
+To build out this proof of concept, the client has provided me with some sample data. This is made up of images of six different types of fruit, sitting on the landing platform in the warehouse.
 
-We randomly split the images for each fruit into training (60%), validation (30%) and test (10%) sets.
+I randomly split the images for each fruit into training (60%), validation (30%) and test (10%) sets.
 
 Examples of four images of each fruit class can be seen in the image below:
 
