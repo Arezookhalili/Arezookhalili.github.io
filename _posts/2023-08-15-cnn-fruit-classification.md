@@ -113,8 +113,8 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, Activation, Flatten, D
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.callbacks import ModelCheckpoint
 ```
-
-We specify that we will resize the images down to 128 x 128 pixels and that we will pass in 32 images at a time (known as the batch size) for training.
+<br>
+I specified that I would resize the images down to 128 x 128 pixels and that I would pass in 32 images at a time (known as the batch size) for training.
 <br>
 ```python
 # Data flow parameters
@@ -127,7 +127,7 @@ num_channels = 3
 num_classes = 6
 ```
 <br>
-To start with, we simply use the generators to rescale the raw pixel values (ranging between 0 and 255) to float values that exist between 0 and 1.  The reason we do this is mainly to help Gradient Descent find an optimal, or near optional solution each time much more efficiently - in other words, it means that the features that are learned in the depths of the network are of a similar magnitude, and the learning rate that is applied to descend the loss or cost function across many dimensions, is somewhat proportionally similar across all dimensions - and long story short, means training time is faster as Gradient Descent can converge faster each time!
+To start with, I simply used the generators to rescale the raw pixel values (ranging between 0 and 255) to float values that existed between 0 and 1. The reason I did this was mainly to help Gradient Descent found an optimal, or near optimal solution each time much more efficiently - in other words, it meant that the features that were learned in the depths of the network were of a similar magnitude, and the learning rate that was applied to descend the loss or cost function across many dimensions, was somewhat proportionally similar across all dimensions - and long story short, meant training time was faster as Gradient Descent could converge faster each time!
 <br>
 ```python
 # Image generators
@@ -135,7 +135,7 @@ training_generator = ImageDataGenerator(rescale = 1./255)
 validation_generator = ImageDataGenerator(rescale = 1./255)
 ```
 <br>
-We will then send the image batches from our hard drive to the network.
+I then sent the image batches from my hard drive to the network.
 <br>
 ```python
 # Image flows
@@ -150,9 +150,9 @@ validation_set = validation_generator.flow_from_directory(directory = validation
                                                                       class_mode = 'categorical')
 ```
 <br>
-We will add more logic to the training set generator to apply Image Augmentation.
+I added more logic to the training set generator to apply Image Augmentation.
 
-With this pipeline in place, our images will be extracted, in batches of 32, from our hard drive, where they're being stored and sent into our model for training!
+With this pipeline in place, my images would be extracted, in batches of 32, from my hard drive, where they're being stored and sent into my model for training!
 
 ___
 <br>
@@ -162,7 +162,7 @@ Convolutional Neural Networks (CNN) are an adaptation of Artificial Neural Netwo
 
 To a computer, an image is simply made up of numbers, those being the color intensity values for each pixel.  Color images have values ranging between 0 and 255 for each pixel, but have three of these values, for each - one for Red, one for Green, and one for Blue, or in other words the RGB values that mix to make up the specific color of each pixel.
 
-These pixel values are the *input* for a Convolutional Neural Network.  It needs to make sense of these values to make predictions about the image, for example, in our task here, to predict what the image is of, one of the six possible fruit classes.
+These pixel values are the *input* for a Convolutional Neural Network. It needs to make sense of these values to make predictions about the image, for example, in my task here, to predict what the image was of, one of the six possible fruit classes.
 
 The pixel values themselves don't hold much useful information on their own - so the network needs to turn them into *features* much like we do as humans.
 
@@ -170,20 +170,19 @@ A big part of this process is called **Convolution** where each input image is s
 
 A somewhat similar process called **Pooling** is also applied to facilitate this *generalization* even further.  A CNN can contain many of these Convolution & Pooling layers - with deeper layers finding more abstract features.
 
-Similar to Artificial Neural Networks, Activation Functions are applied to the data as it moves forward through the network, helping the network decide which neurons will fire, or in other words, helping the network understand which neurons are more or less important for different features, and ultimately which neurons are more or less important for the different output classes.
+Activation Functions are also applied to the data as it moves forward through the network, helping the network decide which neurons will fire, or in other words, helping the network understand which neurons are more or less important for different features, and ultimately which neurons are more or less important for the different output classes.
 
 Over time - as a Convolutional Neural Network trains, it iteratively calculates how well it is predicting on the known classes we pass it (known as the **loss** or **cost**, then heads back through in a process known as **Back Propagation** to update the parameters within the network, in a way that reduces the error, or in other words, improves the match between predicted outputs and actual outputs.  Over time, it learns to find a good mapping between the input data, and the output classes.
 
-Many parameters can be changed within the architecture of a Convolutional Neural Network, as well as clever logic that can be included, all of which can affect the predictive accuracy.  We will discuss and put in place many of these below!
+Many parameters can be changed within the architecture of a Convolutional Neural Network, as well as clever logic that can be included, all of which can affect the predictive accuracy.  
 
 ___
 <br>
 # Baseline Network <a name="cnn-baseline"></a>
 
-<br>
-#### Network Architecture
+### Network Architecture
 
-Our baseline network is simple but gives us a starting point to refine.  This network contains **2 Convolutional Layers**, each with **32 filters** and subsequent **Max Pooling** Layers.  We have a **single Dense (Fully Connected) layer** following flattening with **32 neurons** followed by our output layer.  We apply the **relu** activation function on all layers and use the **adam** optimizer.
+My baseline network was simple but gave me a starting point to refine. This network contained **2 Convolutional Layers**, each with **32 filters** and subsequent **Max Pooling** Layers.  I had a **single Dense (Fully Connected) layer** following flattening with **32 neurons** followed by my output layer. I applied the **relu** activation function on all layers and used the **adam** optimizer.
 
 ```python
 # Network architecture
@@ -214,9 +213,8 @@ model.compile(loss = 'categorical_crossentropy',
 model.summary()
 ```
 <br>
-The below shows us more clearly our baseline architecture:
+The below shows us my baseline architecture more clearly:
 ```
-
 Model: "sequential"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
@@ -246,21 +244,19 @@ activation_3 (Activation)    (None, 6)                 0
 Total params: 1,058,950
 Trainable params: 1,058,950
 Non-trainable params: 0
-_________________________________________________________________
-
 ```
 
 <br>
-#### Training The Network
+### Training The Network
 
-With the pipeline, and architecture in place - we are now ready to train the baseline network!
+With the pipeline, and architecture in place - I trained the baseline network!
 
-In the below code we:
+In the below code, I:
 
-* Specify the number of epochs for training
+* Specified the number of epochs for training
 * Set a location for the trained network to be saved (architecture & parameters)
 * Set a *ModelCheckPoint* callback to save the best network at any point during training (based upon validation accuracy)
-* Train the network and save the results to an object called *history*
+* Trained the network and saved the results to an object called *history*
 
 ```python
 # Training parameters
@@ -282,12 +278,12 @@ history = model.fit(x = training_set,
                     callbacks = [save_best_model])
 ```
 <br>
-The ModelCheckpoint callback that has been put in place means that we do not just save the *final* network at epoch 50, but instead, we save the *best* network, in terms of validation set performance - from *any point* during training.  In other words, at the end of each of the 50 epochs, Keras will assess the performance on the validation set and if it has not seen any performance improvement it will do nothing.  If it does see an improvement, however, it will update the network file that is saved on our hard drive.
+The ModelCheckpoint callback that was put in place meant that I did not just save the *final* network at epoch 50, but instead, I saved the *best* network, in terms of validation set performance - from *any point* during training. In other words, at the end of each of the 50 epochs, Keras would assess the performance on the validation set and if it did not see any performance improvement it would do nothing. If it saw an improvement, however, it would update the network file that was saved on our hard drive.
 
 <br>
-#### Analysis Of Training Results
+### Analysis Of Training Results
 
-As we saved our training process to the *history* object, we can now analyze the performance (Classification Accuracy, and Loss) of the network epoch by epoch.
+As I saved my training process to the *history* object, I could analyze the performance (Classification Accuracy, and Loss) of the network epoch by epoch.
 
 ```python
 Import matplotlib.pyplot as plt
@@ -310,42 +306,40 @@ max(history.history['val_accuracy'])
 <br>
 The below image contains two plots, the first showing the epoch by epoch **Loss** for both the training set (blue) and the validation set (orange) & the second showing the epoch by epoch **Classification Accuracy** again, for both the training set (blue) and the validation set (orange).
 
-<br>
 ![alt text](/img/posts/cnn-baseline-accuracy-plot.png "CNN Baseline Accuracy Plot")
 
 <br>
-There are two key learnings from the above plots. The first is that, with this baseline architecture & the parameters we set for training, we are reaching our best performance in around 10-20 epochs - after that, not much improvement is seen.  This isn't to say that 50 epochs are wrong, especially if we change our network - but is interesting to note at this point.
+There were two key learnings from the above plots. 
+* With this baseline architecture & the parameters I set for training, I was reaching the best performance in around 10-20 epochs - after that, not much improvement was seen.  This wasn't to say that 50 epochs were wrong, especially if I change my network - but was interesting to note at this point.
 
-The second thing to notice is *very important* and that is the significant gap between the orange and blue lines on the plot, in other words between our validation performance and our training performance.
+* The significant gap between the orange and blue lines on the plot, in other words between my validation performance and my training performance. This gap was over-fitting.
 
-This gap is over-fitting.
+Focusing on the lower plot above (Classification Accuracy) - it appeared that my network was learning the features of the training data *so well* that after about 20 or so epochs it was *perfectly* predicting those images - but on the validation set, it never passed approximately **83% Classification Accuracy**.
 
-Focusing on the lower plot above (Classification Accuracy) - it appears that our network is learning the features of the training data *so well* that after about 20 or so epochs it is *perfectly* predicting those images - but on the validation set, it never passes approximately **83% Classification Accuracy**.
+I did not want over-fitting! It meant that I was risking my predictive performance on new data. The network was not learning to generalize, meaning that if something slightly different came along then it's going to struggle to predict well, or at least predict reliably!
 
-We do not want over-fitting! It means that we're risking our predictive performance on new data.  The network is not learning to generalize, meaning that if something slightly 
-different comes along then it's going to struggle to predict well, or at least predict reliably!
-
-We will look to address this with some clever concepts, and you will see those in the next sections.
+I tried to address this with some clever concepts in the next sections.
 
 <br>
-#### Performance On The Test Set
+### Performance On The Test Set
 
-Above, we assessed our model's performance on both the training set and the validation set - both of which were being passed in during training.
+Above, I assessed my model's performance on both the training set and the validation set - both of which were being passed in during training.
 
-Here, we will get a view of how well our network performs when predicting data that was *no part* of the training process whatsoever - our test set.
+Here, I got a view of how well my network performed when predicting data that was *no part* of the training process whatsoever (my test set).
 
-A test set can be extremely useful when looking to assess many different iterations of a network we build.  Where the validation set might be sent through the model in slightly different orders during training to assess the epoch-by-epoch performance, our test set is a *static set* of images.  Because of this, it makes for a really good baseline for testing the first iteration of our network versus any subsequent versions that we create, perhaps after we refine the architecture, or add any other clever bits of
-logic that we think might help the network perform better in the real world.
+A test set can be extremely useful when looking to assess many different iterations of a network we build.  
 
-In the below code, we run this in isolation from training.  We:
+Where the validation set might be sent through the model in slightly different orders during training to assess the epoch-by-epoch performance, my test set was a *static set* of images. Because of this, it made for a really good baseline for testing the first iteration of my network versus any subsequent versions that I created, perhaps after I refined the architecture, or added any other clever bits of logic that I thought might help the network perform better in the real world.
 
-* Import the required packages for importing & manipulating our test set images
+In the below code, I ran this in isolation from training. I:
+
+* Imported the required packages for importing & manipulating my test set images
 * Set up the parameters for the predictions
-* Load in the saved network file from training
-* Create a function for preprocessing our test set images in the same way that training & validation images were
-* Create a function for making predictions, returning both the predicted class label, and predicted class probability
-* Iterate through our test set images, preprocessing each and passing to the network for prediction
-* Create a Pandas DataFrame to hold all prediction data
+* Loaded in the saved network file from training
+* Created a function for preprocessing my test set images in the same way that training & validation images were
+* Created a function for making predictions, returning both the predicted class label, and predicted class probability
+* Iterated through my test set images, preprocessing each and passing to the network for prediction
+* Created a Pandas DataFrame to hold all prediction data
 
 ```python
 # Import required packages
@@ -415,9 +409,8 @@ predictions_df = pd.DataFrame({"actual_label" : actual_labels,
 predictions_df['correct'] = np.where(predictions_df['actual_label'] == predictions_df['predicted_label'], 1, 0)
 ```
 <br>
-After running the code above, we end up with a Pandas DataFrame containing prediction data for each test set image. A random sample of this can be seen in the table below:
+After running the code above, I ended up with a Pandas DataFrame containing prediction data for each test set image. A random sample of this can be seen in the table below:
 
-<br>
 
 | **actual_label** | **predicted_label** | **predicted_probability** | **filename** | **correct** |
 |---|---|---|---|---|
@@ -429,7 +422,7 @@ After running the code above, we end up with a Pandas DataFrame containing predi
 | lemon | lemon | 0.8490372 | lemon_0084.jpg | 1 |
 
 <br>
-In our data, we have:
+In my data, I had:
 
 * Actual Label: The true label for that image
 * Prediction Label: The predicted label for the image (from the network)
@@ -437,12 +430,12 @@ In our data, we have:
 * Filename: The test set image on our local drive (for reference)
 * Correct: A flag showing whether the predicted label is the same as the actual label
 
-This dataset is extremely useful as we can not only calculate our classification accuracy, but we can also deep-dive into images where the network was struggling to predict and try to assess why - leading to us improving our network, and potentially our input data!
+This dataset was extremely useful as I could not only calculate my classification accuracy, but I could also deep-dive into images where the network was struggling to predict and try to assess why - leading to improving my network, and potentially my input data!
 
 <br>
-#### Test Set Classification Accuracy
+### Test Set Classification Accuracy
 
-Using our DataFrame, we can calculate our overall Test Set classification accuracy using the below code:
+Using my DataFrame, I could calculate my overall Test Set classification accuracy using the below code:
 
 ```python
 # Overall test set accuracy
@@ -450,16 +443,16 @@ test_set_accuracy = predictions_df['correct'].sum() / len(predictions_df)
 print(test_set_accuracy)
 ```
 <br>
-Our baseline network achieves a **75% Classification Accuracy** on the Test Set.  It will be interesting to see how much improvement we can this with additions & refinements to our network.
+My baseline network achieved a **75% Classification Accuracy** on the Test Set.  It would be interesting to see how much improvement I could see with these additions and refinements to my network.
 
 <br>
-#### Test Set Confusion Matrix
+### Test Set Confusion Matrix
 
-Overall Classification Accuracy is very useful, but it can hide what is going on with the network's predictions!
+Overall Classification Accuracy was very useful, but it could hide what was going on with the network's predictions!
 
-As we saw above, our Classification Accuracy for the whole test set was 75%, but it might be that our network is predicting extremely well on apples, but struggling with Lemons as for some reason it is regularly confusing them with Oranges.  A Confusion Matrix can help us uncover insights like this!
+As we saw above, My Classification Accuracy for the whole test set was 75%, but it might be that my network was predicting extremely well on apples, but struggling with Lemons as for some reason it was regularly confusing them with Oranges. A Confusion Matrix could help me uncover insights like this!
 
-We can create a Confusion Matrix with the below code:
+I could create a Confusion Matrix with the below code:
 
 ```python
 # Confusion matrix (percentages)
@@ -467,7 +460,7 @@ confusion_matrix = pd.crosstab(predictions_df['predicted_label'], predictions_df
 print(confusion_matrix)
 ```
 <br>
-This results in the following output:
+This resulted in the following output:
 
 ```
 actual_label     apple  avocado  banana  kiwi  lemon  orange
@@ -480,9 +473,9 @@ lemon              0.2      0.0     0.7   0.0    1.0     0.1
 orange             0.0      0.0     0.0   0.1    0.0     0.8
 ```
 <br>
-Along the top are our *actual* classes and down the side are our *predicted* classes - so by counting *down* the columns we can get the Classification Accuracy (%) for each class, and we can see where it is getting confused.
+Along the top were my *actual* classes and down the side were my *predicted* classes - so by counting *down* the columns I could get the Classification Accuracy (%) for each class, and I could see where it was getting confused.
 
-So, while overall our test set accuracy was 75% - for each class we see:
+So, while overall my test set accuracy was 75%, I saw the following accuracies for each class:
 
 * Apple: 80%
 * Avocado: 100%
@@ -491,18 +484,18 @@ So, while overall our test set accuracy was 75% - for each class we see:
 * Lemon: 100%
 * Orange: 80%
 
-This is very powerful - we now can see what exactly is driving our *overall* Classification Accuracy.
+This was very powerful as I could see what exactly was driving my *overall* Classification Accuracy.
 
-The standout insight here is for Bananas - with a 20% Classification Accuracy, and even more interestingly we can see where it is getting confused. The network predicted 70% of Banana images to be of the class Lemon!
+The standout insight here was for Bananas - with a 20% Classification Accuracy, and even more interestingly I could see where it is getting confused. The network predicted 70% of Banana images to be of the class Lemon!
 
 ___
 <br>
 # Tackling Overfitting With Dropout <a name="cnn-dropout"></a>
 
 <br>
-#### Dropout Overview
+### Dropout Overview
 
-Dropout is a technique used in Deep Learning primarily to reduce the effects of over-fitting. Over-fitting is where the network learns the patterns of the training data so specifically, that it runs the risk of not generalizing well, and being very unreliable when used to predict new, unseen data.
+Dropout is a technique used in Deep Learning primarily to reduce the effects of overfitting. Over-fitting is where the network learns the patterns of the training data so specifically, that it runs the risk of not generalizing well, and being very unreliable when used to predict new, unseen data.
 
 Dropout works in a way where, for each batch of observations that is sent forward through the network, a pre-specified proportion of the neurons in a hidden layer are essentially ignored or deactivated.  This can be applied to any number of the hidden layers.
 
@@ -516,13 +509,13 @@ If we *drop out* neurons during training, *other* neurons need to jump in and fi
 
 Over time, with different combinations of neurons being ignored for each mini-batch of data - the network becomes more adept at generalizing and thus is less likely to overfit to the training data.  Since no particular neuron can rely on the presence of other neurons, and the features that they represent - the network learns more robust features, and are less susceptible to noise.
 
-In a Convolutional Neural Network, such as in our task here - it is generally best practice to only apply Dropout to the Dense (Fully Connected) layer or layers, rather than to the Convolutional Layers.  
+In a Convolutional Neural Network, it is generally best practice to only apply Dropout to the Dense (Fully Connected) layer or layers, rather than to the Convolutional Layers.  
 
 
 <br>
-#### Updated Network Architecture
+### Updated Network Architecture
 
-In our task here, we only have one Dense Layer, so we apply Dropout to that layer only.  A common proportion to apply (i.e. the proportion of neurons in the layer to be deactivated randomly each pass) is 0.5 or 50%.  We will apply this here.
+Here, I only had *one Dense Layer*, so I applied *Dropout to that layer only*. A common proportion to apply (i.e. the proportion of neurons in the layer to be deactivated randomly each pass) is 0.5 or 50%.  I applied this here.
 
 ```python
 model = Sequential()
@@ -546,49 +539,48 @@ model.add(Activation('softmax'))
 ```
 
 <br>
-#### Training The Updated Network
+### Training The Updated Network
 
-We run the same code to train this updated network as we did for the baseline network (50 epochs) - the only change is that we modify the filename for the saved network to ensure we have all network files for comparison.
+I ran the same code to train this updated network as I did for the baseline network (50 epochs) - the only change was that I modified the filename for the saved network to ensure I had all network files for comparison.
 
 <br>
 #### Analysis Of Training Results
 
-As we again saved our training process to the *history* object, we can now analyze & plot the performance (Classification Accuracy, and Loss) of the updated network epoch by epoch.
+As I again saved my training process to the *history* object, I could analyze & plot the performance (Classification Accuracy, and Loss) of the updated network epoch by epoch.
 
-With the baseline network, we saw very strong overfitting in action - it will be interesting to see if the addition of Dropout has helped!
+With the baseline network, I saw very strong overfitting in action - it would be interesting to see if the addition of Dropout was helpful!
 
-The below image shows the same two plots we analyzed for the updated network, the first showing the epoch by epoch **Loss** for both the training set (blue) and the validation set (orange) & the second showing the epoch by epoch **Classification Accuracy** again, for both the training set (blue) and the validation set (orange).
+The below image shows the same two plots I analyzed for the updated network, the first showing the epoch by epoch **Loss** for both the training set (blue) and the validation set (orange) & the second showing the epoch by epoch **Classification Accuracy** again, for both the training set (blue) and the validation set (orange).
 
-<br>
 ![alt text](/img/posts/cnn-dropout-accuracy-plot.png "CNN Dropout Accuracy Plot")
 
 <br>
-Firstly, we can see a peak Classification Accuracy on the validation set of around **89%** which is higher than the **83%** we saw for the baseline network.
+Firstly, I could see a peak Classification Accuracy on the validation set of around **89%** which was higher than the **83%** I saw for the baseline network.
 
-Secondly, and what we were looking to see, is that the gap between the Classification Accuracy on the training set, and the validation set has been mostly eliminated. The two lines are trending up at more or less the same rate across all epochs of training - and the accuracy on the training set also never reaches 100% as it did before meaning that we are indeed seeing this *generalization* that we want!
+Secondly, and what I was looking to see, was that the gap between the Classification Accuracy on the training set, and the validation set was mostly eliminated. The two lines were trending up at more or less the same rate across all epochs of training - and the accuracy on the training set also never reached 100% as it did before meaning that we were indeed seeing this *generalization* that we wanted!
 
-The addition of Dropout does appear to have remedied the overfitting that we saw in the baseline network.  This is because, while some neurons are turned off during each mini-batch iteration of training - all will have their turn, many times, to be updated - just in a way where no neuron or combination of neurons will become so hard-wired to certain features found in the training data!
-
-<br>
-#### Performance On The Test Set
-
-During training, we assessed our updated network performance on both the training set and the validation set.  Here, as we did for the baseline network, we will get a view of how well our network performs when predicting data that was *no part* of the training process whatsoever - our test set.
-
-We run the same code as we did for the baseline network, with the only change being to ensure we are loading in the network file for the updated network
+The addition of Dropout appeared to have remedied the overfitting that I saw in the baseline network. This was because, while some neurons were turned off during each mini-batch iteration of training - all would have their turn, many times, to be updated - just in a way where no neuron or combination of neurons would become so hard-wired to certain features found in the training data!
 
 <br>
-#### Test Set Classification Accuracy
+### Performance On The Test Set
 
-Our baseline network achieved a **75% Classification Accuracy** on the test set.  With the addition of Dropout, we saw both a reduction in overfitting and an increased *validation set* accuracy.  On the test set, we again see an increase vs. the baseline, with an **85% Classification Accuracy**. 
+During training, I assessed our updated network performance on both the training set and the validation set. Here, as I did for the baseline network, I would get a view of how well my network performed when predicting data that was *no part* of the training process whatsoever (my test set).
+
+I ran the same code as I did for the baseline network, with the only change being to ensure I was loading in the network file for the updated network
 
 <br>
-#### Test Set Confusion Matrix
+### Test Set Classification Accuracy
 
-As mentioned above, while overall Classification Accuracy is very useful, it can hide what is going on with the network's predictions!
+My baseline network achieved a **75% Classification Accuracy** on the test set.  With the addition of Dropout, I saw both a reduction in overfitting and an increased *validation set* accuracy.  On the test set, I again saw an increase vs. the baseline, with an **85% Classification Accuracy**. 
 
-The standout insight for the baseline network was that Bananas have only a 20% Classification Accuracy, very frequently being confused with Lemons.  It will be interesting to see if the extra *generalization* forced upon the network with the application of Dropout helps this.
+<br>
+### Test Set Confusion Matrix
 
-Running the same code from the baseline section on results for our updated network, we get the following output:
+As mentioned above, while overall Classification Accuracy was very useful, it could hide what was going on with the network's predictions!
+
+The standout insight for the baseline network was that Bananas have only a 20% Classification Accuracy, very frequently being confused with Lemons. It would be interesting to see if the extra *generalization* forced upon the network with the application of Dropout helps this.
+
+Running the same code from the baseline section on resulted for my updated network, I got the following output:
 
 ```
 actual_label     apple  avocado  banana  kiwi  lemon  orange
@@ -601,9 +593,9 @@ lemon              0.0      0.0     0.2   0.0    1.0     0.0
 orange             0.0      0.0     0.0   0.1    0.0     0.9
 ```
 <br>
-Along the top are our *actual* classes and down the side are our *predicted* classes - so by counting *down* the columns we can get the Classification Accuracy (%) for each class, and we can see where it is getting confused.
+Along the top are my *actual* classes and down the side are my *predicted* classes - so by counting *down* the columns I can get the Classification Accuracy (%) for each class, and I can see where it is getting confused.
 
-So, while overall our test set accuracy was 85% - for each class we see:
+So, while overall my test set accuracy was 85% - for each class I saw:
 
 * Apple: 80%
 * Avocado: 100%
@@ -612,7 +604,7 @@ So, while overall our test set accuracy was 85% - for each class we see:
 * Lemon: 100%
 * Orange: 90%
 
-All classes here are being predicted *at least* as well as with the baseline network - and Bananas which had only a 20% Classification Accuracy last time, are now being classified correctly 70% of the time.  Still the lowest of all classes, but a significant improvement over the baseline network!
+All classes here were being predicted *at least* as well as with the baseline network - and Bananas which had only a 20% Classification Accuracy last time, were classified correctly 70% of the time.  Still the lowest of all classes, but a significant improvement over the baseline network!
 
 ___
 <br>
