@@ -79,9 +79,9 @@ ___
 <br>
 # Data Overview  <a name="data-overview"></a>
 
-To build out this proof of concept, the client has provided me with some sample data. This is made up of images of six different types of fruit, sitting on the landing platform in the warehouse.
+To build out this proof of concept, the client provided me with some sample data. This was made up of images of six different types of fruit, sitting on the landing platform in the warehouse.
 
-I randomly split the images for each fruit into training (60%), validation (30%) and test (10%) sets.
+I randomly splitted the images for each fruit into training (60%), validation (30%) and test (10%) sets.
 
 Examples of four images of each fruit class can be seen in the image below:
 
@@ -89,24 +89,23 @@ Examples of four images of each fruit class can be seen in the image below:
 ![alt text](/img/posts/cnn-image-examples.png "CNN Fruit Classification Samples")
 
 <br>
-For ease of use in Keras, our folder structure first splits into training, validation, and test directories, and within each of those is split again into directories based upon the six fruit classes.
+For ease of use in Keras, my folder structure first splitted into training, validation, and test directories, and within each of those was splitted again into directories based upon the six fruit classes.
 
-All images are of size 300 x 200 pixels.
+All images were of size 300 x 200 pixels.
 
 ___
 <br>
 # Data Pipeline  <a name="data-pipeline"></a>
 
-Before we get to building the network architecture, & subsequently training & testing it - we need to set up a pipeline for our images to flow through, from our local hard drive where they are located, to, and through our network.
+Before I got to building the network architecture, and subsequently training & testing it - I needed to set up a pipeline for my images to flow through, from my local hard drive where they were located, to, and through my network.
 
-In the code below, we:
+In the code below, I:
 
-* Import the required packages
-* Set up the parameters for our pipeline
-* Set up our image generators to process the images as they come in
-* Set up our generator flow - specifying what we want to pass in for each iteration of training
+* Imported the required packages
+* Set up the parameters for my pipeline
+* Set up my image generators to process the images as they came in
+* Set up my generator flow - specifying what I wanted to pass in for each iteration of training
 
-<br>
 ```python
 # Import the required Python libraries
 from tensorflow.keras.models import Sequential
