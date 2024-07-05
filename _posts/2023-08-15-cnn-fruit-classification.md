@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Fruit Classification Using A Convolutional Neural Network
-image: "/posts/cnn-fruit-classification-title-img.png"
+image: "/posts/cnn-fruit-classification-title-img1.png"
 tags: [Deep Learning, CNN, Data Science, Computer Vision, Python]
 ---
 
@@ -1267,4 +1267,4 @@ ___
 <br>
 # Growth & Next Steps <a name="growth-next-steps"></a>
 
-The proof of concept was successful, I had shown that I could get very accurate predictions albeit in a small number of classes. I needed to showcase this to the client, discuss what it was that made the network more robust, and then looked to test our best networks on a larger array of classes.
+The proof of concept was successful, I had shown that I could get very accurate predictions albeit in a small number of classes. I needed to showcase this to the client, discuss what it was that made the network more robust, and then looked to test my best networks on a larger array of classes.
