@@ -5,7 +5,7 @@ image: "/posts/clustering-title-img.png"
 tags: [Customer Segmentation, Machine Learning, Clustering, Python]
 ---
 
-In this project, we use k-means clustering to segment the customer base to increase business understanding and enhance the relevancy of targeted messaging & customer communications.
+In this project, I used k-means clustering to segment the customer base to increase business understanding and enhance the relevancy of targeted messaging & customer communications.
 
 # Table of contents
 
@@ -25,27 +25,26 @@ In this project, we use k-means clustering to segment the customer base to incre
 - [04. Growth & Next Steps](#growth-next-steps)
 
 ___
-
+<br>
 # Project Overview  <a name="overview-main"></a>
 
 ### Context <a name="overview-context"></a>
 
-The Senior Management team from our client, a supermarket chain, are disagreeing about how customers are shopping, and how lifestyle choices may affect the food areas customers are shopping into, or more interestingly, not shopping into.
+The Senior Management team from a supermarket chain wanted to know how customers were shopping, and how lifestyle choices might affect the food areas customers were shopping into, or more interestingly, not shopping into.
 
-They have asked us to use data, and Machine Learning to help segment up their customers based on their engagement with each of the major food categories - aiding business understanding of the customer base, and enhancing the relevancy of targeted messaging & customer communications.
+They had asked me to use data, and Machine Learning to help segment up their customers based on their engagement with each of the major food categories - aiding business understanding of the customer base, and enhancing the relevancy of targeted messaging & customer communications.
 
-<br>
 <br>
 ### Actions <a name="overview-actions"></a>
 
-We first needed to compile the necessary data from several tables in the database, namely the *transactions* table, and the *product_areas* table.  We joined together the relevant information using Pandas, and then aggregated the transactional data across product areas, from the most recent six months to a customer level.  The final data for clustering is, for each customer, the percentage of sales allocated to each product area.
+I first needed to compile the necessary data from several tables in the database, namely the *transactions* table, and the *product_areas* table.  I joined together the relevant information using Pandas, and then aggregated the transactional data across product areas, from the most recent six months to a customer level. The final data for clustering was, for each customer, the percentage of sales allocated to each product area.
 
-As a starting point, we test & apply k-means clustering for this task.  We need to apply some data pre-processing and, most importantly feature scaling to ensure all variables exist on the same scale - a very important consideration for distance-based algorithms such as k-means.
+As a starting point, I tested & applied k-means clustering for this task.  I needed to apply some data pre-processing and, most importantly feature scaling to ensure all variables existed on the same scale - a very important consideration for distance-based algorithms such as k-means.
 
-As k-means is an *unsupervised learning* approach, in other words, there are no labels - we use a process known as *Within Cluster Sum of Squares (WCSS)* to understand what a "good" number of clusters or segments is.
+As k-means is an *unsupervised learning* approach, in other words, there are no labels - I used a process known as *Within Cluster Sum of Squares (WCSS)* to understand what a "good" number of clusters or segments was.
 
-Based upon this, we apply the k-means algorithm onto the product area data, append the clusters to our customer base, and then profile the resulting customer segments to understand what the differentiating factors were!
-<br>
+Based upon this, I applied the k-means algorithm onto the product area data, appended the clusters to my customer base, and then profile the resulting customer segments to understand what the differentiating factors were!
+
 <br>
 
 ### Results <a name="overview-results"></a>
