@@ -653,69 +653,66 @@ training_generator = ImageDataGenerator(rescale = 1./255,
 validation_generator = ImageDataGenerator(rescale = 1./255)
 ```
 <br>
-**rotation_range** of 20: This was the *degrees* of rotation, and it dictated the *maximum* amount of rotation that I wanted. In other words, a rotation value will be randomly selected for each image, each epoch, between negative and positive 20 degrees, and whatever is selected, is what will be applied.
+**rotation_range** of 20: This was the *degrees* of rotation, and it dictated the *maximum* amount of rotation that I wanted. In other words, a rotation value would be randomly selected for each image, each epoch, between negative and positive 20 degrees.
 
-We apply a **width_shift_range** and a **height_shift_range** of 0.2.  These represent the fraction of the total width and height that we are happy to shift - in other words, we're allowing Keras to shift our image *up to* 20% both vertically and horizontally.
+**width_shift_range** and **height_shift_range** of 0.2:  I was allowing Keras to shift my image *up to* 20% both vertically and horizontally.
 
-We apply a **zoom_range** of 0.1, meaning a maximum of 10% inward or outward zoom.
+**zoom_range** of 0.1: meaning a maximum of 10% inward or outward zoom.
 
-We specify **horizontal_flip** to be True, meaning that each time an image flows in, there is a 50/50 chance of it being flipped.
+**horizontal_flip** to be True: meaning that each time an image flew in, there was a 50/50 chance of it being flipped.
 
-We specify a **brightness_range** between 0.5 and 1.5 meaning our images can become brighter or darker.
+**brightness_range** between 0.5 and 1.5: meaning that my images can become brighter or darker.
 
-Finally, we have **fill_mode** set to "nearest" which means that when images are shifted and/or rotated, we'll just use the *nearest pixel* to fill in any new pixels that are required - and it means our images still resemble the scene, generally speaking!
+**fill_mode** set to "nearest": meaning that when images were shifted and/or rotated, we would just use the *nearest pixel* to fill in any new pixels that were required - and it meant that images still resembled the scene, generally speaking!
 
-Again, it is important to note that these transformations are applied *only* to the training set, and not the validation set.
-
-<br>
-#### Updated Network Architecture
-
-Our network will be the same as the baseline network.  We will not apply Dropout here to ensure we can understand the true impact of Image Augmentation for our task.
+Again, it is important to note that these transformations were applied *only* to the training set, and not the validation set.
 
 <br>
-#### Training The Updated Network
+### Updated Network Architecture
 
-We run the same code to train this updated network as we did for the baseline network (50 epochs) - the only change is that we modify the filename for the saved network to ensure we have all network files for comparison.
-
-<br>
-#### Analysis Of Training Results
-
-As we again saved our training process to the *history* object, we can now analyze & plot the performance (Classification Accuracy, and Loss) of the updated network epoch by epoch.
-
-With the baseline network, we saw very strong overfitting in action - it will be interesting to see if the addition of Image Augmentation helps in the same way that Dropout did!
-
-The below image shows the same two plots we analyzed for the updated network, the first showing the epoch by epoch **Loss** for both the training set (blue) and the validation set (orange) & the second showing the epoch by epoch **Classification Accuracy** again, for both the training set (blue) and the validation set (orange).
+My network would be the same as the baseline network.  I would not apply Dropout here to ensure I could understand the true impact of Image Augmentation for my task.
 
 <br>
+### Training The Updated Network
+
+I ran the same code to train this updated network as I did for the baseline network (50 epochs) - the only change was that I modified the filename for the saved network to ensure I had all network files for comparison.
+
+<br>
+### Analysis Of Training Results
+
+As I saved my training process to the *history* object, I could analyze & plot the performance (Classification Accuracy, and Loss) of the updated network epoch by epoch.
+
+The below image shows the same two plots I analyzed for the updated network, the first showing the epoch by epoch **Loss** for both the training set (blue) and the validation set (orange) & the second showing the epoch by epoch **Classification Accuracy** again, for both the training set (blue) and the validation set (orange).
+
 ![alt text](/img/posts/cnn-augmentation-accuracy-plot.png "CNN Dropout Accuracy Plot")
 
 <br>
-Firstly, we can see a peak Classification Accuracy on the validation set of around **97%** which is higher than the **83%** we saw for the baseline network, and higher than the **89%** we saw for the network with Dropout added.
+Firstly, I could see a peak Classification Accuracy on the validation set of around **97%** which is higher than the **83%** I saw for the baseline network, and higher than the **89%** I saw for the network with Dropout added.
 
-Secondly, and what we were again really looking to see, is that the gap between the Classification Accuracy on the training set, and the validation set has been mostly eliminated. The two lines are trending up at more or less the same rate across all epochs of training - and the accuracy on the training set also never reaches 100% as it did before meaning that Image Augmentation is also giving the network this *generalization* that we want!
+Secondly, and what I was really looking to see, was that the gap between the Classification Accuracy on the training set, and the validation set was mostly eliminated. The two lines were trending up at more or less the same rate across all epochs of training - and the accuracy on the training set also never reached 100% as it did before meaning that Image Augmentation was also giving the network this *generalization* that I wanted!
 
-The reason for this is that the network is getting a slightly different version of each image each epoch during training, meaning that while it's learning features, it can't cling to a *single version* of those features!
-
-<br>
-#### Performance On The Test Set
-
-During training, we assessed our updated network performance on both the training set and the validation set.  Here, like we did for the baseline & Dropout networks, we will get a view of how well our network performs when predicting on data that was *no part* of the training process whatsoever - our test set.
-
-We run the same code as we did for the earlier networks, with the only change being to ensure we are loading in the network file for the updated network
+The reason for this was that the network was getting a slightly different version of each image each epoch during training, meaning that while it's learning features, it couldn't cling to a *single version* of those features!
 
 <br>
-#### Test Set Classification Accuracy
+### Performance On The Test Set
 
-Our baseline network achieved a **75% Classification Accuracy** on the test set, and our network with Dropout applied achieved **85%**.  With the addition of Image Augmentation, we saw both a reduction in overfitting and an increased *validation set* accuracy.  On the test set, we again see an increase vs. the baseline & Dropout, with a **93% Classification Accuracy**. 
+During training, I assessed my updated network performance on both the training set and the validation set.  Here, like I did for the baseline & Dropout networks, I would get a view of how well my network performs when predicting on data that was *no part* of the training process whatsoever (my test set).
+
+I ran the same code as I did for the earlier networks, with the only change being to ensure I was loading in the network file for the updated network
 
 <br>
-#### Test Set Confusion Matrix
+### Test Set Classification Accuracy
 
-As mentioned above, while overall Classification Accuracy is very useful, it can hide what is going on with the network's predictions!
+My baseline network achieved a **75% Classification Accuracy** on the test set, and my network with Dropout applied achieved **85%**.  With the addition of Image Augmentation, I saw both a reduction in overfitting and an increased *validation set* accuracy. On the test set, i saw an increase vs. the baseline & Dropout, with a **93% Classification Accuracy**. 
 
-The standout insight for the baseline network was that Bananas have only a 20% Classification Accuracy, very frequently being confused with Lemons.  Dropout, through the additional *generalization* forced upon the network, helped a lot - let's see how our network with Image Augmentation fares!
+<br>
+### Test Set Confusion Matrix
 
-Running the same code from the baseline section on results for our updated network, we get the following output:
+As mentioned above, while overall Classification Accuracy was very useful, it could hide what was going on with the network's predictions!
+
+The standout insight for the baseline network was that Bananas had only a 20% Classification Accuracy, very frequently being confused with Lemons. Dropout, through the additional *generalization* forced upon the network, helped a lot - let's see how my network with Image Augmentation fared!
+
+Running the same code from the baseline section on results for my updated network, I got the following output:
 
 ```
 actual_label     apple  avocado  banana  kiwi  lemon  orange
@@ -728,9 +725,9 @@ lemon              0.0      0.0     0.2   0.0    1.0     0.0
 orange             0.0      0.0     0.0   0.1    0.0     1.0
 ```
 <br>
-Along the top are our *actual* classes and down the side are our *predicted* classes - so by counting *down* the columns we can get the Classification Accuracy (%) for each class, and we can see where it is getting confused.
+Along the top are my *actual* classes and down the side are my *predicted* classes - so by counting *down* the columns I could get the Classification Accuracy (%) for each class, and I could see where it was getting confused.
 
-So, while overall our test set accuracy was 93% - for each class we see:
+So, while overall my test set accuracy was 93% - for each class I saw:
 
 * Apple: 90%
 * Avocado: 100%
@@ -739,38 +736,38 @@ So, while overall our test set accuracy was 93% - for each class we see:
 * Lemon: 100%
 * Orange: 100%
 
-All classes here are being predicted *more accurately* when compared to the baseline network, and *at least as accurate or better* when compared to the network with Dropout added.
+All classes here were predicted *more accurately* when compared to the baseline network, and *at least as accurate or better* when compared to the network with Dropout added.
 
-Utilizing Image Augmentation *and* applying Dropout will be a powerful combination!
+Utilizing Image Augmentation *and* applying Dropout would be a powerful combination!
 
 ___
 <br>
 # Hyper-Parameter Tuning <a name="cnn-tuning"></a>
 
 <br>
-#### Keras Tuner Overview
+### Keras Tuner Overview
 
-So far, with our Fruit Classification task, we have:
+So far, with our Fruit Classification task, I had:
 
 * Started with a baseline model
 * Added Dropout to help with overfitting
 * Utilised Image Augmentation
 
-The addition of Dropout and Image Augmentation boosted both performance and robustness - but there is one thing we've not tinkered with yet, and something that *could* have a big impact on how well the network learns to find and utilize important features for classifying our fruits - and that is the network *architecture*!
+The addition of Dropout and Image Augmentation boosted both performance and robustness - but there was one thing I  had not tinkered with yet, and something that *could* have a big impact on how well the network learnt to find and utilize important features for classifying our fruits - and that was the network *architecture*!
 
-So far, we've just used 2 convolutional layers, each with 32 filters, and we've used a single Dense layer, also, just by coincidence, with 32 neurons - and we admitted that this was just a place to start, our baseline.
+So far, I had just used 2 convolutional layers, each with 32 filters, and I had used a single Dense layer, also, just by coincidence, with 32 neurons - and I admitted that this was just a place to start, my baseline.
 
-One way for us to figure out if there are *better* architectures would be to just try different things. Maybe we just double our number of filters to 64, or maybe we keep the first convolutional layer at 32 but increase the second to 64. Perhaps we put a whole lot of neurons in our hidden layer, and then, what about things like our use of Adam as an optimizer, is this the best one for our particular problem, or should we use something else?
+One way for us to figure out if there were *better* architectures would be to just try different things. Maybe I just doubled my number of filters to 64, or maybe I kept the first convolutional layer at 32 but increased the second to 64. Perhaps I put a whole lot of neurons in my hidden layer, and then, what about things like use of Adam as an optimizer, was this the best one for my particular problem, or should I use something else?
 
-As you can imagine, we could start testing all of these things, and noting down performances, but that would be quite messy.
+As you can imagine, I could start testing all of these things, and noting down performances, but that would be quite messy.
 
-Here we will instead utilize *Keras Tuner* which will make this a whole lot easier for us!
+Here I would instead utilize *Keras Tuner* which would make this a whole lot easier for us!
 
-At a high level, with Keras Tuner, we will ask it to test, a whole host of different architecture and parameter options, based upon some specifications that we put in place.  It will go off and run some tests, and return us with all sorts of interesting summary statistics, and of course information about what worked best.
+At a high level, with Keras Tuner, I would ask it to test, a whole host of different architecture and parameter options, based upon some specifications that I put in place.  It would go off and run some tests, and return us with all sorts of interesting summary statistics, and of course information about what worked best.
 
-Once we have this, we can then create that particular architecture, train the network just as we've always done - and analyze the performance against our original networks.
+Once I had this, I could then create that particular architecture, train the network just as I'd always done - and analyze the performance against my original networks.
 
-Our data pipeline will remain the same as it was when applying Image Augmentation.  The code below shows this, as well as the extra packages we need to load for Keras-Tuner.
+My data pipeline would remain the same as it was when applying Image Augmentation. The code below showed this, as well as the extra packages I needed to load for Keras-Tuner.
 
 ```python
 # Import the required Python libraries
@@ -808,13 +805,13 @@ validation_set = validation_generator.flow_from_directory(directory = validation
 ```
 
 <br>
-#### Application Of Keras Tuner
+### Application Of Keras Tuner
 
-Here we specify what we want Keras Tuner to test, and how we want it to test it!
+Here, I specified what I wanted Keras Tuner to test, and how I wanted it to test it!
 
-We put our network architecture into a *function* with a single parameter called *hp* (hyperparameter)
+I put my network architecture into a *function* with a single parameter called *hp* (hyperparameter)
 
-We then make use of several in-build bits of logic to specify what we want to test.  In the code below we test for:
+I then made use of several in-build bits of logic to specify what I wanted to test.  In the code below I tested for:
 
 * Convolutional Layer Count - Between 1 & 4
 * Convolutional Layer Filter Count - Between 32 & 256 (Step Size 32)
