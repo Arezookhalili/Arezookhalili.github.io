@@ -63,7 +63,6 @@ I randomly splitted the images for each fruit into training (60%), validation (3
 
 Examples of four images of each fruit class can be seen in the image below:
 
-<br>
 ![alt text](/img/posts/cnn-image-examples.png "CNN Fruit Classification Samples")
 
 <br>
@@ -964,7 +963,6 @@ As I again saved my training process to the *history* object, I could analyze & 
 
 The below image shows the same two plots I analyzed for the tuned network, the first showing the epoch by epoch **Loss** for both the training set (blue) and the validation set (orange) & the second showing the epoch by epoch **Classification Accuracy** again, for both the training set (blue) and the validation set (orange).
 
-<br>
 ![alt text](/img/posts/cnn-tuned-accuracy-plot.png "CNN Tuned Accuracy Plot")
 
 <br>
