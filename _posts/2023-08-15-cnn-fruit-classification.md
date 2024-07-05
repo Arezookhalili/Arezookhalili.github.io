@@ -54,6 +54,7 @@ With these additions in place, I utilized *keras-tuner* to optimize my network a
 
 Finally, I utilized **Transfer Learning** to compare my network's results against that of the pre-trained **VGG16** network.
 
+___
 <br>
 # Data Overview  <a name="data-overview"></a>
 
