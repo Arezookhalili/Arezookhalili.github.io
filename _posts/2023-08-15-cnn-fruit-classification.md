@@ -611,11 +611,11 @@ ___
 # Image Augmentation <a name="cnn-augmentation"></a>
 
 <br>
-#### Image Augmentation Overview
+### Image Augmentation Overview
 
 Image Augmentation is a concept in Deep Learning that aims to not only increase predictive performance but also to increase the robustness of the network through regularisation.
 
-Instead of passing in each of the training set images as it stands, with Image Augmentation, we pass in many transformed *versions* of each image.  This results in increased variation within our training data (without having to explicitly collect more images) meaning the network has a greater chance to understand and learn the objects we’re looking to classify, in a variety of scenarios.
+Instead of passing in each of the training set images as it stands, with Image Augmentation, we pass in many transformed *versions* of each image. This results in increased variation within our training data (without having to explicitly collect more images) meaning the network has a greater chance to understand and learn the objects we’re looking to classify, in a variety of scenarios.
 
 Common transformation techniques are:
 
@@ -626,18 +626,18 @@ Common transformation techniques are:
 * Horizontal/Vertical Flipping
 * Brightness Alteration
 
-When applying Image Augmentation using Keras' ImageDataGenerator class, we do this "on the fly" meaning the network does not train on the *original* training set image, but instead on the generated/transformed *versions* of the image - and this version changes each epoch.  In other words - for each epoch that the network is trained, each image will be called upon, and then randomly transformed based upon the specified parameters - and because of this variation, the network learns to generalize a lot better for many different scenarios.
+When applying Image Augmentation using Keras' ImageDataGenerator class, we do this "on the fly" meaning the network does not train on the *original* training set image, but instead on the generated/transformed *versions* of the image - and this version changes each epoch. In other words - for each epoch that the network is trained, each image will be called upon, and then randomly transformed based upon the specified parameters - and because of this variation, the network learns to generalize a lot better for many different scenarios.
 
 <br>
-#### Implementing Image Augmentation
+### Implementing Image Augmentation
 
-We apply the Image Augmentation logic into the ImageDataGenerator class that exists within our Data Pipeline.
+I applied the Image Augmentation logic into the ImageDataGenerator class that existed within my Data Pipeline.
 
-It is important to note that we only ever do this for our training data, we don't apply any transformation on our validation or test sets.  The reason for this is that we want our validation & test data to be static and serve us better for measuring our performance over time.  If the images in these sets kept changing because of transformations it would be really hard to understand if our network was improving, or if it was just a lucky set of validation set transformations that made it appear that it was performing better!
+It is important to note that we only do this for our training data, we don't apply any transformation on our validation or test sets. The reason for this is that we want our validation & test data to be static and serve us better for measuring our performance over time. If the images in these sets kept changing because of transformations it would be really hard to understand if our network was improving, or if it was just a lucky set of validation set transformations that made it appear that it was performing better!
 
-When setting up and training the baseline & Dropout networks - we used the ImageGenerator class for only one thing, to rescale the pixel values. Now we will add in the Image Augmentation parameters as well, meaning that as images flow into our network for training the transformations will be applied.
+When setting up and training the baseline & Dropout networks - I used the ImageGenerator class for only one thing, to rescale the pixel values. Here, I added in the Image Augmentation parameters as well, meaning that as images flow into my network for training the transformations would be applied.
 
-In the code below, we add these transformations and specify the magnitudes that we want each applied:
+In the code below, I added these transformations and specified the magnitudes that I wanted to be applied:
 
 ```python
 # Image generators
@@ -653,7 +653,7 @@ training_generator = ImageDataGenerator(rescale = 1./255,
 validation_generator = ImageDataGenerator(rescale = 1./255)
 ```
 <br>
-We apply a **rotation_range** of 20.  This is the *degrees* of rotation, and it dictates the *maximum* amount of rotation that we want.  In other words, a rotation value will be randomly selected for each image, each epoch, between negative and positive 20 degrees, and whatever is selected, is what will be applied.
+**rotation_range** of 20: This was the *degrees* of rotation, and it dictated the *maximum* amount of rotation that I wanted. In other words, a rotation value will be randomly selected for each image, each epoch, between negative and positive 20 degrees, and whatever is selected, is what will be applied.
 
 We apply a **width_shift_range** and a **height_shift_range** of 0.2.  These represent the fraction of the total width and height that we are happy to shift - in other words, we're allowing Keras to shift our image *up to* 20% both vertically and horizontally.
 
