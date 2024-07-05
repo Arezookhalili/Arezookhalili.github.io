@@ -1089,11 +1089,11 @@ validation_set = validation_generator.flow_from_directory(directory = validation
 <br>
 ### Network Architecture
 
-Keras makes the use of VGG16 very easy. We will download the *bottom* of the VGG16 network (everything up to the Dense Layers) and add in what we need to apply the *top* of the model to our fruit classes.
+Keras makes the use of VGG16 very easy. I downloaded the *bottom* of the VGG16 network (everything up to the Dense Layers) and added in what I needed to apply the *top* of the model to my fruit classes.
 
-We then need to specify that we *do not* want the imported layers to be re-trained, we want their parameter values to be frozen.
+I then specified that I *did not* want the imported layers to be re-trained, I wanted their parameter values to be frozen.
 
-The original VGG16 network architecture contains two massive Dense Layers near the end, each with 4096 neurons.  Since our task of classifying 6 types of fruit is more simplistic than the original 1000 ImageNet classes, we reduce this down and instead implement two Dense Layers with 128 neurons each, followed by our output layer.
+The original VGG16 network architecture contains two massive Dense Layers near the end, each with 4096 neurons. Since my task of classifying 6 types of fruit was more simplistic than the original 1000 ImageNet classes, I reduced this down and instead implemented two Dense Layers with 128 neurons each, followed by my output layer.
 
 ```python
 # Network architecture
