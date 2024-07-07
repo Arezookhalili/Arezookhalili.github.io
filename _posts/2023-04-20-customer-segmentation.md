@@ -32,14 +32,14 @@ ___
 
 The Senior Management team from a supermarket chain wanted to know how customers were shopping, and how lifestyle choices might affect the food areas customers were shopping into, or more interestingly, not shopping into.
 
-They had asked me to use data, and Machine Learning to help segment up their customers based on their engagement with each of the major food categories - aiding business understanding of the customer base, and enhancing the relevancy of targeted messaging & customer communications.
+I was asked to use data, and Machine Learning to help segment up their customers based on their engagement with each of the major food categories - aiding business understanding of the customer base, and enhancing the relevancy of targeted messaging & customer communications.
 
 <br>
 ### Actions <a name="overview-actions"></a>
 
 I first needed to compile the necessary data from several tables in the database, namely the *transactions* table, and the *product_areas* table.  I joined together the relevant information using Pandas, and then aggregated the transactional data across product areas, from the most recent six months to a customer level. The final data for clustering was, for each customer, the percentage of sales allocated to each product area.
 
-As a starting point, I tested & applied k-means clustering for this task.  I needed to apply some data pre-processing and, most importantly feature scaling to ensure all variables existed on the same scale - a very important consideration for distance-based algorithms such as k-means.
+As a starting point, I tested & applied k-means clustering for this task. I needed to apply some data pre-processing and, most importantly feature scaling to ensure all variables existed on the same scale - a very important consideration for distance-based algorithms such as k-means.
 
 As k-means is an *unsupervised learning* approach, in other words, there are no labels - I used a process known as *Within Cluster Sum of Squares (WCSS)* to understand what a "good" number of clusters or segments was.
 
@@ -49,37 +49,35 @@ Based upon this, I applied the k-means algorithm onto the product area data, app
 
 ### Results <a name="overview-results"></a>
 
-Based upon iterative testing using WCSS we settled on a customer segmentation with 3 clusters.  These clusters ranged in size, with Cluster 0 accounting for 73.6% of the customer base, Cluster 2 accounting for 14.6%, and Cluster 1 accounting for 11.8%.
+Based upon iterative testing using WCSS, I settled on a customer segmentation with 3 clusters. These clusters ranged in size, with Cluster 0 accounting for 73.6% of the customer base, Cluster 2 accounting for 14.6%, and Cluster 1 accounting for 11.8%.
 
 There were some extremely interesting findings from profiling the clusters.
 
-For *Cluster 0* we saw a significant portion of spend being allocated to each of the product areas - showing customers without any particular dietary preference.  
+For *Cluster 0*, I saw a significant portion of spend being allocated to each of the product areas - showing customers without any particular dietary preference.  
 
-For *Cluster 1* we saw quite high proportions of spending being allocated to Fruit & Vegetables, but very little to the Dairy & Meat product areas.  It could be hypothesized that these customers are following a vegan diet.  
+For *Cluster 1*, I saw quite high proportions of spending being allocated to Fruit & Vegetables, but very little to the Dairy & Meat product areas.  It could be hypothesized that these customers were following a vegan diet.  
 
-Finally customers in *Cluster 2* spent significant portions of Dairy, Fruit & Vegetables, but very little in the Meat product area - so similarly, we would make an early hypothesis that these customers are more along the lines of those following a vegetarian diet.
+Finally customers in *Cluster 2* spent significant portions of Dairy, Fruit & Vegetables, but very little in the Meat product area - so similarly, I would make an early hypothesis that these customers were more along the lines of those following a vegetarian diet.
 
-To help embed this segmentation into the business, we have proposed to call this the "You Are What You Eat" segmentation.
+To help embed this segmentation into the business, I proposed to call this the "You Are What You Eat" segmentation.
 
 ___
-
+<br>
 # Data Overview  <a name="data-overview"></a>
 
-We are primarily looking to discover segments of customers based on their transactions within *food* based product areas so we will need to only select those.
+I was primarily looking to discover segments of customers based on their transactions within *food* based product areas so I would need to only select those.
 
-In the code below, we:
+In the code below, I:
 
-* Import the required Python packages & libraries
-* Import the tables from the database
-* Merge the tables to tag on *product_area_name* which only exists in the *product_areas* table
-* Drop the non-food categories
-* Aggregate the sales data for each product area, at the customer level
-* Pivot the data to get it into the right format for clustering
-* Change the values from raw dollars, into a percentage of spend for each customer (to ensure each customer is comparable)
+* Imported the required Python packages & libraries
+* Imported the tables from the database
+* Merged the tables to tag on *product_area_name* which only exists in the *product_areas* table
+* Dropped the non-food categories
+* Aggregated the sales data for each product area, at the customer level
+* Pivoted the data to get it into the right format for clustering
+* Changed the values from raw dollars, into a percentage of spend for each customer (to ensure each customer is comparable)
 
-<br>
 ```python
-
 # Import required Python packages
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import MinMaxScaler
@@ -116,9 +114,8 @@ data_for_clustering = transaction_summary_pivot.drop(["Total"], axis = 1)
 ```
 <br>
 
-After the data pre-processing using Pandas, we have a dataset for clustering that looks like the below sample:
-<br>
-<br>
+After the data pre-processing using Pandas, I had a dataset for clustering that looks like the below sample:
+
 
 | **customer_id** | **dairy** | **fruit** | **meat** | **vegetables** |
 |---|---|---|---|---|
@@ -130,7 +127,7 @@ After the data pre-processing using Pandas, we have a dataset for clustering tha
 | 7 | 0.000 | 0.517 | 0.000 | 0.483  |
 
 <br>
-The data is at the customer level, and we have a column for each of the highest-level food product areas.  Within each of those, we have the *percentage* of sales that each customer allocated to that product area over the past six months.
+The data is at the customer level, and I had a column for each of the highest-level food product areas. Within each of those, I had the *percentage* of sales that each customer allocated to that product area over the past six months.
 
 ___
 <br>
@@ -166,7 +163,7 @@ There are three vital preprocessing steps for k-means, namely:
 * Feature Scaling
 
 <br>
-##### Missing Values
+#### Missing Values
 
 Missing values can cause issues for k-means, as the algorithm won't know where to plot those data points along the dimension where the value is not present.  If we have observations with missing values, the most common options are to either remove the observations or to use an imputer to fill in or to estimate what those values might be.
 
