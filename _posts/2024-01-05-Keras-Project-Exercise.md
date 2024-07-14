@@ -2116,7 +2116,7 @@ df.drop(categorical_vars, axis = 1, inplace = True)
 from sklearn.model_selection import train_test_split
 ```
 
-### Creating input and output variables
+## Creating input and output variables
 
 
 ```python
@@ -2128,7 +2128,7 @@ X = df.drop('loan_repaid', axis=1)
 y = df['loan_repaid']
 ```
 
-### Due to low RAM, let's grab a sample for data training to save time on training.
+Due to low RAM, I grabbed a sample for data training to save time on training.
 
 
 ```python
@@ -2144,7 +2144,7 @@ print(len(df))
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=101)
 ```
 
-### Normalizing the Data
+#### Normalizing the Data
 
 
 ```python
@@ -2199,7 +2199,7 @@ model.add(Dense(units=1,activation='sigmoid'))                       # output is
 model.compile(loss='binary_crossentropy', optimizer='adam')
 ```
 
-### Let's fit the model to the training data. 
+#### fitting the model to the training data 
 
 
 ```python
@@ -2211,105 +2211,105 @@ model.fit(x=X_train,
 ```
 
     Epoch 1/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m11s[0m 6ms/step - loss: 0.5360 - val_loss: 0.4944
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.5360 - val_loss: 0.4944
     Epoch 2/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m8s[0m 5ms/step - loss: 0.4998 - val_loss: 0.4945
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4998 - val_loss: 0.4945
     Epoch 3/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m8s[0m 6ms/step - loss: 0.4974 - val_loss: 0.4944
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4974 - val_loss: 0.4944
     Epoch 4/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4957 - val_loss: 0.4944
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4957 - val_loss: 0.4944
     Epoch 5/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4973 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4973 - val_loss: 0.4943
     Epoch 6/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4949 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4949 - val_loss: 0.4943
     Epoch 7/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4948 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4948 - val_loss: 0.4943
     Epoch 8/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 5ms/step - loss: 0.4953 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4953 - val_loss: 0.4943
     Epoch 9/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 4ms/step - loss: 0.4959 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  4ms/step - loss: 0.4959 - val_loss: 0.4943
     Epoch 10/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m11s[0m 5ms/step - loss: 0.4969 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4969 - val_loss: 0.4943
     Epoch 11/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4947 - val_loss: 0.4944
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4947 - val_loss: 0.4944
     Epoch 12/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4950 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4950 - val_loss: 0.4943
     Epoch 13/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4960 - val_loss: 0.4944
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4960 - val_loss: 0.4944
     Epoch 14/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4931 - val_loss: 0.4944
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4931 - val_loss: 0.4944
     Epoch 15/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m8s[0m 6ms/step - loss: 0.4938 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4938 - val_loss: 0.4943
     Epoch 16/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m8s[0m 4ms/step - loss: 0.4952 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  4ms/step - loss: 0.4952 - val_loss: 0.4943
     Epoch 17/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 5ms/step - loss: 0.4964 - val_loss: 0.4944
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4964 - val_loss: 0.4944
     Epoch 18/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 5ms/step - loss: 0.4949 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4949 - val_loss: 0.4943
     Epoch 19/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m8s[0m 6ms/step - loss: 0.4961 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4961 - val_loss: 0.4943
     Epoch 20/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4952 - val_loss: 0.4944
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4952 - val_loss: 0.4944
     Epoch 21/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 4ms/step - loss: 0.4939 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  4ms/step - loss: 0.4939 - val_loss: 0.4943
     Epoch 22/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 4ms/step - loss: 0.4946 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  4ms/step - loss: 0.4946 - val_loss: 0.4943
     Epoch 23/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4957 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4957 - val_loss: 0.4943
     Epoch 24/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4950 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4950 - val_loss: 0.4943
     Epoch 25/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4956 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4956 - val_loss: 0.4943
     Epoch 26/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4947 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4947 - val_loss: 0.4943
     Epoch 27/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 5ms/step - loss: 0.4937 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4937 - val_loss: 0.4943
     Epoch 28/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m10s[0m 5ms/step - loss: 0.4966 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4966 - val_loss: 0.4943
     Epoch 29/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4954 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4954 - val_loss: 0.4943
     Epoch 30/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m6s[0m 5ms/step - loss: 0.4951 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4951 - val_loss: 0.4943
     Epoch 31/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 5ms/step - loss: 0.4955 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4955 - val_loss: 0.4943
     Epoch 32/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 5ms/step - loss: 0.4946 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4946 - val_loss: 0.4943
     Epoch 33/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4950 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4950 - val_loss: 0.4943
     Epoch 34/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4961 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4961 - val_loss: 0.4943
     Epoch 35/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 5ms/step - loss: 0.4952 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4952 - val_loss: 0.4943
     Epoch 36/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 4ms/step - loss: 0.4961 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  4ms/step - loss: 0.4961 - val_loss: 0.4943
     Epoch 37/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m8s[0m 6ms/step - loss: 0.4957 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4957 - val_loss: 0.4943
     Epoch 38/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4954 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4954 - val_loss: 0.4943
     Epoch 39/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4967 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4967 - val_loss: 0.4943
     Epoch 40/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4948 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4948 - val_loss: 0.4943
     Epoch 41/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m8s[0m 6ms/step - loss: 0.4942 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4942 - val_loss: 0.4943
     Epoch 42/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4956 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4956 - val_loss: 0.4943
     Epoch 43/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4939 - val_loss: 0.4944
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4939 - val_loss: 0.4944
     Epoch 44/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4953 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4953 - val_loss: 0.4943
     Epoch 45/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 5ms/step - loss: 0.4942 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4942 - val_loss: 0.4943
     Epoch 46/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4963 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4963 - val_loss: 0.4943
     Epoch 47/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m6s[0m 5ms/step - loss: 0.4962 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4962 - val_loss: 0.4943
     Epoch 48/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 5ms/step - loss: 0.4957 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4957 - val_loss: 0.4943
     Epoch 49/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 5ms/step - loss: 0.4966 - val_loss: 0.4944
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  5ms/step - loss: 0.4966 - val_loss: 0.4944
     Epoch 50/50
-    [1m1238/1238[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 6ms/step - loss: 0.4955 - val_loss: 0.4943
+    [1238/1238 ━━━━━━━━━━━━━━━━━━━━  6ms/step - loss: 0.4955 - val_loss: 0.4943
     
 
 
@@ -2319,7 +2319,7 @@ model.fit(x=X_train,
 
 
 
-### Let's save our model.
+#### saving my model
 
 
 ```python
@@ -2331,12 +2331,11 @@ from tensorflow.keras.models import load_model
 model.save('full_data_project_model.h5')  
 ```
 
-    WARNING:absl:You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
-    
+   
 
 # Part 3: Evaluating Model Performance
 
-### Let's plot out the validation loss versus the training loss
+I plotted out the validation loss versus the training loss
 
 
 ```python
@@ -2361,23 +2360,23 @@ loss.plot()
     
 
 
-### Let's create our prediction from the X_test set and display a classification report and confusion matrix for the X_test set.
+I created my our prediction from the X_test set and displayed a classification report and confusion matrix for the X_test set.
 
 
 ```python
 y_predict = model.predict(X_test)
+y_predict
 ```
 
-    [1m2476/2476[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m6s[0m 2ms/step
-    
+    2476/2476 ━━━━━━━━━━━━━━━━━━━━ 6s 2ms/step
+
 
 
 ```python
 y_predict = pd.DataFrame(model.predict(X_test), columns=['Predicted Y'])
 ```
 
-    [1m2476/2476[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m5s[0m 2ms/step
-    
+ 
 
 
 ```python
@@ -2446,7 +2445,7 @@ confusion_matrix(y_test, y_predict_class)
 
 # Part 4: New Case
 
-### Given the customer below, would you offer this person a loan?
+Given the customer below, would you offer this person a loan?
 
 
 ```python
@@ -2476,7 +2475,7 @@ new_customer
 
 
 
-### I had to make sure that my data was numpy array not a dataframe.
+I had to make sure that my data was numpy array not a dataframe.
 
 
 ```python
