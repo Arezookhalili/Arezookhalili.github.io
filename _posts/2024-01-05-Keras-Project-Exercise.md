@@ -404,7 +404,7 @@ df.head()
 
 # Part1: Exploratory Data Analysis
 
-### Since we will be attempting to predict loan_status, we will create a countplot as shown below to see how balanced our labels are:
+Since I wanted to predict loan_status, I created a countplot as shown below to see how balanced the labels were:
 
 
 ```python
@@ -425,9 +425,9 @@ sns.countplot(x='loan_status', data=df)
     
 
 
-#### We have an imbalanced dataset. We can expect to do very well in terms of accuracy but we have to use recall and precision to evaluate our data.
+I had an imbalanced dataset. I expected to do very well in terms of accuracy but I had to use recall and precision to evaluate my data.
 
-### Let's create a histogram of the loan_amnt column.
+I created a histogram of the loan_amnt column.
 
 
 ```python
