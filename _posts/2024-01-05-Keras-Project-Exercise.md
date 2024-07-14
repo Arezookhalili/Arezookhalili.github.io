@@ -721,19 +721,14 @@ sns.scatterplot(y='loan_amnt', x='installment', data=df)
 
 
 
-    <Axes: xlabel='installment', ylabel='loan_amnt'>
-
-
-
-
 
 ![alt text](/img/posts/output_21_1.png)
     
 
 
-#### A perfect correlation is noticed between these two features.
+A perfect correlation was noticed between these two features.
 
-### Let's see if there is any relationship between the loan status and the amount of the loan. For that, we will create a boxplot.
+I tried to see if there was any relationship between the loan status and the amount of the loan. For that, I created a boxplot.
 
 
 ```python
@@ -743,19 +738,14 @@ sns.boxplot(data=df, x='loan_status', y='loan_amnt')
 
 
 
-    <Axes: xlabel='loan_status', ylabel='loan_amnt'>
-
-
-
-
 
 ![alt text](/img/posts/output_24_1.png)
     
 
 
-#### They look pretty similar. 
+They looked pretty similar. 
 
-### Let's calculate the summary statistics for the loan amount, grouped by the loan_status.
+Then, I calculated the summary statistics for the loan amount, grouped by the loan_status.
 
 
 ```python
@@ -833,9 +823,9 @@ df.groupby('loan_status')['loan_amnt'].describe()
 
 
 
-#### The average loan amount of the group is a little higher than fully paid ones which makes sense as higher loan amounts are more difficult to pay off.
+The average loan amount of the charged-off group was a little higher than fully paid ones which made sense as higher loan amounts were more difficult to pay off.
 
-### Let's explore the Grade and SubGrade columns that LendingClub attributes to the loans and check the unique possible grades and subgrades.
+I explored the Grade and SubGrade columns that LendingClub attributed to the loans and checked the unique possible grades and subgrades.
 
 
 ```python
@@ -847,7 +837,7 @@ grade_order = sorted(df['grade'].unique())
 Subgrade_order = sorted(df['sub_grade'].unique())
 ```
 
-### Let's create a countplot per grade to see how loan status . Set the hue to the loan_status label.**
+I created a countplot per grade to see the loan status . I set the hue to the loan_status label.
 
 
 ```python
@@ -867,7 +857,7 @@ sns.countplot(x='grade', hue='loan_status', data=df)
     
 
 
-### Let's order the bars from grade A to E
+I ordered the bars from grade A to E
 
 
 ```python
@@ -887,9 +877,9 @@ sns.countplot(x='grade', hue='loan_status', data=df, order=grade_order)
     
 
 
-#### When we move from grade A to G, the ratio of fully paid loans to charged off loans decreases meaning that we face riskier groups.
+Moving from grade A to G, the ratio of fully paid loans to charged off loans decreased meaning that we faced riskier groups.
 
-### Let's draw a count plot per subgrade. 
+I drew a count plot per subgrade. 
 
 
 ```python
@@ -910,9 +900,9 @@ sns.countplot(x='sub_grade', data=df, order=Subgrade_order, palette='coolwarm')
     
 
 
-#### A decrease in the number of loans can be seen when we move from sub_grades A to G which makes sense as we move towards riskier groups.
+A decrease in the number of loans was seen when moving from sub_grades A to G which makde sense as we moved towards riskier groups.
 
-### Let's check all loans made per subgrade separated based on the loan_status. 
+Then, I checked all loans made per subgrade separated based on the loan_status. 
 
 
 ```python
@@ -932,8 +922,7 @@ sns.countplot(x='sub_grade', data=df, order=Subgrade_order, hue='loan_status', p
 ![alt text](/img/posts/output_41_1.png)
     
 
-
-### It looks like F and G subgrades don't get paid back that often. Let's isolate those and recreate the countplot just for those subgrades.
+It looked like F and G subgrades didn't get paid back that often. I isolated those and recreated the countplot just for those subgrades.
 
 
 ```python
@@ -964,9 +953,9 @@ sns.countplot(x='sub_grade', data=df, order=F_and_G_sub_grade_order, hue='loan_s
     
 
 
-#### As shown in the above figure, the number of fully paid loans is almost equal to the number of charged-off ones for grades F and G.
+As shown in the above figure, the number of fully paid loans was almost equal to the number of charged-off ones for grades F and G.
 
-### Let's create a new column called 'loan_repaid' which will contain a 1 if the loan status was "Fully Paid" and a 0 if it was "Charged Off".**
+Id create a new column called 'loan_repaid' which contained a 1 if the loan status was "Fully Paid" and a 0 if it was "Charged Off".**
 
 
 ```python
@@ -977,21 +966,6 @@ def status(x):
         return 0
 df['loan_repaid'] = df['loan_status'].apply(status)
 ```
-
-### Alternative method
-
-
-```python
-df['loan_repaid'] = df['loan_status'].map({'Fully Paid':1,'Charged Off':0})
-```
-
-
-```python
-df[['loan_repaid','loan_status']]
-```
-
-
-
 
 <div>
 <style scoped>
@@ -1083,24 +1057,10 @@ df[['loan_repaid','loan_status']]
 df.corr()['loan_repaid'].sort_values().drop('loan_repaid').plot(kind='bar')
 ```
 
-    C:\Users\arezo\AppData\Local\Temp\ipykernel_25184\660239616.py:1: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.
-      df.corr()['loan_repaid'].sort_values().drop('loan_repaid').plot(kind='bar')
-    
-
-
-
-
-    <Axes: >
-
-
-
-
-
+   
 ![alt text](/img/posts/output_52_2.png)
     
-
-
-#### We can see that interest rate has the highest negative correlation with loan_repaid which totally makes sense as higher interest rate makes it more difficult to repay the loan.
+The interest rate had the highest negative correlation with loan_repaid which totally made sense as higher interest rate made it more difficult to repay the loan.
 
 ---
 # Part 2: Data PreProcessing
@@ -1284,7 +1244,7 @@ df.head()
 
 # Missing Data
 
-### Let's explore missing data columns. We use a variety of factors to decide whether or not they would be useful, and to see if we should keep, discard, or fill in the missing data.
+I used a variety of factors to decide whether or not they would be useful, and to see if I should keep, discard, or fill in the missing data.
 
 ## Length of the dataframe:
 
@@ -1335,7 +1295,7 @@ df.isna().sum()
 
 
 
-### Let's convert this Series to be in term of percentage of the total DataFrame
+### Total percentage of missing values per column:
 
 
 ```python
@@ -1377,14 +1337,14 @@ df.isna().sum()/(df_length)*100
 
 
 
-### Let's examine emp_title and emp_length to see whether it will be okay to drop them.
+I examined emp_title and emp_length to see whether it would be okay to drop them.
 
 
 ```python
 feature_info('emp_title')
 ```
 
-    The job title supplied by the Borrower when applying for the loan.*
+    The job title supplied by the Borrower when applying for the loan.
     
 
 
@@ -1392,10 +1352,10 @@ feature_info('emp_title')
 feature_info('emp_length')
 ```
 
-    Employment length in years. Possible values are between 0 and 10 where 0 means less than one year and 10 means ten or more years. 
+    Employment length in years. Possible values were between 0 and 10 where 0 meant less than one year and 10 meant ten or more years. 
     
 
-### Let's check the number of unique employment job titles.
+### Number of unique employment job titles:
 
 
 ```python
@@ -1432,23 +1392,17 @@ df['emp_title'].value_counts()
 
 
 
-#### Realistically there are too many unique job titles to try to convert to numeric feature. Let's remove that emp_title column.
+Realistically there were too many unique job titles to try to convert to numeric feature. Therefore, I removed that emp_title column.
 
 
 ```python
 df = df.drop('emp_title', axis=1)
 ```
-
-**TASK: Create a count plot of the emp_length feature column. Challenge: Sort the order of the values.**
-
+I created a count plot of the emp_length feature column, sorted by the order of the values.
 
 ```python
-sorted(df['emp_length'].dropna().unique())
+df['emp_length'].dropna().unique()
 ```
-
-
-
-
     ['1 year',
      '10+ years',
      '2 years',
@@ -1462,9 +1416,10 @@ sorted(df['emp_length'].dropna().unique())
      '< 1 year']
 
 
-
-
 ```python
+emp_length_order = sorted(df['emp_length'].dropna().unique())
+```
+
 emp_length_order = [ '< 1 year',
                       '1 year',
                      '2 years',
@@ -1486,20 +1441,13 @@ sns.countplot(data=df, x='emp_length', order=emp_length_order)
 
 
 
-
-    <Axes: xlabel='emp_length', ylabel='count'>
-
-
-
-
-
 ![alt text](/img/posts/output_74_1.png)
     
 
 
-#### It seems that the majority of people who took loan have been working for more than 10 years which makes sense as you have to have a kind of job security to be able to repay the loan.
+It seemed that the majority of people who took loan had been working for more than 10 years which made sense as I had to have a kind of job security to be able to repay the loan.
 
-### Let's plot out the countplot with a hue separating Fully Paid vs Charged Off
+I plotted out the countplot with a hue separating Fully Paid vs Charged Off
 
 
 ```python
@@ -1508,21 +1456,13 @@ sns.countplot(data=df, x='emp_length', order=emp_length_order, hue= 'loan_status
 ```
 
 
-
-
-    <Axes: xlabel='emp_length', ylabel='count'>
-
-
-
-
-
 ![alt text](/img/posts/output_77_1.png)
     
 
 
-#### For people with more than 10+ years of employment length, the number of fully paid loans is much higher than charged-off ones.
+For people with more than 10+ years of employment length, the number of fully paid loans was much higher than charged-off ones.
 
-### Let's find the percentage of charge-offs per category to see what percent of people per employment category didn't pay back their loan. It may help us to understand if there is a strong relationship between employment length and being charged off.
+I found the percentage of charge-offs per category to see what percent of people per employment category didn't pay back their loan. It might help me to understand if there was a strong relationship between employment length and being charged off.
 
 
 ```python
@@ -1553,33 +1493,25 @@ charged_off_percentage.plot(kind='bar')
 
 
 
-    <Axes: xlabel='emp_length'>
-
-
-
-
-
 ![alt text](/img/posts/output_84_1.png)
     
 
 
-#### Charge off rates are similar across all employment lengths. 
+Charge off rates were similar across all employment lengths. 
 
-### Let's  drop the emp_length column.
+Then, I  dropped the emp_length column.
 
 
 ```python
 df = df.drop('emp_length', axis=1)
 ```
 
-### Let's revisit the DataFrame to see what feature columns still have missing data.
+I revisited the DataFrame to see what feature columns still had missing data.
 
 
 ```python
 df.isna().sum()
 ```
-
-
 
 
     loan_amnt                   0
@@ -1612,7 +1544,7 @@ df.isna().sum()
 
 
 
-**TASK: Review the title column vs the purpose column. Is this repeated information?**
+Then I reviewed the title column vs the purpose column to see if there was any repeated information.
 
 
 ```python
@@ -1657,36 +1589,27 @@ df['title'].head(10)
     Name: title, dtype: object
 
 
-
-#### It seems that the title column is simply a string subcategory/description of the purpose column. 
-
-### Let's drop the title column.
+It seemed that the title column was simply a string subcategory/description of the purpose column. Therefore, I dropped the title column.
 
 
 ```python
 df = df.drop('title', axis=1)
 ```
 
-### Let's find out what the mort_acc feature represents.
+I tried to find out what the mort_acc feature represented.
 
 
 ```python
-feat_info('mort_acc')
+feature_info('mort_acc')
 ```
 
-
-    ---------------------------------------------------------------------------
-
-    NameError                                 Traceback (most recent call last)
-
-    Cell In[66], line 1
-    ----> 1 feat_info('mort_acc')
-    
-
-    NameError: name 'feat_info' is not defined
+    Number of mortgage accounts.
 
 
-### Let's create a value_counts of the mort_acc column.
+
+
+
+I created a value_counts of the mort_acc column.
 
 
 ```python
@@ -1733,18 +1656,12 @@ df['mort_acc'].value_counts()
 
 
 
-### Let's review the other columns to see which most highly correlates to mort_acc.
+Then, I reviewed the other columns to see which most highly correlates to mort_acc.
 
 
 ```python
 df.corr()['mort_acc'].sort_values()
 ```
-
-    C:\Users\arezo\AppData\Local\Temp\ipykernel_25184\2388834679.py:1: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.
-      df.corr()['mort_acc'].sort_values()
-    
-
-
 
 
     int_rate               -0.082583
@@ -1764,26 +1681,18 @@ df.corr()['mort_acc'].sort_values()
 
 
 
-#### Looks like the total_acc feature correlates with the mort_acc , this makes sense! 
+I Looked like the total_acc feature correlated with the mort_acc , this made sense! 
 
 
 ```python
-feat_info('total_acc')
+feature_info('total_acc')
 ```
 
-
-    ---------------------------------------------------------------------------
-
-    NameError                                 Traceback (most recent call last)
-
-    Cell In[69], line 1
-    ----> 1 feat_info('total_acc')
-    
-
-    NameError: name 'feat_info' is not defined
+    The total number of credit lines currently in the borrower's credit file
 
 
-### Let's try the fillna() approach to replace missing data. We will group the dataframe by the total_acc and calculate the mean value for the mort_acc per total_acc entry. 
+
+I tried the fillna() approach to replace missing data. I grouped the dataframe by the total_acc and calculated the mean value for the mort_acc per total_acc entry. 
 
 
 ```python
@@ -1796,7 +1705,7 @@ df_acc
 mort_acc_mean = df.groupby('total_acc')['mort_acc'].mean()
 ```
 
-### Let's fill in the missing mort_acc values based on their total_acc value. If the mort_acc is missing, then we will fill in that missing value with the mean value corresponding to its total_acc value. 
+I filled in the missing mort_acc values based on their total_acc value. If the mort_acc was missing, then I filled in that missing value with the mean value corresponding to its total_acc value. 
 
 
 ```python
@@ -1815,7 +1724,7 @@ df['mort_acc'].fillna(value=df_acc['mort_acc_mean'], inplace=True)
 df.isna().sum()
 ```
 
-### revol_util and the pub_rec_bankruptcies have missing data points, but they account for less than 0.5% of the total data. Therefore, we will remove the rows that are missing those values in those columns.
+revol_util and the pub_rec_bankruptcies had missing data points, but they accounted for less than 0.5% of the total data. Therefore, I removed the rows that were missing those values in those columns.
 
 
 ```python
@@ -1861,7 +1770,7 @@ df.isna().sum()
 
 ## Categorical Variables
 
-### Let's List all the columns that are currently non-numeric.
+Here, I Listed all the columns that were non-numeric.
 
 
 ```python
@@ -1894,7 +1803,7 @@ df['term'].value_counts()
 
 
 
-#### term feature has just 2 values of 36 and 60 months. Let's remove the month and simply convert the categorical data to numeric one.
+#### term feature had just 2 values of 36 and 60 months. I removed the month and simply converted the categorical data to numeric one.
 
 
 ```python
@@ -1919,16 +1828,16 @@ df['term'].value_counts()
 
 
 
-### grade feature: We already know grade is part of sub_grade, so we will drop the grade feature.
+#### grade feature: I already knew grade was part of sub_grade, so I dropped the grade feature.
 
 
 ```python
 df = df.drop('grade', axis=1)
 ```
 
-### sub_grade feature: We will keep it to convert it to a numeric feature later on.
+#### sub_grade feature: I kept it to convert it to a numeric feature later on.
 
-### home_ownership feature
+#### home_ownership feature:
 
 
 ```python
@@ -1988,14 +1897,14 @@ df['issue_d'].value_counts()
 
 
 
-#### This would be data leakage as we wouldn't know beforehand whether or not a loan would be issued when using our model, so in theory, we wouldn't have an issue_date. Let's drop this feature.
+This was data leakage as I wouldn't know beforehand whether or not a loan would be issued when using my model, so in theory, I wouldn't have an issue_date. I dropped this feature.
 
 
 ```python
 df = df = df.drop('issue_d', axis=1)
 ```
 
-### loan_status feature: As loan_status column is a duplicate of the loan_repaid column, we will drop the load_status column and use the loan_repaid column since its already in 0s and 1s.
+#### loan_status feature: As loan_status column was a duplicate of the loan_repaid column, I dropped the load_status column and used the loan_repaid column since its already in 0s and 1s.
 
 
 ```python
@@ -2055,7 +1964,7 @@ df['earliest_cr_line'].value_counts()
 
 
 
-#### This appears to be a historical time stamp feature. Let's extract the year from this feature and convert it to a numeric feature. 
+#### This appeareds to be a historical time stamp feature. I extracted the year from this feature and converted it to a numeric feature. 
 
 
 ```python
@@ -2083,7 +1992,7 @@ df['earliest_cr_line'].apply(year)
 
 
 
-#### Let's set this new data to a feature column called 'earliest_cr_year'.Then drop the earliest_cr_line feature.
+#### I set this new data to a feature column called 'earliest_cr_year'.Then dropped the earliest_cr_line feature.
 
 
 ```python
@@ -2153,7 +2062,7 @@ df['address'].value_counts()
 
 
 
-#### Let's extract the zip_code from address.
+#### I extracted the zip_code from address.
 
 
 ```python
@@ -2163,14 +2072,14 @@ def zip_code(x):
 df ['zip_code'] = df['address'].apply(zip_code)
 ```
 
-### Let's drop address column.
+### I dropped address column.
 
 
 ```python
 df = df.drop('address', axis=1)
 ```
 
-### Let's apply OneHotEncoder to convert all categorical features except loan_status to numeric ones.
+## Applying OneHotEncoder to convert all categorical features except loan_status to numeric ones.
 
 
 ```python
@@ -2198,19 +2107,16 @@ df = pd.concat([df.reset_index(drop = True),df_encoded.reset_index(drop = True)]
 # Drop the original categorical variable columns
 df.drop(categorical_vars, axis = 1, inplace = True)
 ```
-
-    C:\Users\arezo\anaconda3\lib\site-packages\sklearn\preprocessing\_encoders.py:828: FutureWarning: `sparse` was renamed to `sparse_output` in version 1.2 and will be removed in 1.4. `sparse_output` is ignored unless you leave `sparse` to its default value.
-      warnings.warn(
     
 
-## Train Test Split
+## Training Test Split
 
 
 ```python
 from sklearn.model_selection import train_test_split
 ```
 
-### Create input and output variables
+### Creating input and output variables
 
 
 ```python
@@ -2238,7 +2144,7 @@ print(len(df))
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=101)
 ```
 
-## Normalizing the Data
+### Normalizing the Data
 
 
 ```python
@@ -2524,13 +2430,6 @@ print(classification_report(y_test, y_predict_class))
     
     
 
-    C:\Users\arezo\anaconda3\lib\site-packages\sklearn\metrics\_classification.py:1344: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-      _warn_prf(average, modifier, msg_start, len(result))
-    C:\Users\arezo\anaconda3\lib\site-packages\sklearn\metrics\_classification.py:1344: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-      _warn_prf(average, modifier, msg_start, len(result))
-    C:\Users\arezo\anaconda3\lib\site-packages\sklearn\metrics\_classification.py:1344: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-      _warn_prf(average, modifier, msg_start, len(result))
-    
 
 
 ```python
@@ -2577,7 +2476,7 @@ new_customer
 
 
 
-### We have to make sure that our data is numpy array not a dataframe.
+### I had to make sure that my data was numpy array not a dataframe.
 
 
 ```python
@@ -2589,24 +2488,19 @@ new_customer = new_customer.values.reshape(1,80)
 new_customer = scaler.transform(new_customer)
 ```
 
-    C:\Users\arezo\anaconda3\lib\site-packages\sklearn\base.py:420: UserWarning: X does not have valid feature names, but MinMaxScaler was fitted with feature names
-      warnings.warn(
-    
-
 
 ```python
 y_predict = model.predict(new_customer)
+y_predict
 ```
 
-    [1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 45ms/step
+1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 40ms/step
     
 
 
 ```python
 y_predict = pd.DataFrame(model.predict(new_customer), columns=['Predicted Y'])
 ```
-
-    [1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 40ms/step
     
 
 
@@ -2629,9 +2523,9 @@ y_predict_class
 
 
 
-#### We will probably give the loan to this person according to this model prediction.
+I would probably give the loan to this person according to this model prediction.
 
-### Now check if this person actually ended up paying back their loan.
+Here, I checked if this person actually ended up paying back their loan.
 
 
 ```python
@@ -2645,4 +2539,4 @@ df['loan_repaid'].iloc[random_ind]
 
 
 
-#### It seems that the customer had not actually repaid the loan.
+It seemed that the customer had not actually repaid the loan.
