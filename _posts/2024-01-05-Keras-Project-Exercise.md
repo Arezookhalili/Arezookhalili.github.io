@@ -2313,12 +2313,6 @@ model.fit(x=X_train,
     
 
 
-
-
-    <keras.src.callbacks.history.History at 0x20b8a01ca90>
-
-
-
 #### saving my model
 
 
