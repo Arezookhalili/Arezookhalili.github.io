@@ -448,16 +448,15 @@ sns.histplot(data=df,x='loan_amnt', bins=40)
     
 
 
-#### It shows that the vast majority of loans are between 5000 and 25000$.
+It showed that the vast majority of loans were between 5000 and 25000$.
 
-### Let's explore correlation between the continuous feature variables and visualize it using heatmap.
+I then explored correlation between the continuous feature variables and visualize it using heatmap.
 
 
 ```python
 df.corr()
 ```
 
-    C:\Users\arezo\AppData\Local\Temp\ipykernel_25184\1134722465.py:1: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.
       df.corr()
     
 
