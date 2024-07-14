@@ -444,7 +444,7 @@ sns.histplot(data=df,x='loan_amnt', bins=40)
 
 
 
-![alt text](/img/posts/output_12_1.png)
+![alt text](/img/posts/img_012.png)
     
 
 
