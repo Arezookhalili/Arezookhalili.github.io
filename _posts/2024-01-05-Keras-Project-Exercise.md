@@ -457,11 +457,6 @@ I then explored correlation between the continuous feature variables and visuali
 df.corr()
 ```
 
-      df.corr()
-    
-
-
-
 
 <div>
 <style scoped>
@@ -688,24 +683,11 @@ plt.figure(figsize=(9,6))
 sns.heatmap(df.corr(), annot=True, cmap='YlGnBu')
 ```
 
-    C:\Users\arezo\AppData\Local\Temp\ipykernel_25184\2692311087.py:2: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.
-      sns.heatmap(df.corr(), annot=True, cmap='YlGnBu')
-    
-
-
-
-
-    <Axes: >
-
-
-
-
-
 ![alt text](/img/posts/output_16_2.png)
     
 
 
-### We noticed an almost perfect correlation between the loan amount and "installment" features. Let's explore these features further. For that, we will first find their description and then draw a scatterplot between them.
+I noticed an almost perfect correlation between the loan amount and "installment" features and tried to explore these features further. For that, I first found their description and then drew a scatterplot between them.
 
 
 ```python
