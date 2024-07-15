@@ -17,7 +17,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-%matplotlib inline
 ```
 
 ## Import Data
@@ -284,13 +283,7 @@ sns.jointplot(x='Time on Website',y='Yearly Amount Spent',data=customers)
 
 
 
-
-    <seaborn.axisgrid.JointGrid at 0x2d898bddbd0>
-
-
-
-
-![alt text](/img/posts/output_13_1.png)
+![alt text](/img/posts/output_13a_1.png)
     
 
 
@@ -300,11 +293,6 @@ sns.jointplot(x='Time on Website',y='Yearly Amount Spent',data=customers)
 ```python
 sns.jointplot(x='Time on App',y='Yearly Amount Spent',data=customers)
 ```
-
-
-
-
-    <seaborn.axisgrid.JointGrid at 0x2d89d11b5b0>
 
 
 
@@ -325,12 +313,6 @@ sns.jointplot(x='Time on App',y='Length of Membership',data=customers)
 
 
 
-    <seaborn.axisgrid.JointGrid at 0x2d89ce59030>
-
-
-
-
-
 ![alt text](/img/posts/output_17_1.png)
 
     
@@ -346,13 +328,8 @@ sns.pairplot(customers)
 
 
 
-    <seaborn.axisgrid.PairGrid at 0x2d898756080>
 
-
-
-
-
-![alt text](/img/posts/output_19_1.png)
+![alt text](/img/posts/output_19a_1.png)
 
     
 
