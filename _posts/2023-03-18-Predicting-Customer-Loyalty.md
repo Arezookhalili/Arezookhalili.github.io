@@ -244,7 +244,6 @@ I did this using the "boxplot approach" where I removed any rows where the value
 
 <br>
 ```python
-
 outlier_investigation = data_for_model.describe()
 outlier_columns = ["distance_from_store", "total_sales", "total_items"]
 
@@ -262,7 +261,6 @@ for column in outlier_columns:
     print(f"{len(outliers)} outliers detected in column {column}")
     
     data_for_model.drop(outliers, inplace = True)
-
 ```
 
 <br>
@@ -272,36 +270,32 @@ In the next code block, we do two things, we first split our data into an **X** 
 
 Once we have done this, we split our data into training and test sets to ensure we can fairly validate the accuracy of the predictions on data that was not used in training.  In this case, we have allocated 80% of the data for training, and the remaining 20% for validation.
 
-<br>
 ```python
-
 # split data into X and y objects for modelling
 X = data_for_model.drop(["customer_loyalty_score"], axis = 1)
 y = data_for_model["customer_loyalty_score"]
 
 # split out training & test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
-
 ```
 
 <br>
 ##### Categorical Predictor Variables
 
-In our dataset, we have one categorical variable *gender* which has values of "M" for Male, "F" for Female, and "U" for Unknown.
+In my dataset, I had one categorical variable *gender* which had values of "M" for Male, "F" for Female, and "U" for Unknown.
 
-As the Linear Regression algorithm can only deal with numerical data, we have to encode our categorical variable.
+As the Linear Regression algorithm could only deal with numerical data, I had to encode my categorical variable.
 
-As *gender* doesn't have any explicit *order* to it, in other words, Male isn't higher or lower than Female and vice versa - one appropriate approach is to apply One Hot Encoding to the categorical column.
+As *gender* didn't have any explicit *order* to it, in other words, Male wasn't higher or lower than Female and vice versa - one appropriate approach was to apply One Hot Encoding to the categorical column.
 
-One Hot Encoding can be thought of as a way to represent categorical variables as binary vectors, in other words, a set of *new* columns for each categorical value with either a 1 or a 0 saying whether that value is true or not for that observation. These new columns would go into our model as input variables, and the original column is discarded.
+One Hot Encoding could be thought of as a way to represent categorical variables as binary vectors, in other words, a set of *new* columns for each categorical value with either a 1 or a 0 saying whether that value was true or not for that observation. These new columns would go into our model as input variables, and the original column was discarded.
 
-We also drop one of the new columns using the parameter *drop = "first"* to avoid the *dummy variable trap* where our newly created encoded columns perfectly predict each other - and we run the risk of breaking the assumption that there is no multicollinearity, a requirement or at least an important consideration for some models, Linear Regression being one of them! Multicollinearity occurs when two or more input variables are *highly* correlated with each other, it is a scenario we attempt to avoid in short, while it won't necessarily affect the predictive accuracy of our model, it can make it difficult to trust the statistics around how well the model is performing, and how much each input variable is truly having.
+I also dropped one of the new columns using the parameter *drop = "first"* to avoid the *dummy variable trap* where my newly created encoded columns perfectly predict each other - and I ran the risk of breaking the assumption that there was no multicollinearity, a requirement or at least an important consideration for some models, Linear Regression being one of them! Multicollinearity occurs when two or more input variables are *highly* correlated with each other, it was a scenario I attempted to avoid in short, while it won't necessarily affect the predictive accuracy of my model, it could make it difficult to trust the statistics around how well the model was performing, and how much each input variable was truly having.
 
-For ease, after we have applied One Hot Encoding, we turn our training and test objects back into Pandas Dataframes, with the column names applied.
+For ease, after I applied One Hot Encoding, I turned my training and test objects back into Pandas Dataframes, with the column names applied.
 
 <br>
 ```python
-
 # list of categorical variables that need encoding
 categorical_vars = ["gender"]
 
@@ -323,7 +317,6 @@ X_train.drop(categorical_vars, axis = 1, inplace = True)
 X_test_encoded = pd.DataFrame(X_test_encoded, columns = encoder_feature_names)
 X_test = pd.concat([X_test.reset_index(drop=True), X_test_encoded.reset_index(drop=True)], axis = 1)
 X_test.drop(categorical_vars, axis = 1, inplace = True)
-
 ```
 
 <br>
@@ -335,13 +328,12 @@ Feature Selection is the process used to select the input variables that are mos
 * **Lower Computational Cost** - our model becomes faster to train and faster to make predictions
 * **Explainability** - understanding & explaining outputs for stakeholder & customers becomes much easier
 
-There are many, many ways to apply Feature Selection.  These range from simple methods such as a *Correlation Matrix* showing variable relationships, to *Univariate Testing* which helps us understand statistical relationships between variables, and then to even more powerful approaches like *Recursive Feature Elimination (RFE)* which is an approach that starts with all input variables, and then iteratively removes those with the weakest relationships with the output variable.
+There are many, many ways to apply Feature Selection. These range from simple methods such as a *Correlation Matrix* showing variable relationships, to *Univariate Testing* which helps us understand statistical relationships between variables, and then to even more powerful approaches like *Recursive Feature Elimination (RFE)* which is an approach that starts with all input variables, and then iteratively removes those with the weakest relationships with the output variable.
 
-For our task, we applied a variation of Recursive Feature Elimination called *Recursive Feature Elimination With Cross Validation (RFECV)* where we split the data into many "chunks" and iteratively train & validate models on each "chunk" separately.  This means that each time we assess different models with different variables included, or eliminated, the algorithm also knows how accurate each of those models was.  From the suite of model scenarios that are created, the algorithm can determine which provided the best accuracy, and thus can infer the best set of input variables to use!
+For this task, I applied a variation of Recursive Feature Elimination called *Recursive Feature Elimination With Cross Validation (RFECV)* where I splitteded the data into many "chunks" and iteratively train & validated models on each "chunk" separately. This means that each time I assessed different models with different variables included, or eliminated, the algorithm also knew how accurate each of those models was. From the suite of model scenarios that were created, the algorithm could determine which provided the best accuracy, and thus could infer the best set of input variables to use!
 
 <br>
 ```python
-
 # instantiate RFECV & the model type to be utilized
 regressor = LinearRegression()
 feature_selector = RFECV(regressor)
@@ -356,14 +348,12 @@ print(f"Optimal number of features: {optimal_feature_count}")
 # limit our training & test sets to only include the selected variables
 X_train = X_train.loc[:, feature_selector.get_support()]
 X_test = X_test.loc[:, feature_selector.get_support()]
-
 ```
 
 <br>
-The below code then produces a plot that visualizes the cross-validated accuracy with each potential number of features
+The below code then produced a plot that visualized the cross-validated accuracy with each potential number of features.
 
 ```python
-
 plt.style.use('seaborn-poster')
 plt.plot(range(1, len(fit.cv_results_['mean_test_score']) + 1), fit.cv_results_['mean_test_score'], marker = "o")
 plt.ylabel("Model Score")
@@ -371,28 +361,24 @@ plt.xlabel("Number of Features")
 plt.title(f"Feature Selection using RFE \n Optimal number of features is {optimal_feature_count} (at score of {round(max(fit.cv_results_['mean_test_score']),4)})")
 plt.tight_layout()
 plt.show()
-
 ```
 
 <br>
-This creates the below plot, which shows us that the highest cross-validated accuracy (0.8635) is actually when we include all eight of our original input variables.  This is marginally higher than 6 included variables, and 7 included variables.  We will continue on with all 8!
+This created the below plot, which showed me that the highest cross-validated accuracy (0.8635) was actually when I included all eight of my original input variables. This was marginally higher than 6 included variables, and 7 included variables. I continued on with all 8!
 
-<br>
 ![alt text](/img/posts/lin-reg-feature-selection-plot.png "Linear Regression Feature Selection Plot")
 
 <br>
 ### Model Training <a name="linreg-model-training"></a>
 
-Instantiating and training our Linear Regression model is done using the below code
+Instantiating and training the Linear Regression model was done using the below code:
 
 ```python
-
-# instantiate our model object
+# instantiate my model object
 regressor = LinearRegression()
 
-# fit our model using our training & test sets
+# fit my model using our training & test sets
 regressor.fit(X_train, y_train)
-
 ```
 
 <br>
@@ -400,81 +386,72 @@ regressor.fit(X_train, y_train)
 
 ##### Predict On The Test Set
 
-To assess how well our model is predicting new data - we use the trained model object (here called *regressor*) and ask it to predict the *loyalty_score* variable for the test set
+To assess how well my model was predicting new data - I used the trained model object (here called *regressor*) and asked it to predict the *loyalty_score* variable for the test set.
 
 ```python
-
 # predict on the test set
 y_pred = regressor.predict(X_test)
-
 ```
 
 <br>
 ##### Calculate R-Squared
 
-R-Squared is a metric that shows the percentage of variance in our output variable *y* that is being explained by our input variable(s) *x*.  It is a value that ranges between 0 and 1, with a higher value showing a higher level of explained variance.  Another way of explaining this would be to say that, if we had an r-squared score of 0.8 it would suggest that 80% of the variation of our output variable is being explained by our input variables - and something else, or some other variables must account for the other 20%
+R-Squared is a metric that shows the percentage of variance in the output variable *y* that is being explained by the input variable(s) *x*.  It is a value that ranges between 0 and 1, with a higher value showing a higher level of explained variance. Another way of explaining this would be to say that, if we had an r-squared score of 0.8 it would suggest that 80% of the variation of our output variable is being explained by our input variables - and something else, or some other variables must account for the other 20%
 
-To calculate r-squared, we use the following code where we pass in our *predicted* outputs for the test set (y_pred), as well as the *actual* outputs for the test set (y_test)
+To calculate r-squared, I used the following code where I passed in my *predicted* outputs for the test set (y_pred), as well as the *actual* outputs for the test set (y_test)
 
 ```python
-
 # calculate r-squared for our test set predictions
 r_squared = r2_score(y_test, y_pred)
 print(r_squared)
-
 ```
 
-The resulting r-squared score from this is **0.78**
+The resulting r-squared score from this was **0.78**.
 
 <br>
 ##### Calculate Cross Validated R-Squared
 
 An even more powerful and reliable way to assess model performance is to utilize Cross Validation.
 
-Instead of simply dividing our data into a single training set, and a single test set, with Cross Validation we break our data into several "chunks" and then iteratively train the model on all but one of the "chunks", test the model on the remaining "chunk" until each has had a chance to be the test set.
+Instead of simply dividing our data into a single training set, and a single test set, with Cross Validation we can break our data into several "chunks" and then iteratively train the model on all but one of the "chunks", test the model on the remaining "chunk" until each has had a chance to be the test set.
 
 The result of this is that we are provided a number of test set validation results - and we can take the average of these to give a much more robust & reliable view of how our model will perform on new, unseen data!
 
-In the code below, we put this into place.  We first specify that we want 4 "chunks" and then we pass in our regressor object, training set, and test set.  We also specify the metric we want to assess with, in this case, we stick with r-squared.
+In the code below, I put this into place. I first specified that I wanted 4 "chunks" and then I passed in my regressor object, training set, and test set. I also specified the metric I wanted to assess with, in this case, I sticked to r-squared.
 
-Finally, we take a mean of all four test set results.
+Finally, I tookk a mean of all four test set results.
 
 ```python
-
 # calculate the mean cross-validated r-squared for our test set predictions
 cv = KFold(n_splits = 4, shuffle = True, random_state = 42)
 cv_scores = cross_val_score(regressor, X_train, y_train, cv = cv, scoring = "r2")
 cv_scores.mean()
-
 ```
 
-The mean cross-validated r-squared score from this is **0.853**
+The mean cross-validated r-squared score from this was **0.853**.
 
 <br>
 ##### Calculate Adjusted R-Squared
 
-When applying Linear Regression with *multiple* input variables, the r-squared metric on it's own *can* end up being an overinflated view of goodness of fit.  This is because each input variable will have an *additive* effect on the overall r-squared score.  In other words, every input variable added to the model *increases* the r-squared value, and *never decreases* it, even if the relationship is by chance.  
+When applying Linear Regression with *multiple* input variables, the r-squared metric on it's own *can* end up being an overinflated view of goodness of fit. This is because each input variable will have an *additive* effect on the overall r-squared score. In other words, every input variable added to the model *increases* the r-squared value, and *never decreases* it, even if the relationship is by chance.  
 
-**Adjusted R-Squared** is a metric that compensates for the addition of input variables, and only increases if the variable improves the model above what would be obtained by probability.  It is best practice to use Adjusted R-Squared when assessing the results of a Linear Regression with multiple input variables, as it gives a fairer perception of the fit of the data.
+**Adjusted R-Squared** is a metric that compensates for the addition of input variables, and only increases if the variable improves the model above what would be obtained by probability. It is best practice to use Adjusted R-Squared when assessing the results of a Linear Regression with multiple input variables, as it gives a fairer perception of the fit of the data.
 
 ```python
-
 # calculate adjusted r-squared for our test set predictions
 num_data_points, num_input_vars = X_test.shape
 adjusted_r_squared = 1 - (1 - r_squared) * (num_data_points - 1) / (num_data_points - num_input_vars - 1)
 print(adjusted_r_squared)
-
 ```
 
-The resulting *adjusted* r-squared score from this is **0.754** which as expected, is slightly lower than the score we got for r-squared on it's own.
+The resulting *adjusted* r-squared score from this was **0.754** which as expected, was slightly lower than the score I got for r-squared on it's own.
 
 <br>
 ### Model Summary Statistics <a name="linreg-model-summary"></a>
 
-Although our overall goal for this project is predictive accuracy, rather than an explicit understanding of the relationships of each of the input variables and the output variable, it is always interesting to look at the summary statistics for these.
+Although my overall goal for this project was predictive accuracy, rather than an explicit understanding of the relationships of each of the input variables and the output variable, it was always interesting to look at the summary statistics for these.
 <br>
 ```python
-
 # extract model coefficients
 coefficients = pd.DataFrame(regressor.coef_)
 input_variable_names = pd.DataFrame(X_train.columns)
@@ -483,11 +460,9 @@ summary_stats.columns = ["input_variable", "coefficient"]
 
 # extract model intercept
 regressor.intercept_
-
 ```
 <br>
 The information from that code block can be found in the table below:
-<br>
 
 | **input_variable** | **coefficient** |
 |---|---|
@@ -502,17 +477,17 @@ The information from that code block can be found in the table below:
 | gender_M | -0.013 |
 
 <br>
-The coefficient value for each of the input variables, along with that of the intercept would make up the equation for the line of best fit for this particular model (or more accurately, in this case, it would be the plane of best fit, as we have multiple input variables).
+The coefficient value for each of the input variables, along with that of the intercept would make up the equation for the line of best fit for this particular model (or more accurately, in this case, it would be the plane of best fit, as I had multiple input variables).
 
-For each input variable, the coefficient value we see above tells us, with *everything else staying constant* how many units the output variable (loyalty score) would change with a *one-unit change* in this particular input variable.
+For each input variable, the coefficient value I saw above tells us, with *everything else staying constant* how many units the output variable (loyalty score) would change with a *one-unit change* in this particular input variable.
 
-To provide an example of this - in the table above, we can see that the *distance_from_store* input variable has a coefficient value of -0.201.  This is saying that *loyalty_score* decreases by 0.201 (or 20% as loyalty score is a percentage or at least a decimal value between 0 and 1) for *every additional mile* that a customer lives from the store.  This makes intuitive sense, as customers who live a long way from this store, most likely live near *another* store where they might do some of their shopping as well, whereas customers who live near this store, probably do a greater proportion of their shopping at this store...and hence have a higher loyalty score!
+To provide an example of this - in the table above, I could see that the *distance_from_store* input variable had a coefficient value of -0.201. This was saying that *loyalty_score* decreased by 0.201 (or 20% as loyalty score was a percentage or at least a decimal value between 0 and 1) for *every additional mile* that a customer lived from the store. This made intuitive sense, as customers who lived a long way from this store, most likely lived near *another* store where they might do some of their shopping as well, whereas customers who lived near this store, probably did a greater proportion of their shopping at this store...and hence had a higher loyalty score!
 
 ___
 <br>
 # Decision Tree <a name="regtree-title"></a>
 
-We will again utilize the scikit-learn library within Python to model our data using a Decision Tree. The code sections below are broken up into 4 key sections:
+I again utilized the scikit-learn library within Python to model my data using a Decision Tree. The code sections below were broken up into 4 key sections:
 
 * Data Import
 * Data Preprocessing
@@ -522,10 +497,9 @@ We will again utilize the scikit-learn library within Python to model our data u
 <br>
 ### Data Import <a name="regtree-import"></a>
 
-Since we saved our modeling data as a pickle file, we can import it.  We ensure we remove the id column, and we also ensure our data is shuffled.
+I imported my msaved model, removed the id column, and shuffled the data.
 
 ```python
-
 # import required packages
 import pandas as pd
 import pickle
@@ -544,12 +518,11 @@ data_for_model.drop("customer_id", axis = 1, inplace = True)
 
 # shuffle data
 data_for_model = shuffle(data_for_model, random_state = 42)
-
 ```
 <br>
 ### Data Preprocessing <a name="regtree-preprocessing"></a>
 
-While Linear Regression is susceptible to the effects of outliers, and highly correlated input variables - Decision Trees are not, so the required preprocessing here is lighter. We still however will put in place logic for:
+While Linear Regression is susceptible to the effects of outliers, and highly correlated input variables - Decision Trees are not, so the required preprocessing here was lighter. I still however put in place logic for:
 
 * Missing values in the data
 * Encoding categorical variables to numeric form
@@ -557,47 +530,39 @@ While Linear Regression is susceptible to the effects of outliers, and highly co
 <br>
 ##### Missing Values
 
-The number of missing values in the data was extremely low, so instead of applying any imputation (i.e. mean, most common value) we will just remove those rows
+The number of missing values in the data was extremely low, so instead of applying any imputation (i.e. mean, most common value) I just removed those rows.
 
 ```python
-
-# remove rows where values are missing
+# remove rows where values were missing
 data_for_model.isna().sum()
 data_for_model.dropna(how = "any", inplace = True)
-
 ```
 
 <br>
 ##### Split Out Data For Modelling
 
-In exactly the same way we did for Linear Regression, in the next code block we do two things, we first split our data into an **X** object which contains only the predictor variables, and a **y** object which contains only our dependent variable.
+In exactly the same way I did for Linear Regression, I splitted my data into an **X** object which contained only the predictor variables, and a **y** object which contained only my dependent variable.
 
-Once we have done this, we split our data into training and test sets to ensure we can fairly validate the accuracy of the predictions on data that was not used in training.  In this case, we have allocated 80% of the data for training, and the remaining 20% for validation.
+Once I did this, I splitted my data into training and test sets to ensure I could fairly validate the accuracy of the predictions on data that was not used in training. In this case, I allocated 80% of the data for training, and the remaining 20% for validation.
 
 <br>
 ```python
-
 # split data into X and y objects for modelling
 X = data_for_model.drop(["customer_loyalty_score"], axis = 1)
 y = data_for_model["customer_loyalty_score"]
 
 # split out training & test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
-
 ```
 
 <br>
 ##### Categorical Predictor Variables
 
-In our dataset, we have one categorical variable *gender* which has values of "M" for Male, "F" for Female, and "U" for Unknown.
-
-Just like the Linear Regression algorithm, the Decision Tree cannot deal with data in this format as it can't assign any numerical meaning to it when looking to assess the relationship between the variable and the dependent variable.
+In my dataset, I had one categorical variable *gender* which had values of "M" for Male, "F" for Female, and "U" for Unknown.
 
 As *gender* doesn't have any explicit *order* to it, in other words, Male isn't higher or lower than Female and vice versa - we would again apply One Hot Encoding to the categorical column.
 
-<br>
 ```python
-
 # list of categorical variables that need encoding
 categorical_vars = ["gender"]
 
@@ -619,22 +584,19 @@ X_train.drop(categorical_vars, axis = 1, inplace = True)
 X_test_encoded = pd.DataFrame(X_test_encoded, columns = encoder_feature_names)
 X_test = pd.concat([X_test.reset_index(drop=True), X_test_encoded.reset_index(drop=True)], axis = 1)
 X_test.drop(categorical_vars, axis = 1, inplace = True)
-
 ```
 
 <br>
 ### Model Training <a name="regtree-model-training"></a>
 
-Instantiating and training our Decision Tree model is done using the below code.  We use the *random_state* parameter to ensure we get reproducible results, and this helps us understand any improvements in performance with changes to model hyperparameters.
+Instantiating and training the Decision Tree model was done using the below code. I used the *random_state* parameter to ensure I got reproducible results, and this helped us understand any improvements in performance with changes to model hyperparameters.
 
 ```python
-
-# instantiate our model object
+# instantiate my model object
 regressor = DecisionTreeRegressor(random_state = 42)
 
-# fit our model using our training & test sets
+# fit the model using my training & test sets
 regressor.fit(X_train, y_train)
-
 ```
 
 <br>
@@ -642,82 +604,69 @@ regressor.fit(X_train, y_train)
 
 ##### Predict On The Test Set
 
-To assess how well our model is predicting new data - we use the trained model object (here called *regressor*) and ask it to predict the *loyalty_score* variable for the test set
+To assess how well my model was predicting new data - I used the trained model object (here called *regressor*) and asked it to predict the *loyalty_score* variable for the test set.
 
 ```python
-
 # predict on the test set
 y_pred = regressor.predict(X_test)
-
 ```
 
 <br>
 ##### Calculate R-Squared
 
-To calculate r-squared, we use the following code where we pass in our *predicted* outputs for the test set (y_pred), as well as the *actual* outputs for the test set (y_test)
-
 ```python
-
 # calculate r-squared for our test set predictions
 r_squared = r2_score(y_test, y_pred)
 print(r_squared)
-
 ```
 
-The resulting r-squared score from this is **0.898**
+The resulting r-squared score from this was **0.898**.
 
 <br>
 ##### Calculate Cross Validated R-Squared
 
-As we did when testing Linear Regression, we will again utilize Cross-Validation.
+As I did when testing Linear Regression, I utilized Cross-Validation.
 
-Instead of simply dividing our data into a single training set, and a single test set, with Cross Validation we break our data into several "chunks" and then iteratively train the model on all but one of the "chunks", test the model on the remaining "chunk" until each has had a chance to be the test set.
+Instead of simply dividing my data into a single training set, and a single test set, with Cross Validation I broke my data into several "chunks" and then iteratively trained the model on all but one of the "chunks", tested the model on the remaining "chunk" until each had a chance to be the test set.
 
-The result of this is that we are provided a number of test set validation results - and we can take the average of these to give a much more robust & reliable view of how our model will perform on new, unseen data!
+The result of this was that I was provided a number of test set validation results - and I took the average of these to give a much more robust & reliable view of how my model performed on new, unseen data!
 
-In the code below, we put this into place.  We again specify that we want 4 "chunks" and then we pass in our regressor object, training set, and test set.  We also specify the metric we want to assess with, in this case, we stick with r-squared.
+In the code below, I put this into place. I again specified 4 "chunks" and then I passed in my regressor object, training set, and test set. I also specified the metric I wanted to assess with, in this case, I sticked to r-squared.
 
-Finally, we take a mean of all four test set results.
+Finally, I took a mean of all four test set results.
 
 ```python
-
-# calculate the mean cross-validated r-squared for our test set predictions
+# calculate the mean cross-validated r-squared for my test set predictions
 cv = KFold(n_splits = 4, shuffle = True, random_state = 42)
 cv_scores = cross_val_score(regressor, X_train, y_train, cv = cv, scoring = "r2")
 cv_scores.mean()
-
 ```
 
-The mean cross-validated r-squared score from this is **0.871** which is slighter higher than we saw for Linear Regression.
+The mean cross-validated r-squared score from this was **0.871** which was slighter higher than what I saw for Linear Regression.
 
 <br>
 ##### Calculate Adjusted R-Squared
 
-Just like we did with Linear Regression, we will also calculate the *Adjusted R-Squared* which compensates for the addition of input variables and only increases if the variable improves the model above what would be obtained by probability.
-
 ```python
-
-# calculate adjusted r-squared for our test set predictions
+# calculate adjusted r-squared for the test set predictions
 num_data_points, num_input_vars = X_test.shape
 adjusted_r_squared = 1 - (1 - r_squared) * (num_data_points - 1) / (num_data_points - num_input_vars - 1)
 print(adjusted_r_squared)
-
 ```
 
-The resulting *adjusted* r-squared score from this is **0.887** which as expected, is slightly lower than the score we got for r-squared on its own.
+The resulting *adjusted* r-squared score from this was **0.887** which as expected, was slightly lower than the score I got for r-squared on its own.
 
 <br>
 ### Decision Tree Regularisation <a name="regtree-model-regularisation"></a>
 
-Decision Trees can be prone to over-fitting, in other words, without any limits on their splitting, they will end up learning the training data perfectly.  We would much prefer our model to have a more *generalized* set of rules, as this will be more robust & reliable when making predictions on *new* data.
+Decision Trees can be prone to over-fitting, in other words, without any limits on their splitting, they will end up learning the training data perfectly. We would much prefer our model to have a more *generalized* set of rules, as this will be more robust & reliable when making predictions on *new* data.
 
 One effective method of avoiding this over-fitting is to apply a *max depth* to the Decision Tree, meaning we only allow it to split the data a certain number of times before it is required to stop.
 
-Unfortunately, we don't necessarily know the *best* number of splits to use for this - so below we will loop over a variety of values and assess which gives us the best predictive performance!
+Unfortunately, we don't necessarily know the *best* number of splits to use for this - so below I looped over a variety of values and assessed which gave me the best predictive performance!
 
 <br>
 ```python
-
 # finding the best max_depth
 
 # set up range for search, and empty list to append accuracy scores to
@@ -746,25 +695,21 @@ plt.xlabel("Max Depth of Decision Tree")
 plt.ylabel("Accuracy")
 plt.tight_layout()
 plt.show()
-
 ```
 <br>
-That code gives us the below plot - which visualizes the results!
+That code gave me the below plot - which visualized the results!
 
-<br>
 ![alt text](/img/posts/regression-tree-max-depth-plot.png "Decision Tree Max Depth Plot")
 
 <br>
-In the plot, we can see that the *maximum* classification accuracy on the test set is found when applying a *max_depth* value of 7.  However, we lose very little accuracy back to a value of 4, but this would result in a simpler model, that generalized even better on new data.  We make the executive decision to re-train our Decision Tree with a maximum depth of 4!
+In the plot, I saw that the *maximum* classification accuracy on the test set was found when applying a *max_depth* value of 7. However, I lost very little accuracy back to a value of 4, but this would result in a simpler model, that generalized even better on new data. I made the executive decision to re-train my Decision Tree with a maximum depth of 4!
 
 <br>
 ### Visualise Our Decision Tree <a name="regtree-visualise"></a>
 
-To see the decisions that have been made in the (re-fitted) tree, we can use the plot_tree functionality that we imported from scikit-learn.  To do this, we use the below code:
+To see the decisions that have been made in the (re-fitted) tree, I used the plot_tree functionality that I imported from scikit-learn. To do this, I used the below code:
 
-<br>
 ```python
-
 # re-fit our model using a max depth of 4
 regressor = DecisionTreeRegressor(random_state = 42, max_depth = 4)
 regressor.fit(X_train, y_train)
@@ -776,18 +721,16 @@ tree = plot_tree(regressor,
                  filled = True,
                  rounded = True,
                  fontsize = 16)
-
 ```
 <br>
-That code gives us the below plot:
+That code givave me the below plot:
 
-<br>
 ![alt text](/img/posts/regression-tree-nodes-plot.png "Decision Tree Max Depth Plot")
 
 <br>
-This is a very powerful visual, and one that can be shown to stakeholders in the business to ensure they understand exactly what is driving the predictions.
+This was a very powerful visual, and one that could be shown to stakeholders in the business to ensure they understand exactly what was driving the predictions.
 
-One interesting thing to note is that the *very first split* appears to be using the variable *distance from store* so it would seem that this is a very important variable when it comes to predicting loyalty!
+One interesting thing to note was that the *very first split* appeared to be using the variable *distance from store* so it would seem that this was a very important variable when it came to predicting loyalty!
 
 ___
 <br>
