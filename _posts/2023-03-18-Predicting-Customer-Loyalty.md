@@ -88,7 +88,6 @@ The *transactions* table, the *customer_details* table, and the *product_areas* 
 Using pandas in Python, I merged *transactions* table, the *customer_details* table, and the *product_areas* table for all customers, creating a single dataset to be used for predicting the missing loyalty scores.
 
 ```python
-
 # import required packages
 import pandas as pd
 import pickle
@@ -128,12 +127,9 @@ regression_scoring.drop(["customer_loyalty_score"], axis = 1, inplace = True)
 # save the datasets for future use
 pickle.dump(regression_modelling, open("data/customer_loyalty_modelling.p", "wb"))
 pickle.dump(regression_scoring, open("data/customer_loyalty_scoring.p", "wb"))
-
 ```
 <br>
-After this data pre-processing in Python, we have a dataset for modeling that contains the following fields...
-<br>
-<br>
+After this data pre-processing in Python, I had a dataset for modeling containing the following fields...
 
 | **Variable Name** | **Variable Type** | **Description** |
 |---|---|---|
@@ -151,11 +147,11 @@ ___
 <br>
 # Modelling Overview
 
-We will build a model that looks to accurately predict the “loyalty_score” metric for those customers that were able to be tagged, based upon the customer metrics listed above.
+I built a model to accurately predict the “loyalty_score” metric for those customers that were able to be tagged, based upon the customer metrics listed above.
 
-If that can be achieved, we can use this model to predict the customer loyalty score for the customers who were unable to be tagged by the agency.
+If this model works well, I can use this model to predict the customer loyalty score for the customers who were unable to be tagged by the agency.
 
-As we are predicting a numeric output, we tested three regression modeling approaches, namely:
+As I was predicting a numeric output, I tested three regression modeling approaches, namely:
 
 * Linear Regression
 * Decision Tree
@@ -165,7 +161,7 @@ ___
 <br>
 # Linear Regression <a name="linreg-title"></a>
 
-We utilize the scikit-learn library within Python to model our data using Linear Regression. The code sections below are broken up into 4 key sections:
+I utilized the scikit-learn library within Python to model the data using Linear Regression. The code sections below were broken up into 4 key sections:
 
 * Data Import
 * Data Preprocessing
@@ -175,9 +171,8 @@ We utilize the scikit-learn library within Python to model our data using Linear
 <br>
 ### Data Import <a name="linreg-import"></a>
 
-Since we saved our modeling data as a pickle file, we will import it.  We then remove the id column and shuffle our data.
+I imported my modeling data that was saved as a pickle file. I then removed the id column and shuffle our data.
 ```python
-
 # import required packages
 import pandas as pd
 import pickle
@@ -197,12 +192,11 @@ data_for_model.drop("customer_id", axis = 1, inplace = True)
 
 # shuffle data
 data_for_model = shuffle(data_for_model, random_state = 42)
-
 ```
 <br>
 ### Data Preprocessing <a name="linreg-preprocessing"></a>
 
-For Linear Regression we have certain data preprocessing steps that need to be addressed, including:
+For Linear Regression, I had certain data preprocessing steps that needed to be addressed, including:
 
 * Missing values in the data
 * The effect of outliers
@@ -212,25 +206,20 @@ For Linear Regression we have certain data preprocessing steps that need to be a
 <br>
 ##### Missing Values
 
-The number of missing values in the data was extremely low, so instead of applying any imputation (i.e. mean, most common value) we will just remove those rows
+The number of missing values in the data was extremely low, so instead of applying any imputation (i.e. mean, most common value), I just removed those rows.
 
 ```python
-
-# remove rows where values are missing
+# remove rows where values were missing
 data_for_model.isna().sum()
 data_for_model.dropna(how = "any", inplace = True)
-
 ```
 
 <br>
 ##### Outliers
 
-The ability of a Linear Regression model to generalize well across *all* data can be hampered if there are outliers present.  There is no right or wrong way to deal with outliers, but it is always something worth very careful consideration - just because a value is high or low, does not necessarily mean it should not be there!
+The ability of a Linear Regression model to generalize well across *all* data could be hampered if there were outliers present. There was no right or wrong way to deal with outliers, but it was always something worth very careful consideration - just because a value was high or low, did not necessarily mean it should not be there!
 
-In this code section, we use **.describe()** from Pandas to investigate the spread of values for each of our predictors.  The results of this can be seen in the table below.
-
-<br>
-
+In this code section, I used **.describe()** from Pandas to investigate the spread of values for each of the predictors. The results of this can be seen in the table below.
 | **metric** | **distance_from_store** | **credit_score** | **total_sales** | **total_items** | **transaction_count** | **product_area_count** | **average_basket_value** |
 |---|---|---|---|---|---|---|---|
 | mean | 2.02 | 0.60 | 1846.50 | 278.30 | 44.93 | 4.31 | 36.78 |
@@ -242,15 +231,15 @@ In this code section, we use **.describe()** from Pandas to investigate the spre
 | max | 44.37 | 0.88 | 9878.76 | 1187.00 | 109.00 | 5.00 | 102.34 |
 
 <br>
-Based on this investigation, we see some *max* column values for several variables to be much higher than the *median* value.
+Based on this investigation, I saw some *max* column values for several variables to be much higher than the *median* value.
 
-This is for columns *distance_from_store*, *total_sales*, and *total_items*
+This was for columns *distance_from_store*, *total_sales*, and *total_items*
 
-For example, the median *distance_to_store* is 1.645 miles, but the maximum is over 44 miles!
+For example, the median *distance_to_store* was 1.645 miles, but the maximum was over 44 miles!
 
-Because of this, we apply some outlier removal to facilitate generalization across the full dataset.
+Because of this, I applied some outlier removal to facilitate generalization across the full dataset.
 
-We do this using the "boxplot approach" where we remove any rows where the values within those columns are outside of the interquartile range multiplied by 2.
+I did this using the "boxplot approach" where I removed any rows where the values within those columns were outside of the interquartile range multiplied by 2.
 
 <br>
 ```python
