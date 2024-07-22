@@ -5,7 +5,7 @@ image: "/posts/regression-title-img.png"
 tags: [Customer Loyalty, Machine Learning, Regression, Python]
 ---
 
-A grocery retailer wants to append market-level customer loyalty information to the database.  We would like to use ML to solve this!
+I was asked to append market-level customer loyalty information of a grocery retailer to its database. 
 
 # Table of contents
 
@@ -29,16 +29,16 @@ ___
 
 ### Context <a name="overview-context"></a>
 
-The overall aim of this work is to accurately predict the *loyalty score* for those customers who could not be tagged, enabling our client a clear understanding of true customer loyalty, regardless of total spend volume - and allowing for more accurate and relevant customer tracking, targeting, and comms.
+The overall aim of this work was to accurately predict the *loyalty score* for those customers who could not be tagged, enabling my client a clear understanding of true customer loyalty, regardless of total spend volume - and allowing for more accurate and relevant customer tracking, targeting, and comms.
 
-To achieve this, we looked to build a predictive model that will find relationships between customer metrics and *loyalty score* for those customers who were tagged, and use this to predict the loyalty score metric for those who were not.
+To achieve this, I built a predictive model to find relationships between customer metrics and *loyalty score* for those customers who were tagged, and used this to predict the loyalty score metric for those who were not.
 <br>
 <br>
 ### Actions <a name="overview-actions"></a>
 
-We first needed to compile the necessary data from tables in the database, gathering key customer metrics that may help predict *loyalty score*, appending on the dependent variable, and separating those who did and did not have this dependent variable present.
+I first needed to compile the necessary data from tables in the database, gathering key customer metrics that might help predict *loyalty score*, appending on the dependent variable, and separating those who did and did not have this dependent variable present.
 
-As we are predicting a numeric output, we tested three regression modeling approaches, namely:
+As I was predicting a numeric output, I tested three regression modeling approaches, namely:
 
 * Linear Regression
 * Decision Tree
@@ -48,7 +48,7 @@ As we are predicting a numeric output, we tested three regression modeling appro
 
 ### Results <a name="overview-results"></a>
 
-Our testing found that the Random Forest had the highest predictive accuracy.
+The Random Forest had the highest predictive accuracy.
 
 <br>
 **Metric 1: Adjusted R-Squared (Test Set)**
@@ -64,28 +64,28 @@ Our testing found that the Random Forest had the highest predictive accuracy.
 * Decision Tree = 0.871
 * Linear Regression = 0.853
 
-As the most important outcome for this project was predictive accuracy, rather than explicitly understanding weighted drivers of prediction, we chose the Random Forest as the model to use for making predictions on the customers who were missing the *loyalty score* metric.
+As the most important outcome for this project was predictive accuracy, rather than explicitly understanding weighted drivers of prediction, I chose the Random Forest as the model to use for making predictions on the customers who were missing the *loyalty score* metric.
 <br>
 <br>
 
 ### Key Definition  <a name="overview-definition"></a>
 
-The *loyalty score* metric measures the % of grocery spend (market level) that each customer allocates to the client vs. all of the competitors.  
+The *loyalty score* metric measured the % of grocery spend (market level) that each customer allocated to the client vs. all of the competitors.  
 
-Example 1: Customer X has a total grocery spend of $100 and all of this is spent with our client. Customer X has a *loyalty score* of 1.0
+Example 1: Customer X had a total grocery spend of $100 and all of this was spent with my client. Customer X had a *loyalty score* of 1.0
 
-Example 2: Customer Y has a total grocery spend of $200 but only 20% is spent with our client.  The remaining 80% is spent with competitors.  Customer Y has a *customer loyalty score* of 0.2
+Example 2: Customer Y had a total grocery spend of $200 but only 20% is spent with my client. The remaining 80% was spent with competitors. Customer Y had a *customer loyalty score* of 0.2
 <br>
 <br>
 ___
 
 # Data Overview  <a name="data-overview"></a>
 
-We will predict the *loyalty_score* metric. This metric exists (for half of the customer base) in the *loyalty_scores* table of the client database.
+I was supposed to predict the *loyalty_score* metric. This metric existed (for half of the customer base) in the *loyalty_scores* table of the client database.
 
-The key variables hypothesized to predict the missing loyalty scores will come from the client database, namely the *transactions* table, the *customer_details* table, and the *product_areas* table.
+The *transactions* table, the *customer_details* table, and the *product_areas* table were used to predict the missing loyalty scores.
 
-Using pandas in Python, we merge these tables for all customers, creating a single dataset that we can use for modeling.
+Using pandas in Python, I merged *transactions* table, the *customer_details* table, and the *product_areas* table for all customers, creating a single dataset to be used for predicting the missing loyalty scores.
 
 ```python
 
@@ -125,7 +125,7 @@ regression_scoring = data_for_regression.loc[data_for_regression["customer_loyal
 # for the scoring set, drop the loyalty score column (as it is blank/redundant)
 regression_scoring.drop(["customer_loyalty_score"], axis = 1, inplace = True)
 
-# save our datasets for future use
+# save the datasets for future use
 pickle.dump(regression_modelling, open("data/customer_loyalty_modelling.p", "wb"))
 pickle.dump(regression_scoring, open("data/customer_loyalty_scoring.p", "wb"))
 
