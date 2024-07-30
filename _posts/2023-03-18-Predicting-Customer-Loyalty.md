@@ -171,7 +171,7 @@ I utilized the scikit-learn library within Python to model the data using Linear
 <br>
 ### Data Import <a name="linreg-import"></a>
 
-I imported my modeling data that was saved as a pickle file. I then removed the id column and shuffle our data.
+I imported my modeling data that was saved as a pickle file. I then removed the id column and shuffle the data.
 ```python
 # import required packages
 import pandas as pd
@@ -266,9 +266,9 @@ for column in outlier_columns:
 <br>
 ##### Split Out Data For Modelling
 
-In the next code block, we do two things, we first split our data into an **X** object which contains only the predictor variables, and a **y** object that contains only our dependent variable.
+In the next code block, I first splitted my data into an **X** object which contains only the predictor variables, and a **y** object that contains only my dependent variable.
 
-Once we have done this, we split our data into training and test sets to ensure we can fairly validate the accuracy of the predictions on data that was not used in training.  In this case, we have allocated 80% of the data for training, and the remaining 20% for validation.
+Once I did this, I splitted my data into training and test sets to ensure we can fairly validate the accuracy of the predictions on data that was not used in training.  In this case, we have allocated 80% of the data for training, and the remaining 20% for validation.
 
 ```python
 # split data into X and y objects for modelling
@@ -288,7 +288,7 @@ As the Linear Regression algorithm could only deal with numerical data, I had to
 
 As *gender* didn't have any explicit *order* to it, in other words, Male wasn't higher or lower than Female and vice versa - one appropriate approach was to apply One Hot Encoding to the categorical column.
 
-One Hot Encoding could be thought of as a way to represent categorical variables as binary vectors, in other words, a set of *new* columns for each categorical value with either a 1 or a 0 saying whether that value was true or not for that observation. These new columns would go into our model as input variables, and the original column was discarded.
+One Hot Encoding could be thought of as a way to represent categorical variables as binary vectors, in other words, a set of *new* columns for each categorical value with either a 1 or a 0 saying whether that value was true or not for that observation. These new columns would go into my model as input variables, and the original column was discarded.
 
 I also dropped one of the new columns using the parameter *drop = "first"* to avoid the *dummy variable trap* where my newly created encoded columns perfectly predict each other - and I ran the risk of breaking the assumption that there was no multicollinearity, a requirement or at least an important consideration for some models, Linear Regression being one of them! Multicollinearity occurs when two or more input variables are *highly* correlated with each other, it was a scenario I attempted to avoid in short, while it won't necessarily affect the predictive accuracy of my model, it could make it difficult to trust the statistics around how well the model was performing, and how much each input variable was truly having.
 
@@ -325,7 +325,7 @@ X_test.drop(categorical_vars, axis = 1, inplace = True)
 Feature Selection is the process used to select the input variables that are most important to your Machine Learning task.  It can be a very important addition or at least, a consideration, in certain scenarios.  The potential benefits of Feature Selection are:
 
 * **Improved Model Accuracy** - eliminating noise can help true relationships stand out
-* **Lower Computational Cost** - our model becomes faster to train and faster to make predictions
+* **Lower Computational Cost** - my model becomes faster to train and faster to make predictions
 * **Explainability** - understanding & explaining outputs for stakeholder & customers becomes much easier
 
 There are many, many ways to apply Feature Selection. These range from simple methods such as a *Correlation Matrix* showing variable relationships, to *Univariate Testing* which helps us understand statistical relationships between variables, and then to even more powerful approaches like *Recursive Feature Elimination (RFE)* which is an approach that starts with all input variables, and then iteratively removes those with the weakest relationships with the output variable.
@@ -338,14 +338,14 @@ For this task, I applied a variation of Recursive Feature Elimination called *Re
 regressor = LinearRegression()
 feature_selector = RFECV(regressor)
 
-# fit RFECV onto our training & test data
+# fit RFECV onto my training & test data
 fit = feature_selector.fit(X_train,y_train)
 
 # extract & print the optimal number of features
 optimal_feature_count = feature_selector.n_features_
 print(f"Optimal number of features: {optimal_feature_count}")
 
-# limit our training & test sets to only include the selected variables
+# limit my training & test sets to only include the selected variables
 X_train = X_train.loc[:, feature_selector.get_support()]
 X_test = X_test.loc[:, feature_selector.get_support()]
 ```
@@ -377,7 +377,7 @@ Instantiating and training the Linear Regression model was done using the below 
 # instantiate my model object
 regressor = LinearRegression()
 
-# fit my model using our training & test sets
+# fit my model using my training & test sets
 regressor.fit(X_train, y_train)
 ```
 
@@ -396,12 +396,12 @@ y_pred = regressor.predict(X_test)
 <br>
 ##### Calculate R-Squared
 
-R-Squared is a metric that shows the percentage of variance in the output variable *y* that is being explained by the input variable(s) *x*.  It is a value that ranges between 0 and 1, with a higher value showing a higher level of explained variance. Another way of explaining this would be to say that, if we had an r-squared score of 0.8 it would suggest that 80% of the variation of our output variable is being explained by our input variables - and something else, or some other variables must account for the other 20%
+R-Squared is a metric that shows the percentage of variance in the output variable *y* that is being explained by the input variable(s) *x*.  It is a value that ranges between 0 and 1, with a higher value showing a higher level of explained variance. Another way of explaining this would be to say that, if we had an r-squared score of 0.8 it would suggest that 80% of the variation of my output variable is being explained by my input variables - and something else, or some other variables must account for the other 20%
 
 To calculate r-squared, I used the following code where I passed in my *predicted* outputs for the test set (y_pred), as well as the *actual* outputs for the test set (y_test)
 
 ```python
-# calculate r-squared for our test set predictions
+# calculate r-squared for my test set predictions
 r_squared = r2_score(y_test, y_pred)
 print(r_squared)
 ```
@@ -413,16 +413,16 @@ The resulting r-squared score from this was **0.78**.
 
 An even more powerful and reliable way to assess model performance is to utilize Cross Validation.
 
-Instead of simply dividing our data into a single training set, and a single test set, with Cross Validation we can break our data into several "chunks" and then iteratively train the model on all but one of the "chunks", test the model on the remaining "chunk" until each has had a chance to be the test set.
+Instead of simply dividing my data into a single training set, and a single test set, with Cross Validation we can break my data into several "chunks" and then iteratively train the model on all but one of the "chunks", test the model on the remaining "chunk" until each has had a chance to be the test set.
 
-The result of this is that we are provided a number of test set validation results - and we can take the average of these to give a much more robust & reliable view of how our model will perform on new, unseen data!
+The result of this is that we are provided a number of test set validation results - and we can take the average of these to give a much more robust & reliable view of how my model will perform on new, unseen data!
 
 In the code below, I put this into place. I first specified that I wanted 4 "chunks" and then I passed in my regressor object, training set, and test set. I also specified the metric I wanted to assess with, in this case, I sticked to r-squared.
 
-Finally, I tookk a mean of all four test set results.
+Finally, I took a mean of all four test set results.
 
 ```python
-# calculate the mean cross-validated r-squared for our test set predictions
+# calculate the mean cross-validated r-squared for my test set predictions
 cv = KFold(n_splits = 4, shuffle = True, random_state = 42)
 cv_scores = cross_val_score(regressor, X_train, y_train, cv = cv, scoring = "r2")
 cv_scores.mean()
@@ -438,7 +438,7 @@ When applying Linear Regression with *multiple* input variables, the r-squared m
 **Adjusted R-Squared** is a metric that compensates for the addition of input variables, and only increases if the variable improves the model above what would be obtained by probability. It is best practice to use Adjusted R-Squared when assessing the results of a Linear Regression with multiple input variables, as it gives a fairer perception of the fit of the data.
 
 ```python
-# calculate adjusted r-squared for our test set predictions
+# calculate adjusted r-squared for my test set predictions
 num_data_points, num_input_vars = X_test.shape
 adjusted_r_squared = 1 - (1 - r_squared) * (num_data_points - 1) / (num_data_points - num_input_vars - 1)
 print(adjusted_r_squared)
@@ -497,7 +497,7 @@ I again utilized the scikit-learn library within Python to model my data using a
 <br>
 ### Data Import <a name="regtree-import"></a>
 
-I imported my msaved model, removed the id column, and shuffled the data.
+I imported my saved model, removed the id column, and shuffled the data.
 
 ```python
 # import required packages
@@ -615,7 +615,7 @@ y_pred = regressor.predict(X_test)
 ##### Calculate R-Squared
 
 ```python
-# calculate r-squared for our test set predictions
+# calculate r-squared for my test set predictions
 r_squared = r2_score(y_test, y_pred)
 print(r_squared)
 ```
@@ -659,7 +659,7 @@ The resulting *adjusted* r-squared score from this was **0.887** which as expect
 <br>
 ### Decision Tree Regularisation <a name="regtree-model-regularisation"></a>
 
-Decision Trees can be prone to over-fitting, in other words, without any limits on their splitting, they will end up learning the training data perfectly. We would much prefer our model to have a more *generalized* set of rules, as this will be more robust & reliable when making predictions on *new* data.
+Decision Trees can be prone to over-fitting, in other words, without any limits on their splitting, they will end up learning the training data perfectly. We would much prefer my model to have a more *generalized* set of rules, as this will be more robust & reliable when making predictions on *new* data.
 
 One effective method of avoiding this over-fitting is to apply a *max depth* to the Decision Tree, meaning we only allow it to split the data a certain number of times before it is required to stop.
 
@@ -723,7 +723,7 @@ tree = plot_tree(regressor,
                  fontsize = 16)
 ```
 <br>
-That code givave me the below plot:
+That code gave me the below plot:
 
 ![alt text](/img/posts/regression-tree-nodes-plot.png "Decision Tree Max Depth Plot")
 
@@ -863,7 +863,7 @@ y_pred = regressor.predict(X_test)
 ##### Calculate R-Squared
 
 ```python
-# calculate r-squared for our test set predictions
+# calculate r-squared for test set predictions
 r_squared = r2_score(y_test, y_pred)
 print(r_squared)
 ```
@@ -873,7 +873,7 @@ The resulting r-squared score from this was **0.957** - higher than both Linear 
 <br>
 ##### Calculate Cross Validated R-Squared
 
-As I did when testing Linear Regression & our Decision Tree, I again utilized Cross Validation.
+As I did when testing Linear Regression & Decision Tree, I again utilized Cross Validation.
 ```python
 # calculate the mean cross-validated r-squared for the test set predictions
 cv = KFold(n_splits = 4, shuffle = True, random_state = 42)
@@ -881,12 +881,12 @@ cv_scores = cross_val_score(regressor, X_train, y_train, cv = cv, scoring = "r2"
 cv_scores.mean()
 ```
 
-The mean cross-validated r-squared score from this was **0.923** which again was higher than I saw for both Linear Regression & our Decision Tree.
+The mean cross-validated r-squared score from this was **0.923** which again was higher than I saw for both Linear Regression & Decision Tree.
 
 <br>
 ##### Calculate Adjusted R-Squared
 ```python
-# calculate adjusted r-squared for our test set predictions
+# calculate adjusted r-squared for test set predictions
 num_data_points, num_input_vars = X_test.shape
 adjusted_r_squared = 1 - (1 - r_squared) * (num_data_points - 1) / (num_data_points - num_input_vars - 1)
 print(adjusted_r_squared)
@@ -911,7 +911,7 @@ If this decrease in performance, or accuracy, was large, then I’d deem that in
 
 At a high level, there were two common ways to tackle this. The first, often just called **Feature Importance** is where we find all nodes in the Decision Trees of the forest where a particular input variable is used to split the data and assess what the Mean Squared Error (for a Regression problem) was before the split was made, and compare this to the Mean Squared Error after the split was made.  We can take the *average* of these improvements across all Decision Trees in the Random Forest to get a score that tells us *how much better* we’re making the model by using that input variable.
 
-If we do this for *each* of our input variables, we can compare these scores and understand which is adding the most value to the predictive power of the model!
+If we do this for *each* of my input variables, we can compare these scores and understand which is adding the most value to the predictive power of the model!
 
 The other approach, often called **Permutation Importance** cleverly uses some data that has gone *unused* at when random samples are selected for each Decision Tree (this stage is called "bootstrap sampling" or "bootstrapping")
 
@@ -1002,7 +1002,7 @@ In the following code, I
 
 * Import the required packages for preprocessing
 * Import the data for those customers who are missing a *loyalty_score* value
-* Import our model object & any preprocessing artifacts
+* Import model object & any preprocessing artifacts
 * Drop columns that were not used when training the model (customer_id)
 * Drop rows with missing values
 * Apply One Hot Encoding to the gender column (using transform)
@@ -1034,7 +1034,7 @@ encoder_vars_df = pd.DataFrame(encoder_vars_array, columns = encoder_feature_nam
 to_be_scored = pd.concat([to_be_scored.reset_index(drop=True), encoder_vars_df.reset_index(drop=True)], axis = 1)
 to_be_scored.drop(categorical_vars, axis = 1, inplace = True)
 
-# make our predictions!
+# make the predictions!
 loyalty_predictions = regressor.predict(to_be_scored)
 ```
 <br>
