@@ -37,23 +37,16 @@ The Random Forest had the highest predictive accuracy.
 <br>
 **Metric 1: R-Squared (Test Set)**
 
-* Random Forest = 0.918
+* Random Forest = 0.917
 * Decision Tree = 0.908
 * Linear Regression = 0.766
   
 <br>
-**Metric 2: Adjusted R-Squared (Test Set)**
+**Metric 2: Cross Validated R-Squared (K-Fold Cross Validation, k = 4)**
 
-* Random Forest = 0.915
-* Decision Tree = 0.904
-* Linear Regression = 0.755
-
-<br>
-**Metric 3: Cross Validated R-Squared (K-Fold Cross Validation, k = 4)**
-
-* Random Forest = 0.881
+* Random Forest = 0.883
 * Decision Tree = 0.865
-* Linear Regression = 0.755
+* Linear Regression = 0.756
 
 As the most important outcome for this project was predictive accuracy, rather than explicitly understanding weighted drivers of prediction, I chose the Random Forest as the model to use for making predictions on the life insurance premiums for future clients.
 <br>
@@ -99,7 +92,7 @@ I tested three regression modeling approaches, namely:
 
 For each model, I imported the data in the same way but needed to pre-process the data based on the requirements of each particular algorithm. I trained & tested each model, refined each to provide optimal performance, and then measured this predictive performance based on several metrics to give a well-rounded overview of which is best.
 
-The dataset was split into training and testing sets, ensuring that the model could be evaluated on unseen data. The model was trained on the training set, and its performance was evaluated using the testing set. Key metrics of R-squared and adjusted R-squared were calculated to assess the model's accuracy.
+The dataset was split into training and testing sets, ensuring that the model could be evaluated on unseen data. The model was trained on the training set, and its performance was evaluated using the testing set. Key metric of R-squared was calculated to assess the model's accuracy.
 
 To further refine the model, cross-validation was performed using KFold, providing a more robust evaluation by splitting the data into multiple folds and ensuring the model's consistency across different subsets of the data.
 
@@ -287,15 +280,7 @@ R-Squared is a metric that shows the percentage of variance in the output variab
 r_squared = r2_score(y_test, y_pred)
 print(r_squared)
 ```
-The resulting r-squared score from this was **0.766**.
-<br>
-##### Calculate adjusted R-squared
-```python
-num_data_points, num_input_vars = X_test.shape                           
-adjusted_r_squared = 1 - (1 - r_squared) * (num_data_points - 1) / (num_data_points - num_input_vars - 1)
-print(adjusted_r_squared)
-```
-The resulting r-squared score from this was **0.755**.
+The resulting R-squared score from this was **0.766**.
 <br>
 ##### Calculate Cross Validated R-Squared (Cross validation (KFold: including both shuffling and the random state))
 
@@ -305,7 +290,7 @@ Instead of simply dividing our data into a single training set, and a single tes
 
 The result of this is that we are provided a number of test set validation results - and we can take the average of these to give a much more robust & reliable view of how our model will perform on new, unseen data!
 
-In the code below, I put this into place. I first specified that I wanted 4 "chunks" and then I passed in my regressor object, training set, and test set. I also specified the metric I wanted to assess with, in this case, I sticked to r-squared.
+In the code below, I put this into place. I first specified that I wanted 4 "chunks" and then I passed in my regressor object, training set, and test set. I also specified the metric I wanted to assess with, in this case, I sticked to R-squared.
 
 Finally, I took a mean of all four test set results.
 ```python
@@ -314,12 +299,16 @@ cv_scores = cross_val_score(regressor, X_train, y_train, cv = cv, scoring = 'r2'
 cv_scores.mean()
 print(cv_scores.mean())
 ```
-The resulting r-squared score from this was **0.755**.
+The resulting R-squared score from this was **0.755** which as expected, was slightly lower than the score I got for R-squared on it's own.
 
-##### Extract model coefficients and intercept
-
-Here, I extracted the coefficients of the linear model which showed a high positive correlation between age, bmi, smoking status and gender with the resulted premium.
+<br>
+### Model Summary Statistics <a name="linreg-model-summary"></a>
+Although my overall goal for this project was predictive accuracy, rather than an explicit understanding of the relationships of each of the input variables and the output variable, it was always interesting to look at the summary statistics for these.
+The coefficient value for each of the input variables, along with that of the intercept would make up the equation for the line of best fit for this particular model (or more accurately, in this case, it would be the plane of best fit, as I had multiple input variables).
+<br>
 ```python
+# Extract model coefficients
+
 coefficients = pd.DataFrame(regressor.coef_)
 input_variable_names = pd.DataFrame(X_train.columns)
 summary_stats = pd.concat([input_variable_names, coefficients], axis = 1)
@@ -328,32 +317,354 @@ summary_stats.columns = ['input_variable', 'coefficient']
 # Extract model intercept
 regressor.intercept_
 ```
+___
+<br>
+# Decision Tree <a name="regtree-title"></a>
 
+I again utilized the scikit-learn library within Python to model my data using a Decision Tree. The whole code can be found below:
+```python
+# Import Required Packages
 
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
+from sklearn.model_selection import train_test_split, cross_val_score, KFold
+from sklearn.utils import shuffle
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.metrics import r2_score
+from sklearn.tree import DecisionTreeRegressor, plot_tree
 
+# Import Sample Data
 
+data_for_model = pd.read_excel('Life insurance.xlsx', sheet_name='Life insurance')  
 
+# Shuffle data
+data_for_model = shuffle(data_for_model, random_state = 42)               
 
+# Get Data Information
 
+data_for_model.info()
+data_for_model['region'].value_counts()
+```
+<br>
+While Linear Regression is susceptible to the effects of outliers, and highly correlated input variables - Decision Trees are not, so the required preprocessing here was lighter. I still however put in place logic for:
+<br>
+##### Missing Values
+```python
+# Deal with Missing Values
 
-Optimal Model Selection
-Determining the optimal complexity of the decision tree was crucial. By experimenting with different maximum depths for the tree, the optimal depth was identified based on the highest accuracy score. This step ensured that the model was neither too simple to capture essential patterns nor too complex to overfit the training data.
+data_for_model.isna().sum()     
+```
+There was no missing values in the data.
+<br>
+##### Split Out Data For Modelling
+```python
+# Split Input Variables and Output Variables
 
-Results and Insights
-The final decision tree model provided valuable insights into the factors influencing life insurance premiums. Feature importance analysis highlighted the key variables impacting premium calculations, offering transparency and interpretability to WFG's underwriting process.
+X = data_for_model.drop(['premium'], axis = 1)
+y = data_for_model['premium']
 
-Visualization and Predictions
-Visualizations such as histograms, pair plots, and tree plots were created to understand the data distribution and model structure better. Additionally, the model was used to predict premiums for new clients, showcasing its practical applicability in real-world scenarios.
+# Split out Training and Test Sets
+
+X_train, X_test, y_train, y_test = train_test_split (X, y, test_size = 0.2, random_state = 42)
+```
+<br>
+##### Categorical Predictor Variables
+We would again apply One Hot Encoding to the categorical column.
+```python
+# Create a list of categorical variables                    
+categorical_vars = ['sex', 'smoker', 'region', 'CI', 'rated', 'UL permanent', 'disability']   
+
+# Create and apply OneHotEncoder while removing the dummy variable
+one_hot_encoder = OneHotEncoder(sparse = False, drop = 'first')               
+
+# Apply fit_transform on training data
+X_train_encoded =  one_hot_encoder.fit_transform(X_train[categorical_vars])
+
+# Apply transform on test data
+X_test_encoded = one_hot_encoder.transform(X_test[categorical_vars])            
+
+# Get feature names to see what each column in the 'encoder_vars_array' presents
+encoder_feature_names = one_hot_encoder.get_feature_names_out(categorical_vars)
+
+# Convert our result from an array to a DataFrame
+X_train_encoded = pd.DataFrame(X_train_encoded, columns = encoder_feature_names)
+X_test_encoded = pd.DataFrame(X_test_encoded, columns = encoder_feature_names)
+
+# Concatenate (Link together in a series or chain) new DataFrame to our original DataFrame 
+X_train = pd.concat([X_train.reset_index(drop = True), X_train_encoded.reset_index(drop = True)], axis = 1)    
+X_test = pd.concat([X_test.reset_index(drop = True), X_test_encoded.reset_index(drop = True)], axis = 1)    
+ 
+# Drop the original categorical variable columns
+X_train.drop(categorical_vars, axis = 1, inplace = True)           
+X_test.drop(categorical_vars, axis = 1, inplace = True) 
+```
+<br>
+### Model Training <a name="regtree-model-training"></a>
+
+Instantiating and training the Decision Tree model was done using the below code. I used the *random_state* parameter to ensure I got reproducible results, and this helped us understand any improvements in performance with changes to model hyperparameters.     
+```python
+# Model Training
+
+regressor = DecisionTreeRegressor(random_state = 42, max_depth = 4)
+regressor.fit(X_train, y_train)
+```
+<br>
+### Model Performance Assessment <a name="regtree-model-assessment"></a>
+```python
+# Predict on the test set
+y_pred = regressor.predict(X_test)
+
+# Model Assessment (Validation)
+
+# First approach: Calculate R-squared
+r_squared = r2_score(y_test, y_pred)
+print(r_squared)
+
+# Calculate Cross Validated R-Squared (Cross validation (KFold: including both shuffling and the random state))
+cv = KFold(n_splits = 4, shuffle = True, random_state = 42)                    # n_splits: number of equally sized chunk of data
+cv_scores = cross_val_score(regressor, X_train, y_train, cv = cv, scoring = 'r2')
+cv_scores.mean()
+print(cv_scores.mean())
+```
+The resulting R-squared and cross-validated R-squared scores from this analysis was **0.908** and **0.865**, respectively.
+<br>
+### Decision Tree Regularisation <a name="regtree-model-regularisation"></a>
+
+Decision Trees can be prone to over-fitting, in other words, without any limits on their splitting, they will end up learning the training data perfectly. We would much prefer our model to have a more *generalized* set of rules, as this will be more robust & reliable when making predictions on *new* data.
+
+One effective method of avoiding this over-fitting is to apply a *max depth* to the Decision Tree, meaning we only allow it to split the data a certain number of times before it is required to stop.
+
+Unfortunately, we don't necessarily know the *best* number of splits to use for this - so below I looped over a variety of values and assessed which gave me the best predictive performance!
+
+### Finding the best max depth
+```python
+max_depth_list = list(range(1,9))
+accuracy_scores = []
+
+for depth in max_depth_list:
+    
+    regressor = DecisionTreeRegressor(max_depth = depth, random_state = 42)
+    regressor.fit(X_train, y_train)
+    y_pred = regressor.predict(X_test)
+    accuracy = r2_score(y_test,y_pred)
+    accuracy_scores.append(accuracy)
+    
+max_accuracy = max(accuracy_scores)
+max_accuracy_idx = accuracy_scores.index(max_accuracy)
+optimal_depth = max_depth_list[max_accuracy_idx]
+
+# Plot of max depths
+plt.plot(max_depth_list, accuracy_scores)
+plt.scatter(optimal_depth, max_accuracy, marker = 'x', color = 'red')
+plt.title(f'Accuracy by Max Depth \n Optimal Tree Depth: {optimal_depth} (Accuracy: {round(max_accuracy, 4)})')
+plt.xlabel('Max Depth of Decision Tree')
+plt.ylabel('Accuracy')
+plt.tight_layout()
+plt.show()
+```
+"""
+best max depth was 6 but refitting the model with max depth of 6 did not change the validation score.
+![alt text](/img/posts/Figure 2024-07-30 172758.png)
+"""
+
+___
+<br>
+# Random Forest <a name="rf-title"></a>
+
+I utilized the scikit-learn library within Python to model my data using a Random Forest. 
+```python
+# import required packages
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from sklearn.model_selection import train_test_split, cross_val_score, KFold
+from sklearn.utils import shuffle
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.metrics import r2_score
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.inspection import permutation_importance
+
+# Import Sample Data
+data_for_model = pd.read_excel('Life insurance.xlsx', sheet_name='Life insurance')  
+
+# Shuffle data
+data_for_model = shuffle(data_for_model, random_state = 42)               
+
+# Get Data Information
+
+data_for_model.info()
+data_for_model['region'].value_counts()
+
+# Deal with Missing Values
+
+data_for_model.isna().sum()     
+```
+<br>
+##### Split Out Data For Modelling
+```python
+# Split Input Variables and Output Variables
+
+X = data_for_model.drop(['premium'], axis = 1)
+y = data_for_model['premium']
+
+# Split out Training and Test Sets
+
+X_train, X_test, y_train, y_test = train_test_split (X, y, test_size = 0.2, random_state = 42)
+```
+<br>
+##### Categorical Predictor Variables
+
+```python
+# Create a list of categorical variables                    
+categorical_vars = ['sex', 'smoker', 'region', 'CI', 'rated', 'UL permanent', 'disability']   
+
+# Create and apply OneHotEncoder while removing the dummy variable
+one_hot_encoder = OneHotEncoder(sparse = False, drop = 'first')               
+
+# Apply fit_transform on training data
+X_train_encoded =  one_hot_encoder.fit_transform(X_train[categorical_vars])
+
+# Apply transform on test data
+X_test_encoded = one_hot_encoder.transform(X_test[categorical_vars])            
+
+# Get feature names to see what each column in the 'encoder_vars_array' presents
+encoder_feature_names = one_hot_encoder.get_feature_names_out(categorical_vars)
+
+# Convert our result from an array to a DataFrame
+X_train_encoded = pd.DataFrame(X_train_encoded, columns = encoder_feature_names)
+X_test_encoded = pd.DataFrame(X_test_encoded, columns = encoder_feature_names)
+
+# Concatenate (Link together in a series or chain) new DataFrame to our original DataFrame 
+X_train = pd.concat([X_train.reset_index(drop = True), X_train_encoded.reset_index(drop = True)], axis = 1)    
+X_test = pd.concat([X_test.reset_index(drop = True), X_test_encoded.reset_index(drop = True)], axis = 1)    
+ 
+# Drop the original categorical variable columns
+X_train.drop(categorical_vars, axis = 1, inplace = True)           
+X_test.drop(categorical_vars, axis = 1, inplace = True) 
+```
+
+<br>
+### Model Training <a name="rf-model-training"></a>
+```python
+# instantiate my model object
+regressor = RandomForestRegressor(random_state = 42)
+
+# fit my model using my training & test sets
+regressor.fit(X_train, y_train)
+```
+<br>
+### Model Performance Assessment <a name="rf-model-assessment"></a>
+
+##### Predict On The Test Set
+```python
+# predict on the test set
+y_pred = regressor.predict(X_test)
+```
+<br>
+##### Calculate R-Squared
+
+```python
+# calculate r-squared for our test set predictions
+r_squared = r2_score(y_test, y_pred)
+print(r_squared)
+```
+
+The resulting r-squared score from this was **0.917** - higher than both Linear Regression & the Decision Tree.
+
+<br>
+##### Calculate Cross Validated R-Squared
+
+As I did when testing Linear Regression & Decision Tree, I again utilized Cross Validation.
+```python
+# calculate the mean cross-validated r-squared for the test set predictions
+cv = KFold(n_splits = 4, shuffle = True, random_state = 42)
+cv_scores = cross_val_score(regressor, X_train, y_train, cv = cv, scoring = "r2")
+cv_scores.mean()
+```
+
+The mean cross-validated r-squared score from this was **0.883** which again was higher than what I saw for both Linear Regression & Decision Tree.
+
+<br>
+### Feature Importance <a name="rf-model-feature-importance"></a>
+
+Random Forests are an ensemble model, made up of many, many Decision Trees, each of which was different due to the randomness of the data being provided, and the random selection of input variables available at each potential split point.
+
+Because of this, I ended up with a powerful and robust model, but because of the random or different nature of all these Decision trees - the model gave me a unique insight into how important each of my input variables was to the overall model.  
+
+At a high level, in a Random Forest, I could measure *importance* by asking *How much would accuracy decrease if a specific input variable was removed or randomized?*
+
+If this decrease in performance, or accuracy, was large, then I’d deem that input variable to be quite important, and if I saw only a small decrease in accuracy, then I’d conclude that the variable is of less importance.
+
+At a high level, there were two common ways to tackle this. The first, often just called **Feature Importance** is where we find all nodes in the Decision Trees of the forest where a particular input variable is used to split the data and assess what the Mean Squared Error (for a Regression problem) was before the split was made, and compare this to the Mean Squared Error after the split was made.  We can take the *average* of these improvements across all Decision Trees in the Random Forest to get a score that tells us *how much better* we’re making the model by using that input variable.
+
+If we do this for *each* of my input variables, we can compare these scores and understand which is adding the most value to the predictive power of the model!
+
+The other approach, often called **Permutation Importance** cleverly uses some data that has gone *unused* at when random samples are selected for each Decision Tree (this stage is called "bootstrap sampling" or "bootstrapping")
+
+These observations that were not randomly selected for each Decision Tree are known as *Out of Bag* observations and these can be used for testing the accuracy of each particular Decision Tree.
+
+For each Decision Tree, all of the *Out of Bag* observations are gathered and then passed through. Once all of these observations have been run through the Decision Tree, we obtain an accuracy score for these predictions, which in the case of a regression problem could be Mean Squared Error or r-squared.
+
+In order to understand the *importance*, we *randomize* the values within one of the input variables - a process that essentially destroys any relationship that might exist between that input variable and the output variable - and run that updated data through the Decision Tree again, obtaining a second accuracy score. The difference between the original accuracy and the new accuracy gives us a view on how important that particular variable is for predicting the output.
+
+*Permutation Importance* is often preferred over *Feature Importance* which can at times inflate the importance of numerical features. Both are useful and in most cases will give fairly similar results.
+
+Here, I put them both in place and plotted the results...
+
+```python
+# calculate feature importance
+feature_importance = pd.DataFrame(regressor.feature_importances_)
+feature_names = pd.DataFrame(X_train.columns)
+feature_importance_summary = pd.concat([feature_names, feature_importance], axis = 1)
+feature_importance_summary.columns = ['input_variable', 'feature_importance']
+feature_importance_summary.sort_values(by = 'feature_importance', inplace = True)
+
+plt.barh(feature_importance_summary['input_variable'], feature_importance_summary['feature_importance'])
+plt.title('Feature Importance of Random Forest')
+plt.xlabel('Feature Importance')
+plt.tight_layout()
+plt.show()
+
+# calculate permutation importance
+result = permutation_importance(regressor, X_test, y_test, n_repeats = 10, random_state = 42)      # n_repeats: How many times we want to apply random shuffling on each input variable
+
+permutation_importance = pd.DataFrame(result['importances_mean'])                                  # importances_mean: average of data we got over n_repeats of random shuffling
+permutation_names = pd.DataFrame(X_train.columns)
+permutation_importance_summary = pd.concat([feature_names, permutation_importance], axis = 1)
+permutation_importance_summary.columns = ['input_variable', 'permutation_importance']
+permutation_importance_summary.sort_values(by = 'permutation_importance', inplace = True)
+
+plt.barh(permutation_importance_summary['input_variable'],permutation_importance_summary['permutation_importance'])        
+plt.title('Permutation Importance of Random Forest')
+plt.xlabel('Permutation Importance')
+plt.tight_layout()
+plt.show()
+```
+<br>
+That code gave me the below plots - the first being for *Feature Importance* and the second for *Permutation Importance*!
+
+![alt text](/img/posts/Figure 2024-07-30 181237.png)
+
+<br>
+![alt text](/img/posts/Figure 2024-07-30 181409.png)
+
+<br>
+The overall story from both approaches was very similar, in that by far, the most important or impactful input variable was *smoking status*, followed by bmi and age. These insights were consistent with the results from my assessments using Linear Regression and Decision Tree models.
+___
+<br>
+# Modelling Summary  <a name="modelling-summary"></a>
+
+The most important outcome of this project was predictive accuracy, rather than explicitly understanding the drivers of prediction. Based upon this, I chose the model that performed the best when predicted on the test set - the Random Forest.
+
+___
+<br>
+# Growth & Next Steps <a name="growth-next-steps"></a>
 
 Impact and Future Directions
-The implementation of this machine learning solution marked a significant milestone for WFG. By accurately predicting life insurance premiums, WFG was able to offer fairer and more personalized insurance plans to their clients, enhancing customer satisfaction and trust.
+By accurately predicting life insurance premiums, the agency can offer fairer and more personalized insurance plans to their clients, enhancing customer satisfaction and trust. It would also allow clients to play with premiums and see how different premiums could allocate money for their retirements.
 
-Looking ahead, WFG plans to continuously refine and expand this model by incorporating additional data sources and exploring more advanced machine learning techniques. This initiative represents a commitment to innovation and excellence, ensuring that WFG remains at the forefront of the financial services industry.
-
-Through this project, WFG has demonstrated the transformative power of data and machine learning in revolutionizing traditional financial processes, paving the way for a more efficient and customer-centric future.
-
-
-
-Growth:
-It would also allow clients to play with premiums and see how different premiums could allocate money for their retirements.
+Looking ahead, the insurance agency plans to continuously refine and expand this model by incorporating additional data sources and exploring more advanced machine learning techniques. This initiative represents a commitment to innovation and excellence, paving the way for a more efficient and customer-centric future.
