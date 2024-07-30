@@ -464,10 +464,9 @@ plt.ylabel('Accuracy')
 plt.tight_layout()
 plt.show()
 ```
-"""
-best max depth was 6 but refitting the model with max depth of 6 did not change the validation score.
+
+Best max depth was 6 but refitting the model with max depth of 6 did not change the validation score.
 ![alt text](/img/posts/Figure 2024-07-30 172758.png)
-"""
 
 ___
 <br>
