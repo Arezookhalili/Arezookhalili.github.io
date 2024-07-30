@@ -160,18 +160,7 @@ The results of this can be seen in the table below.
 | 75% | 51 | 34.7 | 2 | 1386.66 | 
 | max | 64 | 53.1 | 5 | 5314.20 | 
 <br>
-| **input_variable** | **coefficient** |
-|---|---|
-| intercept | 0.516 |
-| distance_from_store | -0.201 |
-| credit_score | -0.028 |
-| total_sales | 0.000 |
-| total_items | 0.001 |
-| transaction_count | -0.005 |
-| product_area_count | 0.062 |
-| average_basket_value | -0.004 |
-| gender_M | -0.013 |
-<br>
+
 Based on this investigation, I saw some *max* column values for bmi was much higher than the *median* value.
 
 Because of this, I applied some outlier removal to facilitate generalization across the full dataset.
@@ -259,54 +248,78 @@ This created the below plot, which showed where the majority of data points lied
 sns.pairplot(data_for_model)
 ```
 
-Following pairplot was created showing the potential correlation between different numerical features.
-is created the below plot, which showed where the majority of data points lied.
+Following pairplot showed the correlation between bmi and age with premium.
 
+* A positive correlation between bmi and premium suggests that clients with higher BMI might have higher premiums. This could be due to the increased health risks associated with higher bmi.
+
+* A positive correlation between age and premium indicates that older clients tend to have higher premiums. This is expected as life insurance premiums generally increase with age due to higher risk.
 ![alt text](/img/posts/Pairplotp.png)
 
-###############################################################################
-# Feature Scaling
-###############################################################################
+Feature selection and feature scaling did not impact the modeling process or the accuracy of the predictions. Therefore, they were excluded.
+<br>
+### Model Training <a name="linreg-model-training"></a>
 
-scale_standard = StandardScaler()
+Instantiating and training the Linear Regression model was done using the below code:
 
-X_train = pd.DataFrame(scale_standard.fit_transform(X_train), columns = X_train.columns)        
-X_test = pd.DataFrame(scale_standard.transform(X_test), columns = X_test.columns)   
-
-###############################################################################
-# Model Training
-###############################################################################
-
+```python
+# instantiate my model object
 regressor = LinearRegression()
+
+# fit my model using our training & test sets
 regressor.fit(X_train, y_train)
+```
+<br>
+### Model Performance Assessment <a name="linreg-model-assessment"></a>
 
-###############################################################################
-# Prediction
-###############################################################################
+##### Predict On The Test Set
 
-# Predict on the test set
+To assess how well my model was predicting new data - I used the trained model object (here called *regressor*) and asked it to predict the *insurance premium* variable for the test set.
+
+```python
+# predict on the test set
 y_pred = regressor.predict(X_test)
+```
 
-###############################################################################
-# Model Assessment (Validation)
-###############################################################################
-
-# Calculate R-squared
+<br>
+##### Calculate R-Squared
+R-Squared is a metric that shows the percentage of variance in the output variable *y* that is being explained by the input variable(s) *x*.  It is a value that ranges between 0 and 1, with a higher value showing a higher level of explained variance.
+```python
 r_squared = r2_score(y_test, y_pred)
 print(r_squared)
-
-# Calculate adjusted R-squared
+```
+The resulting r-squared score from this was **0.766**.
+<br>
+##### Calculate adjusted R-squared
+```python
 num_data_points, num_input_vars = X_test.shape                           
 adjusted_r_squared = 1 - (1 - r_squared) * (num_data_points - 1) / (num_data_points - num_input_vars - 1)
 print(adjusted_r_squared)
+```
+The resulting r-squared score from this was **0.755**.
+<br>
+##### Calculate Cross Validated R-Squared (Cross validation (KFold: including both shuffling and the random state))
 
-# Calculate Cross Validated R-Squared (Cross validation (KFold: including both shuffling and the random state))
+An even more powerful and reliable way to assess model performance is to utilize Cross Validation.
+
+Instead of simply dividing our data into a single training set, and a single test set, with Cross Validation we can break our data into several "chunks" and then iteratively train the model on all but one of the "chunks", test the model on the remaining "chunk" until each has had a chance to be the test set.
+
+The result of this is that we are provided a number of test set validation results - and we can take the average of these to give a much more robust & reliable view of how our model will perform on new, unseen data!
+
+In the code below, I put this into place. I first specified that I wanted 4 "chunks" and then I passed in my regressor object, training set, and test set. I also specified the metric I wanted to assess with, in this case, I sticked to r-squared.
+
+Finally, I took a mean of all four test set results.
+```python
 cv = KFold(n_splits = 4, shuffle = True, random_state = 42)    
 cv_scores = cross_val_score(regressor, X_train, y_train, cv = cv, scoring = 'r2')     # returns r2 for each chunk of data (each cv)
 cv_scores.mean()
 print(cv_scores.mean())
+```
+The resulting r-squared score from this was **0.755**.
 
-# Extract model coefficients
+##### Extract model coefficients and intercept
+
+Here, I extracted the coefficients of the linear model which showed a high positive correlation between age, bmi, smoking status and gender with the resulted premium.
+```python
 coefficients = pd.DataFrame(regressor.coef_)
 input_variable_names = pd.DataFrame(X_train.columns)
 summary_stats = pd.concat([input_variable_names, coefficients], axis = 1)
@@ -314,7 +327,7 @@ summary_stats.columns = ['input_variable', 'coefficient']
 
 # Extract model intercept
 regressor.intercept_
-
+```
 
 
 
