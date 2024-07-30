@@ -655,12 +655,6 @@ That code gave me the below plots - the first being for *Feature Importance* and
 The overall story from both approaches was very similar, in that by far, the most important or impactful input variable was *smoking status*, followed by bmi and age. These insights were consistent with the results from my assessments using Linear Regression and Decision Tree models.
 ___
 <br>
-# Modelling Summary  <a name="modelling-summary"></a>
-
-The most important outcome of this project was predictive accuracy, rather than explicitly understanding the drivers of prediction. Based upon this, I chose the model that performed the best when predicted on the test set - the Random Forest.
-
-___
-<br>
 # Growth & Next Steps <a name="growth-next-steps"></a>
 
 Impact and Future Directions
