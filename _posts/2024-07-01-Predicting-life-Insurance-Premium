@@ -140,10 +140,32 @@ data_for_model.isna().sum()
 ##### Outliers
 
 The ability of a Linear Regression model to generalize well across *all* data could be hampered if there were outliers present. There was no right or wrong way to deal with outliers, but it was always something worth very careful consideration - just because a value was high or low, did not necessarily mean it should not be there!
+In this code section, I used **.describe()** from Pandas to investigate the spread of values for each of the predictors. 
 ```python
 # Deal with Outliers
 
 outlier_investigation = data_for_model.describe()
+```
+
+The results of this can be seen in the table below.
+
+| **metric** | **age** | **bmi** | **children** | **premium** | 
+|---|---|---|---|---|
+| count | 1338 | 1338 | 1338 | 1338 |
+| mean | 39.2 | 30.67 | 1.09 | 1104.10 |
+| std | 14.05 | 6.10 | 1.21 | 1010.11 | 
+| min | 18 | 16 | 0 | 93.49 | 
+| 25% | 27 | 26.3 | 0 | 391.28 | 
+| 50% | 39 | 30.4 | 1 | 775.27 | 
+| 75% | 51 | 34.7 | 2 | 1386.66 | 
+| max | 64 | 53.1 | 5 | 5314.20 | 
+<br>
+Based on this investigation, I saw some *max* column values for bmi was much higher than the *median* value.
+
+Because of this, I applied some outlier removal to facilitate generalization across the full dataset.
+
+I did this using the "boxplot approach" where I removed any rows where the values within those columns were outside of the interquartile range multiplied by 2.
+```python
 outlier_columns = ["bmi"]
 
 # boxplot approach
@@ -160,7 +182,10 @@ for column in outlier_columns:
     print(f"{len(outliers)} outliers detected in column {column}")
     
     data_for_model.drop(outliers, inplace = True)
-
+```
+<br>
+##### Split Out Data For Modelling
+```python
 # Split Input Variables and Output Variables
 
 X = data_for_model.drop(['premium'], axis = 1)
@@ -169,7 +194,16 @@ y = data_for_model['premium']
 # Split out Training and Test Sets
 
 X_train, X_test, y_train, y_test = train_test_split (X, y, test_size = 0.2, random_state = 42)
+```
+<br>
+##### Categorical Predictor Variables
 
+In my dataset, I had seven categorical variables. As the Linear Regression algorithm could only deal with numerical data, I had to encode my categorical variables.
+
+One Hot Encoding was used to represent categorical variables as binary vectors. 
+
+For ease, after I applied One Hot Encoding, I turned my training and test objects back into Pandas Dataframes, with the column names applied.
+```python
 # Deal with Categorical Variables
 
 # Create a list of categorical variables                    
@@ -199,10 +233,15 @@ X_test = pd.concat([X_test.reset_index(drop = True), X_test_encoded.reset_index(
 X_train.drop(categorical_vars, axis = 1, inplace = True)           
 X_test.drop(categorical_vars, axis = 1, inplace = True) 
 ```
-# Data Visualization
-
+<br>
+##### Data Visualization
+```python
 # Data Distribution
 data_for_model.hist(figsize=(10,8))  
+```
+This created the below plot, which showed where the majority of data points lied.
+
+![alt text](/img/posts/hist.png)
 
 # Pairplot
 sns.pairplot(data_for_model)
