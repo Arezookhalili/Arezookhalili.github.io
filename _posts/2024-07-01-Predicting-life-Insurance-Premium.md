@@ -159,6 +159,18 @@ The results of this can be seen in the table below.
 | 50% | 39 | 30.4 | 1 | 775.27 | 
 | 75% | 51 | 34.7 | 2 | 1386.66 | 
 | max | 64 | 53.1 | 5 | 5314.20 | 
+
+| **input_variable** | **coefficient** |
+|---|---|
+| intercept | 0.516 |
+| distance_from_store | -0.201 |
+| credit_score | -0.028 |
+| total_sales | 0.000 |
+| total_items | 0.001 |
+| transaction_count | -0.005 |
+| product_area_count | 0.062 |
+| average_basket_value | -0.004 |
+| gender_M | -0.013 |
 <br>
 Based on this investigation, I saw some *max* column values for bmi was much higher than the *median* value.
 
