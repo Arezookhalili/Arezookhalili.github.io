@@ -159,7 +159,7 @@ The results of this can be seen in the table below.
 | 50% | 39 | 30.4 | 1 | 775.27 | 
 | 75% | 51 | 34.7 | 2 | 1386.66 | 
 | max | 64 | 53.1 | 5 | 5314.20 | 
-
+<br>
 | **input_variable** | **coefficient** |
 |---|---|
 | intercept | 0.516 |
