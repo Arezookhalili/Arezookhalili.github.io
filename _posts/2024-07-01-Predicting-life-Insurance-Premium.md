@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Predicting Life Insurance Premiums for Clients
-image: "/posts/classification-title-img.png"
+image: "/posts/premium.png"
 tags: [Machine Learning, Regression, Python]
 ---
 
@@ -240,11 +240,17 @@ X_test.drop(categorical_vars, axis = 1, inplace = True)
 data_for_model.hist(figsize=(10,8))  
 ```
 This created the below plot, which showed where the majority of data points lied.
-
 ![alt text](/img/posts/hist.png)
 
+```python
 # Pairplot
 sns.pairplot(data_for_model)
+```
+
+Following pairplot was created showing the potential correlation between different numerical features.
+is created the below plot, which showed where the majority of data points lied.
+
+![alt text](/img/posts/Pairplotp.png)
 
 ###############################################################################
 # Feature Scaling
