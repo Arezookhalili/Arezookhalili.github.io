@@ -121,7 +121,7 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split, cross_val_score, KFold
 from sklearn.linear_model import LinearRegression
 from sklearn.utils import shuffle
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import r2_score
 
 # Import Sample Data
@@ -348,7 +348,7 @@ import seaborn as sns
 
 from sklearn.model_selection import train_test_split, cross_val_score, KFold
 from sklearn.utils import shuffle
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import r2_score
 from sklearn.tree import DecisionTreeRegressor, plot_tree
 
@@ -504,7 +504,7 @@ import seaborn as sns
 
 from sklearn.model_selection import train_test_split, cross_val_score, KFold
 from sklearn.utils import shuffle
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import r2_score
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.inspection import permutation_importance
