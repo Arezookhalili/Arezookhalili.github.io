@@ -55,7 +55,7 @@ Here, I aimed to build a model that would accurately predict the fraud transacti
 **Metric 2: Precision**
 
 * Random Forest = 0.90
-* Logistic Regression = 0.89
+* Logistic Regression = 0.88
 * Decision Tree = 0.66
 
 <br>
@@ -63,13 +63,13 @@ Here, I aimed to build a model that would accurately predict the fraud transacti
 
 * Random Forest = 0.76
 * Decision Tree = 0.75
-* Logistic Regression = 0.6
+* Logistic Regression = 0.58
 
 <br>
 **Metric 4: F1 Score**
 
 * Random Forest = 0.82
-* Logistic Regression = 0.72
+* Logistic Regression = 0.7
 * Decision Tree = 0.7
 
 <br>
@@ -85,6 +85,39 @@ The project addresses class imbalance using:
 * Oversampling: Using SMOTE (Synthetic Minority Over-sampling Technique) to generate synthetic samples for the minority class.
 
 I implemented both undersampling and oversampling techniques, but oversampling appears to be more favorable as it ensures no data is lost.
+
+Using oversampling, I ended up following enhanced metrics with Random forest and decision tree offers very smilar metrics.
+
+<br>
+**Metric 1: Classification Accuracy**
+
+* Random Forest = 0.99
+* Decision Tree = 0.99
+* Logistic Regression = 0.96
+
+<br>
+**Metric 2: Precision**
+
+* Random Forest = 0.99
+* Decision Tree = 0.99
+* Logistic Regression = 0.98
+
+
+<br>
+**Metric 3: Recall**
+
+* Random Forest = 1
+* Decision Tree = 0.99
+* Logistic Regression = 0.93
+
+<br>
+**Metric 4: F1 Score**
+
+* Random Forest = 0.99
+* Decision Tree = 0.99
+* Logistic Regression = 0.96
+
+<br>
 
 
 ___
@@ -123,7 +156,7 @@ from imblearn.over_sampling import SMOTE
 <br>
 ### Get the Data
 
-Read the 'Creditcard.csv file into a dataframe.
+Read the creditcard.csv file into a dataframe.
 
 
 ```python
@@ -153,12 +186,6 @@ print(f'Number of columns: {data.shape[1]}')
 # Check data type and missing values
 data.info()
 data.isna().sum()
-
-# Standardisation
-scale_standard = StandardScaler()
-
-# Convert the Result from Array to DataFrame
-data['Amount'] = scale_standard.fit_transform(pd.DataFrame(data['Amount']))         
 
 # Drop Time column
 data.drop('Time', axis = 1, inplace = True)
@@ -247,6 +274,35 @@ for name, clf in classifier.items():
     f1 = f1_score(y_test, y_pred_class)
     print(f'\n F1_score: {f1}')
 ```
+Below, you can find the abovementioned metrics for all three models, without addressing class imbalance.
+
+<br>
+**Metric 1: Classification Accuracy**
+
+* Random Forest = 0.99
+* Decision Tree = 0.99
+* Logistic Regression = 0.99
+  
+<br>
+**Metric 2: Precision**
+
+* Random Forest = 0.90
+* Logistic Regression = 0.88
+* Decision Tree = 0.66
+
+<br>
+**Metric 3: Recall**
+
+* Random Forest = 0.76
+* Decision Tree = 0.75
+* Logistic Regression = 0.58
+
+<br>
+**Metric 4: F1 Score**
+
+* Random Forest = 0.82
+* Logistic Regression = 0.7
+* Decision Tree = 0.7
 
 <br>
 ### Handling Class Imbalance
@@ -353,14 +409,14 @@ Running this code resulted in:
 
 * Random Forest = 0.99
 * Decision Tree = 0.99
-* Logistic Regression = 0.95
+* Logistic Regression = 0.96
 
 <br>
 **Metric 2: Precision**
 
 * Random Forest = 0.99
 * Decision Tree = 0.99
-* Logistic Regression = 0.97
+* Logistic Regression = 0.98
 
 
 <br>
@@ -368,14 +424,14 @@ Running this code resulted in:
 
 * Random Forest = 1
 * Decision Tree = 0.99
-* Logistic Regression = 0.92
+* Logistic Regression = 0.93
 
 <br>
 **Metric 4: F1 Score**
 
 * Random Forest = 0.99
 * Decision Tree = 0.99
-* Logistic Regression = 0.94
+* Logistic Regression = 0.96
 
 <br>
 
