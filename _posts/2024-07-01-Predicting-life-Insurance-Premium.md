@@ -261,6 +261,7 @@ Following pairplot showed the correlation between bmi and age with premium.
 
 Feature selection and feature scaling did not impact the modeling process or the accuracy of the predictions. Therefore, they were excluded.
 <br>
+
 ### Model Training <a name="linreg-model-training"></a>
 
 Instantiating and training the Linear Regression model was done using the below code:
@@ -273,7 +274,9 @@ regressor = LinearRegression()
 regressor.fit(X_train, y_train)
 ```
 <br>
+
 ### Model Performance Assessment <a name="linreg-model-assessment"></a>
+
 
 ##### Predict On The Test Set
 
@@ -293,6 +296,7 @@ print(r_squared)
 ```
 The resulting R-squared score from this was **0.766**.
 <br>
+
 ##### Calculate Cross Validated R-Squared (Cross validation (KFold: including both shuffling and the random state))
 
 An even more powerful and reliable way to assess model performance is to utilize Cross Validation.
@@ -313,6 +317,7 @@ print(cv_scores.mean())
 The resulting R-squared score from this was **0.755** which as expected, was slightly lower than the score I got for R-squared on it's own.
 
 <br>
+
 ### Model Summary Statistics <a name="linreg-model-summary"></a>
 Although my overall goal for this project was predictive accuracy, rather than an explicit understanding of the relationships of each of the input variables and the output variable, it was always interesting to look at the summary statistics for these.
 The coefficient value for each of the input variables, along with that of the intercept would make up the equation for the line of best fit for this particular model (or more accurately, in this case, it would be the plane of best fit, as I had multiple input variables).
@@ -330,6 +335,7 @@ regressor.intercept_
 ```
 ___
 <br>
+
 # Decision Tree <a name="regtree-title"></a>
 
 I again utilized the scikit-learn library within Python to model my data using a Decision Tree. The whole code can be found below:
@@ -361,6 +367,7 @@ data_for_model['region'].value_counts()
 <br>
 While Linear Regression is susceptible to the effects of outliers, and highly correlated input variables - Decision Trees are not, so the required preprocessing here was lighter. I still however put in place logic for:
 <br>
+
 ##### Missing Values
 ```python
 # Deal with Missing Values
@@ -369,6 +376,7 @@ data_for_model.isna().sum()
 ```
 There was no missing values in the data.
 <br>
+
 ##### Split Out Data For Modelling
 ```python
 # Split Input Variables and Output Variables
@@ -381,6 +389,7 @@ y = data_for_model['premium']
 X_train, X_test, y_train, y_test = train_test_split (X, y, test_size = 0.2, random_state = 42)
 ```
 <br>
+
 ##### Categorical Predictor Variables
 We would again apply One Hot Encoding to the categorical column.
 ```python
@@ -412,6 +421,7 @@ X_train.drop(categorical_vars, axis = 1, inplace = True)
 X_test.drop(categorical_vars, axis = 1, inplace = True) 
 ```
 <br>
+
 ### Model Training <a name="regtree-model-training"></a>
 
 Instantiating and training the Decision Tree model was done using the below code. I used the *random_state* parameter to ensure I got reproducible results, and this helped us understand any improvements in performance with changes to model hyperparameters.     
@@ -426,6 +436,7 @@ regressor.fit(X_train, y_train)
 ```python
 # Predict on the test set
 y_pred = regressor.predict(X_test)
+
 
 # Model Assessment (Validation)
 
