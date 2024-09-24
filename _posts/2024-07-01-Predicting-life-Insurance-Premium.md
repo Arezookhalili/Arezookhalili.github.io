@@ -152,17 +152,16 @@ outlier_investigation = data_for_model.describe()
 
 The results of this can be seen in the table below.
 
-
 | **metric** | **age** | **bmi** | **children** | **premium** | 
 |---|---|---|---|---|
-| count | 1338 | 1338 | 1338 | 1338 |
-| mean | 39.2 | 30.67 | 1.09 | 1104.10 |
-| std | 14.05 | 6.10 | 1.21 | 1010.11 | 
-| min | 18 | 16 | 0 | 93.49 | 
-| 25% | 27 | 26.3 | 0 | 391.28 | 
-| 50% | 39 | 30.4 | 1 | 775.27 | 
-| 75% | 51 | 34.7 | 2 | 1386.66 | 
-| max | 64 | 53.1 | 5 | 5314.20 | 
+| **count | 1338 | 1338 | 1338 | 1338 |
+| **mean** | 39.2 | 30.67 | 1.09 | 1104.10 |
+| **std** | 14.05 | 6.10 | 1.21 | 1010.11 | 
+| **min** | 18 | 16 | 0 | 93.49 | 
+| **25%** | 27 | 26.3 | 0 | 391.28 | 
+| **50%** | 39 | 30.4 | 1 | 775.27 | 
+| **75%** | 51 | 34.7 | 2 | 1386.66 | 
+| **max** | 64 | 53.1 | 5 | 5314.20 | 
 <br>
 
 Based on this investigation, I saw some *max* column values for bmi was much higher than the *median* value.
