@@ -366,7 +366,6 @@ While Linear Regression is susceptible to the effects of outliers, and highly co
 ##### Missing Values
 ```python
 # Deal with Missing Values
-
 data_for_model.isna().sum()     
 ```
 There was no missing values in the data.
