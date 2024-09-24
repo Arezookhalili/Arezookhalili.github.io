@@ -662,8 +662,10 @@ That code gave me the below plots - the first being for *Feature Importance* and
 
 <br>
 The overall story from both approaches was very similar, in that by far, the most important or impactful input variable was *smoking status*, followed by bmi and age. These insights were consistent with the results from my assessments using Linear Regression and Decision Tree models.
+
 ___
 <br>
+
 
 # Growth & Next Steps <a name="growth-next-steps"></a>
 
