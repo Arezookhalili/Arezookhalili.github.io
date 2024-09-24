@@ -324,7 +324,6 @@ The coefficient value for each of the input variables, along with that of the in
 <br>
 ```python
 # Extract model coefficients
-
 coefficients = pd.DataFrame(regressor.coef_)
 input_variable_names = pd.DataFrame(X_train.columns)
 summary_stats = pd.concat([input_variable_names, coefficients], axis = 1)
@@ -341,7 +340,6 @@ ___
 I again utilized the scikit-learn library within Python to model my data using a Decision Tree. The whole code can be found below:
 ```python
 # Import Required Packages
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -353,18 +351,15 @@ from sklearn.metrics import r2_score
 from sklearn.tree import DecisionTreeRegressor, plot_tree
 
 # Import Sample Data
-
 data_for_model = pd.read_excel('Life insurance.xlsx', sheet_name='Life insurance')  
 
 # Shuffle data
 data_for_model = shuffle(data_for_model, random_state = 42)               
 
 # Get Data Information
-
 data_for_model.info()
 data_for_model['region'].value_counts()
 ```
-<br>
 While Linear Regression is susceptible to the effects of outliers, and highly correlated input variables - Decision Trees are not, so the required preprocessing here was lighter. I still however put in place logic for:
 <br>
 
@@ -380,12 +375,10 @@ There was no missing values in the data.
 ##### Split Out Data For Modelling
 ```python
 # Split Input Variables and Output Variables
-
 X = data_for_model.drop(['premium'], axis = 1)
 y = data_for_model['premium']
 
 # Split out Training and Test Sets
-
 X_train, X_test, y_train, y_test = train_test_split (X, y, test_size = 0.2, random_state = 42)
 ```
 <br>
@@ -427,7 +420,6 @@ X_test.drop(categorical_vars, axis = 1, inplace = True)
 Instantiating and training the Decision Tree model was done using the below code. I used the *random_state* parameter to ensure I got reproducible results, and this helped us understand any improvements in performance with changes to model hyperparameters.     
 ```python
 # Model Training
-
 regressor = DecisionTreeRegressor(random_state = 42, max_depth = 4)
 regressor.fit(X_train, y_train)
 ```
@@ -436,7 +428,6 @@ regressor.fit(X_train, y_train)
 ```python
 # Predict on the test set
 y_pred = regressor.predict(X_test)
-
 
 # Model Assessment (Validation)
 
@@ -452,6 +443,7 @@ print(cv_scores.mean())
 ```
 The resulting R-squared and cross-validated R-squared scores from this analysis was **0.908** and **0.865**, respectively.
 <br>
+
 ### Decision Tree Regularisation <a name="regtree-model-regularisation"></a>
 
 Decision Trees can be prone to over-fitting, in other words, without any limits on their splitting, they will end up learning the training data perfectly. We would much prefer our model to have a more *generalized* set of rules, as this will be more robust & reliable when making predictions on *new* data.
@@ -459,6 +451,7 @@ Decision Trees can be prone to over-fitting, in other words, without any limits 
 One effective method of avoiding this over-fitting is to apply a *max depth* to the Decision Tree, meaning we only allow it to split the data a certain number of times before it is required to stop.
 
 Unfortunately, we don't necessarily know the *best* number of splits to use for this - so below I looped over a variety of values and assessed which gave me the best predictive performance!
+<br>
 
 ### Finding the best max depth
 ```python
@@ -496,8 +489,7 @@ ___
 
 I utilized the scikit-learn library within Python to model my data using a Random Forest. 
 ```python
-# import required packages
-
+# Import required packages
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -516,24 +508,20 @@ data_for_model = pd.read_excel('Life insurance.xlsx', sheet_name='Life insurance
 data_for_model = shuffle(data_for_model, random_state = 42)               
 
 # Get Data Information
-
 data_for_model.info()
 data_for_model['region'].value_counts()
 
 # Deal with Missing Values
-
 data_for_model.isna().sum()     
 ```
 <br>
 ##### Split Out Data For Modelling
 ```python
 # Split Input Variables and Output Variables
-
 X = data_for_model.drop(['premium'], axis = 1)
 y = data_for_model['premium']
 
 # Split out Training and Test Sets
-
 X_train, X_test, y_train, y_test = train_test_split (X, y, test_size = 0.2, random_state = 42)
 ```
 <br>
@@ -677,6 +665,7 @@ That code gave me the below plots - the first being for *Feature Importance* and
 The overall story from both approaches was very similar, in that by far, the most important or impactful input variable was *smoking status*, followed by bmi and age. These insights were consistent with the results from my assessments using Linear Regression and Decision Tree models.
 ___
 <br>
+
 # Growth & Next Steps <a name="growth-next-steps"></a>
 
 Impact and Future Directions
