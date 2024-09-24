@@ -55,15 +55,25 @@ As the most important outcome for this project was predictive accuracy, rather t
 ### Key Definition  <a name="overview-definition"></a>
 
 age: client's age
+
 sex: client's gender
+
 bmi: Body mass index is a value derived from the mass and height of a person (the body mass (kg) divided by the square of the body height (m^2))
+
 children: number of client's children
+
 smoker: client's smoking status	
+
 region: client's place of residence
+
 CI: includes critical illness insurance
+
 rated: increased premium due to health problems
+
 UL permanent: combined investment and life insurance
+
 disability: includes disability insurance
+
 premium: client's monthly payment
 
 ___
