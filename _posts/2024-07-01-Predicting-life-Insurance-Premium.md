@@ -152,6 +152,7 @@ outlier_investigation = data_for_model.describe()
 
 The results of this can be seen in the table below.
 
+
 | **metric** | **age** | **bmi** | **children** | **premium** | 
 |---|---|---|---|---|
 | count | 1338 | 1338 | 1338 | 1338 |
