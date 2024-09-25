@@ -1268,7 +1268,3 @@ corr_Fargo[corr_Fargo['num of ratings']>100].sort_values('Correlation',ascending
   </tbody>
 </table>
 </div>
-
-
-
-# Great Job!
