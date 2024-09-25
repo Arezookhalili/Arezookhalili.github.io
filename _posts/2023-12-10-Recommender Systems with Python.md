@@ -887,17 +887,7 @@ starwars_user_ratings.head()
 ```python
 similar_to_starwars = moviemat.corrwith(starwars_user_ratings)
 similar_to_Fargo = moviemat.corrwith(Fargo_user_ratings)
-```
-
-    C:\Users\arezo\anaconda3\lib\site-packages\numpy\lib\function_base.py:2845: RuntimeWarning: Degrees of freedom <= 0 for slice
-      c = cov(x, y, rowvar, dtype=dtype)
-    C:\Users\arezo\anaconda3\lib\site-packages\numpy\lib\function_base.py:2704: RuntimeWarning: divide by zero encountered in divide
-      c *= np.true_divide(1, fact)
-    C:\Users\arezo\anaconda3\lib\site-packages\numpy\lib\function_base.py:2845: RuntimeWarning: Degrees of freedom <= 0 for slice
-      c = cov(x, y, rowvar, dtype=dtype)
-    C:\Users\arezo\anaconda3\lib\site-packages\numpy\lib\function_base.py:2704: RuntimeWarning: divide by zero encountered in divide
-      c *= np.true_divide(1, fact)
-    
+```  
 
 We can then use corrwith() method to get correlations between two pandas series:
 
