@@ -230,6 +230,17 @@ X_train, X_test, y_train, y_test = train_test_split (X, y, test_size = 0.2, rand
 ```
 
 <br>
+### Standardisation
+
+Standardisation was used for scaling the data (normaliztion makes a specific bound for my data that was not what I wanted here)
+
+```python
+scale_standard = StandardScaler()
+
+X_train = pd.DataFrame(scale_standard.fit_transform(X_train), columns = X_train.columns)
+X_test = pd.DataFrame(scale_standard.transform(X_test), columns = X_test.columns)
+```
+<br>
 ### Model Training and Assessment
 
 Three classifiers were trained and evaluated:
@@ -333,6 +344,11 @@ y = new_data['Class']
 
 X_train, X_test, y_train, y_test = train_test_split (X, y, test_size = 0.2, random_state = 42)
 
+scale_standard = StandardScaler()
+
+X_train = pd.DataFrame(scale_standard.fit_transform(X_train), columns = X_train.columns)
+X_test = pd.DataFrame(scale_standard.transform(X_test), columns = X_test.columns)
+
 classifier = {
        'LogisticRegression': LogisticRegression(random_state = 42),
        'DecisionTreeClassifier': DecisionTreeClassifier(random_state = 42),
@@ -375,6 +391,11 @@ X_res, y_res = SMOTE().fit_resample(X,y)
 y_res.value_counts()
 
 X_train, X_test, y_train, y_test = train_test_split (X_res, y_res, test_size = 0.2, random_state = 42)
+
+scale_standard = StandardScaler()
+
+X_train = pd.DataFrame(scale_standard.fit_transform(X_train), columns = X_train.columns)
+X_test = pd.DataFrame(scale_standard.transform(X_test), columns = X_test.columns)
 
 classifier = {
        'LogisticRegression': LogisticRegression(random_state = 42),
