@@ -711,15 +711,14 @@ for column in num_col:
         plt.show()
 ```
 
-
+![alt text](/img/posts/combined_notebook_34_0)
     
-![png](combined_notebook_files/combined_notebook_34_0.png)
     
 
 
 
-    
-![png](combined_notebook_files/combined_notebook_34_1.png)
+![alt text](/img/posts/combined_notebook_34_1)    
+
     
 
 
