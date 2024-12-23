@@ -463,17 +463,9 @@ plt.show()
 
     [[156   6]
      [ 25 143]]
-    
-
-    C:\Users\arezo\AppData\Local\Temp\ipykernel_24288\710092627.py:6: MatplotlibDeprecationWarning: The seaborn styles shipped by Matplotlib are deprecated since 3.6, as they no longer correspond to the styles shipped by seaborn. However, they will remain available as 'seaborn-v0_8-<style>'. Alternatively, directly use the seaborn API instead.
-      plt.style.use('seaborn-poster')
-    
+      
 
 
 
 ![alt text](/img/posts/output_28_2.png)
 
-    
-
-
-## Great Job!
