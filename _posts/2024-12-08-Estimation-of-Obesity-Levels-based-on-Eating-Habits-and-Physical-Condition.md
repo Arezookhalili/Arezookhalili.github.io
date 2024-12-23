@@ -711,7 +711,8 @@ for column in num_col:
         plt.show()
 ```
 
-![alt text](/img/posts/combined_notebook_34_0)
+![alt text](/img/posts/combined_notebook_34_0.png)
+![alt text](/img/posts/regression-tree-nodes-plot.png "Decision Tree Max Depth Plot")
     
     
 
