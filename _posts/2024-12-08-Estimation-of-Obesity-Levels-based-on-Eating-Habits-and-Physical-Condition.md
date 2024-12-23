@@ -3370,7 +3370,7 @@ shap.summary_plot(shap_values, X_train, plot_type="bar")
 
 
     
-![png](combined_notebook_files/combined_notebook_150_0.png)
+!![alt text](/img/posts/combined_notebook_150_0.png)
     
 
 
@@ -4078,7 +4078,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_170_0.png)
+!![alt text](/img/posts/combined_notebook_170_0.png)
     
 
 
@@ -4113,13 +4113,13 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_171_1.png)
+!![alt text](/img/posts/combined_notebook_171_1.png)
     
 
 
 
     
-![png](combined_notebook_files/combined_notebook_171_2.png)
+!![alt text](/img/posts/combined_notebook_171_2.png)
     
 
 
@@ -4152,7 +4152,7 @@ shap.summary_plot(shap_values_rf, X_train_new, plot_type="bar")
 
 
     
-![png](combined_notebook_files/combined_notebook_174_0.png)
+!![alt text](/img/posts/combined_notebook_174_0.png)
     
 
 
@@ -4172,7 +4172,7 @@ shap.summary_plot(shap_values_xgb, X_train_new, plot_type="bar")
 
 
     
-![png](combined_notebook_files/combined_notebook_175_0.png)
+!![alt text](/img/posts/combined_notebook_175_0.png)
     
 
 
@@ -4613,4 +4613,4 @@ Based on the results and observations from the above tables and SHAP visualizati
 
 
 
-![Model Comparison Table](../reports/image1.png)
+!![alt text](/img/posts/image1.png)
