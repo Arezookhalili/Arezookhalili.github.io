@@ -712,26 +712,25 @@ for column in num_col:
 ```
 
 ![alt text](/img/posts/combined_notebook_34_0.png)
-![alt text](/img/posts/regression-tree-nodes-plot.png "Decision Tree Max Depth Plot")
     
     
 
 
 
-![alt text](/img/posts/combined_notebook_34_1)    
+![alt text](/img/posts/combined_notebook_34_1.png)    
 
     
 
 
 
     
-![png](combined_notebook_files/combined_notebook_34_2.png)
+![alt text](/img/posts/combined_notebook_34_2.png)
     
 
 
 
     
-![png](combined_notebook_files/combined_notebook_34_3.png)
+![alt text](/img/posts/combined_notebook_34_3.png)
     
 
 
@@ -760,7 +759,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_38_0.png)
+![alt text](/img/posts/combined_notebook_38_0.png)
     
 
 
@@ -783,7 +782,7 @@ plt.title('Age Distribution')
 
 
     
-![png](combined_notebook_files/combined_notebook_40_1.png)
+![alt text](/img/posts/combined_notebook_40_1.png)
     
 
 
@@ -808,7 +807,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_43_0.png)
+![alt text](/img/posts/combined_notebook_43_0.png)
     
 
 
@@ -826,7 +825,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_46_0.png)
+![alt text](/img/posts/combined_notebook_46_0.png)
     
 
 
@@ -879,7 +878,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_49_0.png)
+![alt text](/img/posts/combined_notebook_49_0.png)
     
 
 
@@ -948,7 +947,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_52_0.png)
+![alt text](/img/posts/combined_notebook_52_0.png)
     
 
 
@@ -984,7 +983,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_57_0.png)
+![alt text](/img/posts/combined_notebook_57_0.png)
     
 
 
@@ -1007,7 +1006,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_60_0.png)
+![alt text](/img/posts/combined_notebook_60_0.png)
     
 
 
@@ -1035,7 +1034,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_62_0.png)
+![alt text](/img/posts/combined_notebook_62_0.png)
     
 
 
@@ -1059,7 +1058,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_65_0.png)
+![alt text](/img/posts/combined_notebook_65_0.png)
     
 
 
@@ -1092,7 +1091,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_67_0.png)
+![alt text](/img/posts/combined_notebook_67_0.png)
     
 
 
@@ -1125,7 +1124,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_70_0.png)
+![alt text](/img/posts/combined_notebook_70_0.png)
     
 
 
@@ -1160,7 +1159,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_74_0.png)
+![alt text](/img/posts/combined_notebook_74_0.png)
     
 
 
@@ -1184,7 +1183,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_77_0.png)
+![alt text](/img/posts/combined_notebook_77_0.png)
     
 
 
@@ -1217,7 +1216,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_80_0.png)
+![alt text](/img/posts/combined_notebook_80_0.png)
     
 
 
@@ -1265,7 +1264,7 @@ show_pie_chart(data, 'Transportation')
 
 
     
-![png](combined_notebook_files/combined_notebook_84_0.png)
+![alt text](/img/posts/combined_notebook_84_0.png)
     
 
 
@@ -2554,7 +2553,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_125_1.png)
+![alt text](/img/posts/combined_notebook_125_1.png)
     
 
 
@@ -2582,7 +2581,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_127_1.png)
+![alt text](/img/posts/combined_notebook_127_1.png)
     
 
 
@@ -2610,7 +2609,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_129_1.png)
+![alt text](/img/posts/combined_notebook_129_1.png)
     
 
 
@@ -2815,7 +2814,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_139_0.png)
+![alt text](/img/posts/combined_notebook_139_0.png)
     
 
 
@@ -2853,7 +2852,7 @@ ax = sns.barplot(y=fimp.index, x=fimp.values, palette=palette, orient='h')
 
 
     
-![png](combined_notebook_files/combined_notebook_141_1.png)
+![alt text](/img/posts/combined_notebook_141_1.png)
     
 
 
@@ -3307,7 +3306,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_144_0.png)
+![alt text](/img/posts/combined_notebook_144_0.png)
     
 
 
@@ -3320,7 +3319,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_145_0.png)
+![alt text](/img/posts/combined_notebook_145_0.png)
     
 
 
@@ -3333,7 +3332,7 @@ plt.show()
 
 
     
-![png](combined_notebook_files/combined_notebook_146_0.png)
+![alt text](/img/posts/combined_notebook_146_0.png)
     
 
 
