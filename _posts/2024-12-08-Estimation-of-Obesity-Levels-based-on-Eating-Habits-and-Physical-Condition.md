@@ -1,4 +1,9 @@
-## Obesity Levels Based On Eating Habits and Physical Condition
+---
+layout: post
+title: Estimation of Obesity Levels based on eating Habits and Physical Condition
+image: "/posts/Obesity.png"
+tags: [XGBoost, RandomForest, Decision Tree, KNN, Machine Learning, Classification, Python]
+---
 
 ### The dataset contains 2111 rows and 17 columns, with a mix of categorical and numerical variables. Here's a breakdown of the key columns:
 
