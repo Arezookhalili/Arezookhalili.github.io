@@ -1,73 +1,63 @@
 ---
 layout: post
-title: Estimation of Obesity Levels based on eating Habits and Physical Condition
+title: Obesity Level Classification Using Eating Habits and Physical Condition
 image: "/posts/Obesity.png"
 tags: [XGBoost, RandomForest, KNN, Machine Learning, Classification, Python]
 ---
 
-### The dataset contains 2111 rows and 17 columns, with a mix of categorical and numerical variables. Here's a breakdown of the key columns:
+## 🧠 Project Overview
 
-- **Numerical variables**: Age, Height, Weight, FCVC, NCP, CH2O, FAF, TUE
+This project leverages supervised machine learning to classify individuals into obesity categories based on their **demographic data**, **eating habits**, and **physical activity levels**. The dataset consists of **2,111 observations** and **17 features**, capturing both behavioral and physiological variables.  
 
-- **Categorical variables**: Gender, family_history_with_overweight, FAVC, CAEC, SMOKE, SCC, CALC, MTRANS, NObeyesdad
+The target variable, `NObeyesdad`, represents **seven distinct obesity classes**:
+- Insufficient Weight
+- Normal Weight
+- Overweight Level I
+- Overweight Level II
+- Obesity Type I
+- Obesity Type II
+- Obesity Type III
 
-### Dataset
+**Dataset Source:** [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/544/estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition)
 
-Each row in the dataset represents one individual eating habits and physical condition and nutritional behavior. Columns with the description :
-- **Gender** - Male or Female
-- **Age**:  A person's age may affect their metabolic rate and lifestyle, influencing obesity levels.
-- **Height**: Useful for calculating Body Mass Index (BMI), which is closely related to obesity.
-- **Weight**: One of the most critical variables for determining obesity.
-- **Family_History_with_Overweight**: Whether a person has a genetic predisposition to being overweight or obese, which can significantly impact obesity risk.
-- **FAVC** (Frequent Consumption of High-Calorie Food): This reflects dietary habits, particularly the consumption of high-calorie foods, which is a known risk factor for obesity.
-- **FCVC** (Frequency of Consumption of Vegetables): A higher intake of vegetables is typically associated with a healthier diet and lower risk of obesity.
-- **NCP** (Number of Meals): The number of meals consumed daily can impact weight gain, especially if portion sizes are not controlled.
-- **CAEC** (Consumption of Food Between Meals): Eating snacks or meals outside of regular eating hours can contribute to weight gain.
-- **SMOKE** (Smoking Habit): Smoking status can influence metabolism and overall health, affecting obesity.
-- **CH20** (Water Intake: Adequate water intake can aid in digestion and prevent overeating, indirectly influencing weight management.
-- **CALC** (Calories Consumed): Regular or frequent alcohol consumption adds extra calories, contributing to weight gain.
-- **FAF** (Physical Activity Frequency): Frequency of physical activity is a key factor in energy expenditure and weight control.
-- **TUE** (Time Spent Using Technology): Time spent on technology or screens is often linked to sedentary behavior, which can contribute to obesity.
-- **MTRANS** (Transportation Mode): The mode of transportation, such as walking or using public transportation, reflects levels of physical activity in daily life.
+---
 
-The target column is **NObeyesdad** - Obesity level, which we will try to predict based on the other features in the dataset.
+## 📊 Dataset Summary
 
-*Attributes related with eating habits are:*
+- 📌 **Rows:** 2,111  
+- 📌 **Features:** 16 predictors + 1 target (`NObeyesdad`)  
+- 📌 **Balance:** 77% synthetic (via SMOTE), 23% survey-based real data  
+- 📌 **Goal:** Predict obesity level using lifestyle and physiological variables
 
-    - Frequent consumption of high caloric food (FAVC),
+### 📁 Feature Categories
 
-    - Frequency of consumption of vegetables (FCVC),
+- 🥗 **Eating Habits:**  
+  - FAVC (Frequent consumption of high-calorie food)  
+  - FCVC (Frequency of vegetable consumption)  
+  - NCP (Number of daily meals)  
+  - CAEC (Food consumption between meals)  
+  - CH2O (Daily water intake)  
+  - CALC (Alcohol consumption)  
 
-    - Number of main meals (NCP),
+- 🏃‍♂️ **Physical Activity & Lifestyle:**  
+  - FAF (Physical activity frequency)  
+  - SCC (Calorie consumption monitoring)  
+  - TUE (Technology usage per day)  
+  - MTRANS (Transportation mode)
 
-    - Consumption of food between meals (CAEC),
+- 👤 **Demographics:**  
+  - Gender  
+  - Age  
+  - Height  
+  - Weight  
+  - Family_History_with_Overweight
 
-    - Consumption of water daily (CH20),
+- 🎯 **Target Variable:**  
+  - `NObeyesdad` (Multi-class label indicating obesity category)
 
-    - Consumption of alcohol (CALC).
+Each row in the dataset corresponds to one individual, capturing their nutritional behavior, lifestyle factors, and physical condition. These features provide a comprehensive view of potential predictors for obesity and are used to train classification models.
 
 
-*Attributes related with the physical condition are:*
-
-    - Calories consumption monitoring (SCC),
-
-    - Physical activity frequency (FAF),
-
-    - Time using technology devices (TUE),
-
-    - Transportation used (MTRANS),
-
-*Other variables were:*
-
-    - Gender
-
-    - Age
-
-    - Height
-
-    - Weight
-
-This dataset was obtained from the UCI Machine Learning Repository, a well-known resource for datasets in the machine learning community.
 
 ### Import required packages and dataset
 
