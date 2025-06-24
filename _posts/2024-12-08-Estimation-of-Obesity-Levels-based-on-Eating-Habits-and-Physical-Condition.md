@@ -73,7 +73,7 @@ The dotenv extension is already loaded. To reload it, use:
 ```
 
 ```python
-# **Import standard libraries**
+# Import standard libraries
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -89,7 +89,7 @@ sys.path.append(os.getenv('SRC_DIR'))
 ### 📥 Load the Dataset into a DataFrame
 
 ```python
-# **Load the dataset**
+# Load the dataset
 from DataManager import get_data
 
 obesity_df = get_data('../data/ObesityDataSet_raw_and_data_sinthetic.csv')
@@ -107,9 +107,6 @@ Output: (2111, 17)
 ```python
 obesity_df.head()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -252,7 +249,6 @@ obesity_df.head()
   </tbody>
 </table>
 </div>
-
 
 
 ### 📝 Rename Columns for Clarity
@@ -497,8 +493,6 @@ obesity_df_renamed.isnull().sum() # check for null values
 ```
 
 
-
-
     Gender                       0
     Age                          0
     Height                       0
@@ -523,20 +517,11 @@ obesity_df_renamed.isnull().sum() # check for null values
 Similarly with missing values data doesn't have any null values.
 
 
-### Uniqueness Check for Categorical Variables
-
-In this step, we analyze the categorical variables to ensure their values are unique and consistent. This involves:
-
-1. Identifying all categorical columns in the dataset.
-2. Checking the unique values in each categorical column.
-3. Verifying that no redundant or inconsistent categories exist.
-
-
+### 🧾 Uniqueness Check for Categorical Variables
 
 ```python
-# Get unique values for all categorical variables
-
 unique_values_per_column = {col: obesity_df_renamed[col].unique() for col in cat_col}
+
 # Display unique values for each column
 for col, unique_vals in unique_values_per_column.items():
     print(f"Unique values in '{col}': {unique_vals}")
@@ -556,32 +541,20 @@ for col, unique_vals in unique_values_per_column.items():
      'Obesity_Type_III']
     
 
-***Results:***  
-The analysis confirms that all categorical variables have unique and consistent values, with no irregularities detected.
+## Observation:
+✅ All categorical variables contain consistent and interpretable values. No cleaning required.
 
-### Check for Duplicates
-
-In this step, we identify and handle duplicate rows in the dataset to ensure data integrity. The process includes:
-
-1. Scanning the dataset for duplicate entries.
-2. Counting the total number of duplicate rows (if any).
-3. Removing duplicates to avoid redundant data affecting the analysis.
-
+### 🔁 Duplicate Rows
 
 ```python
-# Find duplicated values
 
 obesity_df_renamed.duplicated().sum()
+
 ```
-
-
-
 
     np.int64(24)
 
-
-
-### <span style='color:green'> Observation - 24 values are duplicate </span>
+🟡 24 duplicate rows detected
 
 
 ```python
@@ -592,7 +565,6 @@ obesity_df_renamed.duplicated().sum()
 
 ### Remove duplicates
 
-
 ```python
 # remove duplicates from the dataset
 from DataManager import drop_duplicates
@@ -601,31 +573,12 @@ data = drop_duplicates(obesity_df_renamed)
 data.shape
 ```
 
+## Observation:
+✅ Duplicates removed successfully
 
 
 
-    (2087, 17)
-
-
-
-### Outlier Detection
-
-In this step, we analyze numerical variables to identify and handle potential outliers. Outliers are extreme values that can skew the analysis and affect model performance. The process includes:
-
-1. **Visualization Techniques:**  
-   - Using boxplots to visually identify outliers in numerical data.
-   - Plotting histograms or scatter plots to detect irregular distributions.
-
-2. **Statistical Methods:**  
-   - Calculating z-scores to detect data points that are far from the mean.
-   - Applying the Interquartile Range (IQR) method to identify values outside the acceptable range:  
-
-3. **Handling Outliers:**  
-   - Reviewing whether outliers are genuine or due to errors.
-   - Deciding whether to remove, transform, or retain outliers based on their relevance to the analysis.
-
-
-
+### 🚨 Outlier Detection (IQR Method)
 
 ```python
 def find_outliers_IQR(df,numeric_col):
@@ -636,7 +589,6 @@ def find_outliers_IQR(df,numeric_col):
    outliers = df[((df[numeric_col]<(q1-1.5*IQR)) | (df[numeric_col]>(q3+1.5*IQR)))]
    return outliers
 ```
-
 
 ```python
 numeric_columns = num_col
@@ -652,25 +604,21 @@ for column in numeric_columns:
    
 ```
 
-    167 outliers detected in column Age
-    Max outlier value: 61.0
-    Min outlier value: 35.194089
-    1 outliers detected in column Height
-    Max outlier value: 1.98
-    Min outlier value: 1.98
-    1 outliers detected in column Weight
-    Max outlier value: 173.0
-    Min outlier value: 173.0
-    No outliers detected in column Freq_Veg
-    577 outliers detected in column Num_Meals
-    Max outlier value: 4.0
-    Min outlier value: 1.0
-    No outliers detected in column Water_Intake
-    No outliers detected in column Phys_Activity
-    No outliers detected in column Tech_Use
+## Observation:
+
+✅ Detected outliers in:
+
+Age: 167 values
+
+Height: 1 value
+
+Weight: 1 value
+
+Num_Meals: 577 values
     
 
-### Boxplot visualisation for Outliers detection
+### 📦 Boxplots for Visual Outlier Analysis
+
 We will visualize only the columns we have outliers
 
 
@@ -709,13 +657,15 @@ for column in num_col:
     
 
 
-#### **Age** and **Freq_Meals** contain outliers. We will further investigate the outliers in the Age feature to determine whether to retain or remove them. 
+#### 🧠 Outlier Interpretation
 
-#### Regarding the **Num_Meals** feature, although it contains float values, it behaves more like a categorical variable due to its monolithic nature. Specifically, all meal frequencies above 3.5 are flagged as outliers (577 instances). Since meal frequency could be a significant factor in detecting obesity, we have decided not to remove these outliers.
+Age is right-skewed. We'll retain outliers and revisit during feature engineering.
 
-### Data Visulaization
+Num_Meals behaves like a categorical variable. We'll retain all values as they may be informative.
 
-### 1. Age distribution across different obesity levels (NObeyesdad)
+Height and Weight outliers are minimal and reasonable, so we retain them.
+
+### 📊 Distribution of Age
 
 
 ```python
@@ -738,7 +688,6 @@ plt.show()
     
 
 
-## Age Distribution
 From the figure below, it is evident that Age is right-skewed, suggesting that the dataset predominantly represents certain age groups. This could introduce a bias in the machine learning decision-making process. For now, we will retain the outliers and observe how the skewness of the Age feature impacts the model's performance. Depending on the results, we will decide whether to keep or remove the outliers during the feature engineering phase.
 
 
@@ -761,10 +710,12 @@ plt.title('Age Distribution')
     
 
 
-### <span style='color:green'>Observation - Age variable ranges between 14 and 61, and at this point, we have decided not to remove any data as outliers from the dataset.</<span> 
+## Observation:
 
-### 2. Distribution of different target labels (NObeyesdad)
+✅ Age values range from 14 to 61. We'll retain all entries for now.
 
+
+### 📈 Target Class Distribution
 
 ```python
 # Define the order of obesity levels based on their frequency
@@ -786,11 +737,12 @@ plt.show()
     
 
 
-### <span style='color:green'>Observation  - We can see Obesity type I has highest percentage and then is Obestity_type III </span>
+## Observation:
+
+🔍 Obesity Type I is the most frequent category.
 
 
-### 3. Draw Pairplot to explore relationships between numerical variables
-
+### 🔍 Pairplot of Numerical Features
 
 ```python
 
@@ -804,15 +756,15 @@ plt.show()
     
 
 
-In this scatter plot, we observe a strong linear relationship between Height and Weight, indicating potential multicollinearity. During feature engineering, this relationship might warrant consideration, such as removing one of the variables or using BMI (Body Mass Index) as a combined feature to better represent the data.
+🔎 Height and Weight show strong correlation. Consider engineering BMI.
+
 
 Other features, such as Frequency of Vegetable Consumption (FCVC), Water Intake (CH2O), and Physical Activity Frequency (FAF), do not exhibit a clear linear relationship with other variables. However, their monolithic behavior (clustered values) suggests they may behave more like categorical features despite being numerical. This observation should be considered in the preprocessing and modeling stages to ensure these features are treated appropriately.
 
-### Categorical Column relationship with target
-
+### 📊 Categorical Feature Distribution by Target
 
 ```python
-# Define fixed palettes for different categorical variables
+# Plot categorical variables against Obesity_Level
 binary_palette = {"yes": "#8dd3c7", "no": "#fb8072"}
 # Define the desired order of obesity levels
 obesity_level_order = [
@@ -857,58 +809,33 @@ plt.show()
     
 
 
-# Insights from Categorical Variable Analysis
+# 🧠 Insights from Categorical Analysis
 
-## Gender:
+- Gender: Slight imbalance in Obesity II & III (more males).
 
-- Obesity levels are distributed relatively evenly between males and females beisdes obesity level II and obersity level III. In this two classes we might be see more bias in ML decisions.
+- Family_History: Clear link with higher obesity.
 
+- FAVC: High-calorie food consumption increases with obesity.
 
-## Family History with Overweight:
+- Snacking: "Sometimes" snacking is more frequent in overweight/obese groups.
 
-- The graphs shows that higher obesity level indiviuals has a family history with overweight.
+- SMOKE: No significant pattern with obesity.
 
-## FAVC (Frequent Consumption of High-Caloric Food):
+- SCC (Calorie Monitoring): Lower monitoring in higher obesity levels.
 
-- The graph indicates that frequent consumption of high-caloric food is common across all obesity levels. We are observing that in higher obesity levels are more tend to consumpt high caloric foods.
+- CALC (Alcohol): No strong pattern observed.
 
-## Snacking:
-
-- Individuals who snack "Always" or "Frequently" are more prevalent in the Insufficient Weight or Normal Weight categories, while "Sometimes" dominates in the Overweight and some obesity categories, suggesting overweight people tends to more snacking then the other categories.
-
-## SMOKE:
-
-- Smoking habits appear to have no significant association with obesity levels.
-- In different categories it is mostly selected as 'No'.
-
-## SCC (Calorie Monitoring):
-
-- Individuals who monitor their calories tend to cluster more in normal and lower obesity categories.
-- The graph shows that higher level of obesity level indivuals are nor doing a calorie monitoring.
-
-## CALC (Alcohol Consumption):
-
-- There is no strong evidence that alcohol consumption significantly affects obesity levels. One possible explanation could be the age distribution within obesity levels, as most individuals in higher obesity categories belong to younger age groups, who are often restricted from consuming alcohol.
-
-## MTRANS (Mode of Transportation):
-
--Public transportation users are distributed across all obesity categories, while those who walk tend to be in lower obesity levels; however, there is no strong evidence that transportation type directly affects obesity levels, as factors like urban location or the socioeconomic status of individuals may also play a role.
-
-
-## Key Takeaways:
+- MTRANS: Walkers tend to be in lower obesity levels.
 
 
 
-
-### 4. Correlation Analysis
+### 🔗 Correlation Matrix of Numerical Features
 
 We will perform correlation analysis between numerical features with using Pearson Correlation coefficent. 
 
 
 ```python
-# Let's start by performing correlation analysis, pair plots, and creating distribution plots.
 # Create a heatmap for the correlation matrix using only numerical columns
-# Automatically select numerical columns
 numerical_columns = obesity_df_renamed.select_dtypes(include=['float64', 'int64']).columns
 numerical_correlation_matrix = obesity_df_renamed[numerical_columns].corr()
 
@@ -926,9 +853,10 @@ plt.show()
     
 
 
-### <span style='color:green'> Observation - We noticed a relatively strong positive correlation between the Weight and Height. </span>
+## Observation:
+✅ Strong positive correlation observed between Height and Weight.
+💡 We will define a new feature: BMI = Weight / Height² in the next section.
 
-<b>We will define a new variable (BMI = Weight/Height^2).</b>
 
 ### Feature Enginerring - Adding a new column **BMI** and explore its relationship with other features.
 
