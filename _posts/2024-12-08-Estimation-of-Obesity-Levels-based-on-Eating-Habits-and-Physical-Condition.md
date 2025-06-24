@@ -57,7 +57,7 @@ The target variable, `NObeyesdad`, represents **seven distinct obesity classes**
 
 Each row in the dataset corresponds to one individual, capturing their nutritional behavior, lifestyle factors, and physical condition. These features provide a comprehensive view of potential predictors for obesity and are used to train classification models.
 
-
+---
 
 ### 📦 Import Required Packages and Dataset
 
@@ -858,20 +858,21 @@ plt.show()
 💡 We will define a new feature: BMI = Weight / Height² in the next section.
 
 
-### Feature Enginerring - Adding a new column **BMI** and explore its relationship with other features.
+### Feature Engineering: Body Mass Index (BMI)
+
+In this section, we engineer a new feature: Body Mass Index (BMI). It’s a critical variable in obesity-related analysis as it combines weight and height to assess body fat composition.
 
 
 ```python
-# Define new variable of BMI
-
+# Define new BMI feature
 data['BMI'] = data['Weight'] / (data['Height'] ** 2)
 ```
 
-### BMI distribution across different obesity levels (NObeyesdad)
+### 📊 Exploratory Analysis on BMI
 
+#### 📈 BMI Distribution by Obesity Level
 
 ```python
-# BMI distribution across different obesity levels (NObeyesdad)
 
 plt.figure(figsize=(10,8))
 nobeyesdad_order = ['Insufficient_Weight', 'Normal_Weight', 'Overweight_Level_I','Overweight_Level_II','Obesity_Type_I', 'Obesity_Type_II', 'Obesity_Type_III']  # Adjust according to your dataset
@@ -890,10 +891,11 @@ plt.show()
     
 
 
-### <span style='color:green'>Observation - The box plot effectively illustrates how BMI increases progressively with the severity of obesity levels. The spread of the data becomes wider with higher obesity categories, indicating more variation in BMI as obesity severity increases. Conversely, the Normal Weight and Insufficient Weight categories show more tightly grouped BMI distributions.</span>
+## Observation: 
+✅ BMI increases consistently with obesity severity. Variability also rises at higher obesity levels, while normal and insufficient weight groups are more tightly distributed.
 
-### BMI distribution across different Genders
 
+#### 📈 BMI Distribution by Gender
 
 ```python
 # BMI distribution across different obesity levels (NObeyesdad)
@@ -913,7 +915,8 @@ plt.show()
     
 
 
-### <span style='color:green'>Observation - The plot shows that females, on average, tend to have a higher and more varied BMI compared to males. The broader spread of BMI values in females suggests more diversity in body composition within this group.</span>
+## Observation:
+✅ The plot shows that females, on average, tend to have a higher and more varied BMI compared to males. The broader spread of BMI values in females suggests more diversity in body composition within this group.</span>
 
 
 ```python
@@ -941,14 +944,14 @@ plt.show()
     
 
 
-### <span style='color:green'>Observation - 1) Obesity Type III is predominantly observed in females, 2) Obesity Type II is predominantly observed in males.</span>
+## Observation:
+✅ Females exhibit a wider and higher range of BMI values than males, indicating greater variability in body composition.
 
-### BMI distribution by Age across different obesity levels (NObeyesdad)
+
+#### 📈 BMI distribution by Age 
 
 
 ```python
-# BMI distribution by Age across different obesity levels (NObeyesdad)
-
 plt.figure(figsize=(10,8))
 sns.scatterplot(x='Age', y='BMI', data=data, hue_order= nobeyesdad_order,hue='Obesity_Level', palette='Set3')
 
@@ -965,7 +968,8 @@ plt.show()
     
 
 
-### <span style='color:green'> Observation - Obesity type III is more commonly observed in individuals under the age of 30. </span>
+## Observation:
+✅ Obesity type III is more commonly observed in individuals under the age of 30. </span>
 
 
 ```python
@@ -998,9 +1002,11 @@ plt.show()
     
 
 
-### <span style='color:green'> Observation - Normal Weight or Insufficient weight people seems to be younger on an average than the rest </span>
+## Observation:
+✅ Normal Weight or Insufficient weight people seems to be younger on an average than the rest </span>
 
-### BMI distribution by Family History with Overweight across different obesity levels (NObeyesdad)
+
+#### 📈  BMI distribution by Family History with Overweight 
 
 
 ```python
@@ -1030,12 +1036,13 @@ plt.show()
 ![alt text](/img/posts/combined_notebook_70_0.png)
     
 
+## Observation:
+✅ There is a strong evidence higher BMI levels have a family history of obesity.
 
-### There is a strong evidence higher BMI levels have a family history of obesity.
+✅ No cases of obesity level III have been observed in individuals without a family history of overweight, suggesting that family history plays a significant role, at least in the development of obesity level III. </span>
 
-### <span style='color:green'> Observation - No cases of obesity level III have been observed in individuals without a family history of overweight, suggesting that family history plays a significant role, at least in the development of obesity level III. </span>
 
-### BMI distribution by Frequent Consumption of High-Calorie Food (FAVC) across different obesity levels (NObeyesdad)
+#### 📈 BMI distribution by Frequent Consumption of High-Calorie Food (FAVC) 
 
 
 ```python
@@ -1065,10 +1072,11 @@ plt.show()
 ![alt text](/img/posts/combined_notebook_74_0.png)
     
 
+## Observation:
+✅ There is only one case of Obesity Type III where frequent consumption of high-calorie food is not present, suggesting that frequent consumption of high-calorie food likely plays a key role in the development of Obesity Type III. For other types of obesity and normal weight individuals, the distribution of high-calorie food consumption appears to be similar across all levels.<span>
 
-### <span style='color:green'> Observation - There is only one case of Obesity Type III where frequent consumption of high-calorie food is not present, suggesting that frequent consumption of high-calorie food likely plays a key role in the development of Obesity Type III. For other types of obesity and normal weight individuals, the distribution of high-calorie food consumption appears to be similar across all levels.<span>
 
-### BMI distribution by Number of Meals (NCP) across different obesity levels (NObeyesdad)
+#### 📈 BMI distribution by Number of Meals (NCP) 
 
 
 ```python
@@ -1090,9 +1098,11 @@ plt.show()
     
 
 
-### <span style="color:green"> Observation - Obestiy type III are mostly consuming 3 meals where as normal weight people are consuming 1, 3 or 4 meals </span>
+## Observation:
+✅ Obestiy type III are mostly consuming 3 meals where as normal weight people are consuming 1, 3 or 4 meals </span>
 
-### BMI distribution by Smoking Habit (SMOKE) across different obesity levels (NObeyesdad)
+
+#### 📈 BMI distribution by Smoking Habit (SMOKE)
 
 
 ```python
@@ -1122,8 +1132,8 @@ plt.show()
 ![alt text](/img/posts/combined_notebook_80_0.png)
     
 
-
-### There is insufficient evidence to conclude that smoking has a significant effect on obesity levels. The primary observation is that individuals in Obesity Level III are predominantly non-smokers.
+## Observation:
+✅ There is insufficient evidence to conclude that smoking has a significant effect on obesity levels. The primary observation is that individuals in Obesity Level III are predominantly non-smokers.
 
 
 ```python
@@ -1157,7 +1167,7 @@ def show_pie_chart(df, column_name):
     plt.show()
 ```
 
-### BMI distribution by public transportation (MTRANS) across different obesity levels (NObeyesdad)
+#### 📈 BMI distribution by public transportation (MTRANS) 
 
 
 ```python
@@ -1171,65 +1181,59 @@ show_pie_chart(data, 'Transportation')
     
 
 
-### <span style='color:green'> Observation - 97.6% use some form of vehicles while only ~2.7% prefers walking/using bike That's concerning!</span>
+## Observation:
+✅ 97.6% use some form of vehicles while only ~2.7% prefers walking/using bike That's concerning!</span>
 
-## Exporting the clean data
 
+## 📦 Export Cleaned Dataset
 
 ```python
 data.to_csv('clean_data.csv', index=False)
 ```
 
-### Summary 
-1. We have highest number of people with Obesity_Type I
-2. On average most people have family history of obsesity.
-3. Most people use some form of vehicles while only ~2.7% prefers walking/using bike That's concerning!
-4. More female are Obese as compared to male.
-5. We noticed a relatively strong positive correlation between the Weight and Height.
-6. Outliers are present in Age.
+## 📌 Summary
+
+1. Obesity_Type I has the highest number of individuals.
+2. Most individuals have a family history of obesity.
+3. ~2.7% prefer walking/biking; the rest use vehicles — a concerning imbalance.
+4. More females are classified as obese compared to males.
+5. Strong positive correlation observed between Weight and Height.
+6. Outliers present in Age distribution.
 
 
-# Obesity Estimation - Feature Engineering and Machine Learning Models
+---
 
-### In this notebook we will implement various Machine Learning Classification alogrithms to select the best performing model
-1) Decision Tree </br>
-2) Random Forest</br>
-3) KNN </br>
-4) XGBClassifier</br>
+# 🤖 Obesity Estimation - Feature Engineering & ML Models
+
+We apply multiple classification models to identify the best-performing model for predicting obesity levels.
+
+## 🧠 Models Considered
+1. Decision Tree
+2. Random Forest
+3. K-Nearest Neighbors (KNN)
+4. XGBoost (XGBClassifier)
+
+## 🧭 Workflow Steps
+
+- **Train-Test Split** (Stratified)
+- **One-Hot Encoding** (categorical features)
+- **Standard Scaling** (numerical features)
+- **Label Encoding** (target variable)
+- **GridSearchCV + 5-Fold CV** for performance tuning
+- **Feature Importance Analysis**
 
 
-### We will use the following steps:
-##### Split the Dataset:
-Split the dataset into training and test sets before applying transformations to avoid data leakage.
-##### One-Hot Encoding:
-Apply one-hot encoding only to the training set using fit_transform.</br>
-Use the same encoder to transform the test set with transform, ensuring consistency.</br>
-Handle unknown categories with handle_unknown='ignore'.
-##### Label Encoding for Target Variable:
-Apply label encoding to the entire target column (train + test) for consistent label mappings across splits.
-This is safe as it will not allow information to leak from features to the model.
-##### Feature Scaling:
-Apply scaling (e.g., StandardScaler or MinMaxScaler) only to the training set using fit_transform.
-Use the same scaler to transform the test set with transform.
-##### Save Encoders/Scalers:
-Save the fitted encoders and scalers to ensure consistent transformations for future data.
+---
 
-#####  GridsearchCV and 5-fold cross-validation to compare the accuracies.
-
-#### Feature Selection and Feature importance analysis
+## 🔍 Load and Preprocess Data
 
 
 ```python
 import pandas as pd
-```
 
-
-```python
-# Read data and convert to a dataframe
 clean_data_df = pd.read_csv(r'../data/clean_data.csv')
 
 clean_data_df.info()
-
 clean_data_df.drop('BMI', axis='columns', inplace=True)
 ```
 
@@ -1261,32 +1265,34 @@ clean_data_df.drop('BMI', axis='columns', inplace=True)
     
 
 
-```python
-# Feature columns by preprocessing type: categorical and continous
+---
 
+## 🧾 Identify Feature Types
+
+```python
 cat_cols = ['Gender', 'Family_History', 'High_Cal_Foods_Frequently', 'Snacking','Smoke', 'Calorie_Monitoring', 'Freq_Alcohol', 'Transportation']
 
 num_cols = ['Age', 'Height', 'Weight', 'Freq_Veg', 'Num_Meals','Water_Intake', 'Phys_Activity', 'Tech_Use']
 ```
 
-### Define dataframes X and y 
+---
 
+## 🎯 Define Feature Matrix `X` and Target `y`
 
 ```python
+
 X = clean_data_df.drop('Obesity_Level',axis=1)  
 y = clean_data_df['Obesity_Level'] 
 
 X.shape, y.shape
 ```
 
-
-
-
     ((2087, 16), (2087,))
 
 
+---
 
-### Train test split - stratified splitting
+## 🔄 Stratified Train-Test Split
 Stratified splitting means that when you generate a training / validation dataset split, it will attempt to keep the same percentages of classes in each split.
 
 These dataset divisions are usually generated randomly according to a target variable. However, when doing so, the proportions of the target variable among the different splits can differ, especially in the case of small datasets.
@@ -1294,23 +1300,19 @@ These dataset divisions are usually generated randomly according to a target var
 
 ```python
 from sklearn.model_selection import train_test_split
+
 X_train,X_test,y_train,y_test=train_test_split(X,y,stratify=y,test_size=0.2,random_state=42)
-```
 
-
-```python
 X_train.shape, X_test.shape, y_train.shape, y_test.shape
 ```
-
-
 
 
     ((1669, 16), (418, 16), (1669,), (418,))
 
 
+---
 
-### Scaling - OneHot for cat columns and Standard scaling for num columns
-
+## ⚙️ Preprocessing: One-Hot Encoding + Standard Scaling
 
 ```python
 from sklearn.preprocessing import OneHotEncoder
@@ -1323,9 +1325,6 @@ transformer = make_column_transformer((Sscaler, num_cols), (OneHotEncoder(handle
 
 transformer
 ```
-
-
-
 
 <style>#sk-container-id-3 {
   /* Definition of color scheme common for light and dark mode */
