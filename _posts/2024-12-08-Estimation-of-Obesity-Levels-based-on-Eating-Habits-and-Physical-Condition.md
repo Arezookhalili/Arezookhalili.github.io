@@ -59,27 +59,21 @@ Each row in the dataset corresponds to one individual, capturing their nutrition
 
 
 
-### Import required packages and dataset
-
-
+### 📦 Import Required Packages and Dataset
 
 ```python
 %load_ext dotenv
 %dotenv 
 ```
 
-    The dotenv extension is already loaded. To reload it, use:
-      %reload_ext dotenv
-    
-
-
+The dotenv extension is already loaded. To reload it, use:
+  
 ```python
 %reload_ext dotenv
 ```
 
-
 ```python
-# Import standard libraries
+# **Import standard libraries**
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -88,32 +82,27 @@ warnings.filterwarnings('ignore')
 import os
 import sys
 
+# **Append source directory to Python path**
 sys.path.append(os.getenv('SRC_DIR'))
 ```
 
-### Load the data set into dataframe
-
+### 📥 Load the Dataset into a DataFrame
 
 ```python
-# Load the dataset
+# **Load the dataset**
 from DataManager import get_data
 
 obesity_df = get_data('../data/ObesityDataSet_raw_and_data_sinthetic.csv')
 obesity_df.shape
 ```
 
-    Getting data from ../data/ObesityDataSet_raw_and_data_sinthetic.csv
+Getting data from ../data/ObesityDataSet_raw_and_data_sinthetic.csv
     
+Output: (2111, 17)
 
 
 
-
-    (2111, 17)
-
-
-
-### Display basic information about the dataset
-
+### 🔍 Display Basic Information
 
 ```python
 obesity_df.head()
@@ -266,12 +255,10 @@ obesity_df.head()
 
 
 
-### Renaming the columns for better readability
-
-
+### 📝 Rename Columns for Clarity
 
 ```python
-#from DataManager import rename_columns
+# Rename columns for improved readability
 columnName = {'family_history_with_overweight': 'Family_History', 
                                           'FAVC' : 'High_Cal_Foods_Frequently', 
                                           'FCVC': 'Freq_Veg', 'NCP': 'Num_Meals', 
@@ -289,6 +276,7 @@ columnName = {'family_history_with_overweight': 'Family_History',
 obesity_df_renamed = obesity_df.rename(columns=columnName)
 ```
 
+### ℹ️ Dataset Info After Renaming
 
 ```python
 obesity_df_renamed.info()
@@ -319,13 +307,11 @@ obesity_df_renamed.info()
     dtypes: float64(8), object(9)
     memory usage: 280.5+ KB
     
-
+### 📊 Summary Statistics
 
 ```python
 obesity_df_renamed.describe()
 ```
-
-
 
 
 <div>
@@ -450,38 +436,37 @@ obesity_df_renamed.describe()
 </div>
 
 
+## 🧹 Data Preprocessing
 
-## Data Preprocessing
-In this section, we will perform the following data quality checks to ensure the dataset is clean and ready for analysis:
+In this section, we perform essential data quality checks to prepare the dataset for analysis:
 
 1. **Check for Missing or Null Values**  
-   Identify any missing or null values in the dataset and handle them appropriately (e.g., imputation or removal).
+   Confirm that no values are missing from the dataset.
 
 2. **Check for Uniqueness in Categories**  
-   Verify the uniqueness of categorical data to ensure there are no inconsistencies or redundancies in the categories.
+   Verify the categorical variables contain consistent and non-redundant entries.
 
 3. **Check for Duplicates**  
-   Identify and remove duplicate rows to avoid redundant data that may skew the analysis.
+   Identify and remove duplicate records to ensure data integrity.
 
 4. **Check for Outliers**  
-   Detect and handle outliers in numerical data using statistical methods or visualization techniques (e.g., boxplots, z-scores, or IQR).
+   Detect and assess the impact of outliers on numerical features using statistical and visual methods.
 
+---
+
+### 📌 Identify Numerical vs Categorical Columns
 
 ```python
 num_col = obesity_df_renamed.select_dtypes(include=['float64', 'int64']).columns
 cat_col = obesity_df_renamed.select_dtypes(include=['object']).columns
 ```
 
-### Missing values or null values
-
+### ✅ Missing or Null Values
 
 ```python
 # Find missing values
 obesity_df_renamed.isna().sum()
 ```
-
-
-
 
     Gender                       0
     Age                          0
@@ -504,8 +489,8 @@ obesity_df_renamed.isna().sum()
 
 
 
-From the above analysis, we can confirm that the dataset does not contain any missing or null values. This ensures that no additional imputation or handling for missing data is required.
-
+## Observation:
+✅ No missing or null values were found in the dataset. No imputation is required.
 
 ```python
 obesity_df_renamed.isnull().sum() # check for null values
