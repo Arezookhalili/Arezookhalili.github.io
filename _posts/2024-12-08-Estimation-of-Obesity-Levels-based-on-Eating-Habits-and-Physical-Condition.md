@@ -57,7 +57,6 @@ The target variable, `NObeyesdad`, represents **seven distinct obesity classes**
 
 Each row in the dataset corresponds to one individual, capturing their nutritional behavior, lifestyle factors, and physical condition. These features provide a comprehensive view of potential predictors for obesity and are used to train classification models.
 
----
 
 ### 📦 Import Required Packages and Dataset
 
@@ -86,6 +85,7 @@ import sys
 sys.path.append(os.getenv('SRC_DIR'))
 ```
 
+
 ### 📥 Load the Dataset into a DataFrame
 
 ```python
@@ -95,12 +95,9 @@ from DataManager import get_data
 obesity_df = get_data('../data/ObesityDataSet_raw_and_data_sinthetic.csv')
 obesity_df.shape
 ```
-
-Getting data from ../data/ObesityDataSet_raw_and_data_sinthetic.csv
-    
 Output: (2111, 17)
 
-
+---
 
 ### 🔍 Display Basic Information
 
@@ -272,6 +269,7 @@ columnName = {'family_history_with_overweight': 'Family_History',
 obesity_df_renamed = obesity_df.rename(columns=columnName)
 ```
 
+
 ### ℹ️ Dataset Info After Renaming
 
 ```python
@@ -302,7 +300,8 @@ obesity_df_renamed.info()
      16  Obesity_Level              2111 non-null   object 
     dtypes: float64(8), object(9)
     memory usage: 280.5+ KB
-    
+
+
 ### 📊 Summary Statistics
 
 ```python
@@ -431,6 +430,7 @@ obesity_df_renamed.describe()
 </table>
 </div>
 
+---
 
 ## 🧹 Data Preprocessing
 
@@ -448,7 +448,6 @@ In this section, we perform essential data quality checks to prepare the dataset
 4. **Check for Outliers**  
    Detect and assess the impact of outliers on numerical features using statistical and visual methods.
 
----
 
 ### 📌 Identify Numerical vs Categorical Columns
 
@@ -456,6 +455,7 @@ In this section, we perform essential data quality checks to prepare the dataset
 num_col = obesity_df_renamed.select_dtypes(include=['float64', 'int64']).columns
 cat_col = obesity_df_renamed.select_dtypes(include=['object']).columns
 ```
+
 
 ### ✅ Missing or Null Values
 
@@ -484,8 +484,7 @@ obesity_df_renamed.isna().sum()
     dtype: int64
 
 
-
-## Observation:
+#### Observation:
 ✅ No missing or null values were found in the dataset. No imputation is required.
 
 ```python
@@ -513,7 +512,6 @@ obesity_df_renamed.isnull().sum() # check for null values
     dtype: int64
 
 
-
 Similarly with missing values data doesn't have any null values.
 
 
@@ -525,7 +523,6 @@ unique_values_per_column = {col: obesity_df_renamed[col].unique() for col in cat
 # Display unique values for each column
 for col, unique_vals in unique_values_per_column.items():
     print(f"Unique values in '{col}': {unique_vals}")
-
 ```
 
     Unique values in 'Gender': ['Female' 'Male']
@@ -541,27 +538,26 @@ for col, unique_vals in unique_values_per_column.items():
      'Obesity_Type_III']
     
 
-## Observation:
+#### Observation:
 ✅ All categorical variables contain consistent and interpretable values. No cleaning required.
+
 
 ### 🔁 Duplicate Rows
 
 ```python
-
 obesity_df_renamed.duplicated().sum()
-
 ```
 
     np.int64(24)
 
 🟡 24 duplicate rows detected
 
-
 ```python
 # Show duplicated values if needed
 
 #obesity_df_renamed[obesity_df_renamed.duplicated(keep=False)]
 ```
+
 
 ### Remove duplicates
 
@@ -573,9 +569,8 @@ data = drop_duplicates(obesity_df_renamed)
 data.shape
 ```
 
-## Observation:
+#### Observation:
 ✅ Duplicates removed successfully
-
 
 
 ### 🚨 Outlier Detection (IQR Method)
@@ -588,9 +583,7 @@ def find_outliers_IQR(df,numeric_col):
    IQR=q3-q1
    outliers = df[((df[numeric_col]<(q1-1.5*IQR)) | (df[numeric_col]>(q3+1.5*IQR)))]
    return outliers
-```
 
-```python
 numeric_columns = num_col
 for column in numeric_columns:
     outliers = find_outliers_IQR(data, column)
@@ -601,10 +594,9 @@ for column in numeric_columns:
         print(f"{len(outliers)} outliers detected in column {column}")
         print("Max outlier value:", str(outliers[column].max()))
         print("Min outlier value:", str(outliers[column].min()))
-   
 ```
 
-## Observation:
+#### Observation:
 
 ✅ Detected outliers in:
 
@@ -620,7 +612,6 @@ Num_Meals: 577 values
 ### 📦 Boxplots for Visual Outlier Analysis
 
 We will visualize only the columns we have outliers
-
 
 ```python
 for column in num_col:
@@ -656,8 +647,7 @@ for column in num_col:
 ![alt text](/img/posts/combined_notebook_34_3.png)
     
 
-
-#### 🧠 Outlier Interpretation
+#### Outlier Interpretation
 
 Age is right-skewed. We'll retain outliers and revisit during feature engineering.
 
@@ -665,8 +655,8 @@ Num_Meals behaves like a categorical variable. We'll retain all values as they m
 
 Height and Weight outliers are minimal and reasonable, so we retain them.
 
-### 📊 Distribution of Age
 
+### 📊 Distribution of Age
 
 ```python
 # Age distribution across different obesity levels (NObeyesdad)
@@ -690,9 +680,7 @@ plt.show()
 
 From the figure below, it is evident that Age is right-skewed, suggesting that the dataset predominantly represents certain age groups. This could introduce a bias in the machine learning decision-making process. For now, we will retain the outliers and observe how the skewness of the Age feature impacts the model's performance. Depending on the results, we will decide whether to keep or remove the outliers during the feature engineering phase.
 
-
 ```python
-
 sns.histplot(data['Age'], kde=True, bins=20, color='skyblue')
 plt.title('Age Distribution')
 ```
@@ -710,7 +698,7 @@ plt.title('Age Distribution')
     
 
 
-## Observation:
+#### Observation:
 
 ✅ Age values range from 14 to 61. We'll retain all entries for now.
 
@@ -737,15 +725,14 @@ plt.show()
     
 
 
-## Observation:
+#### Observation:
 
-🔍 Obesity Type I is the most frequent category.
+✅ Obesity Type I is the most frequent category.
 
 
 ### 🔍 Pairplot of Numerical Features
 
 ```python
-
 sns.pairplot(data[['Age', 'Height', 'Weight', 'Freq_Veg', 'Water_Intake', 'Phys_Activity', 'Obesity_Level']], hue='Obesity_Level', palette='Set3')
 plt.show()
 ```
@@ -756,10 +743,13 @@ plt.show()
     
 
 
-🔎 Height and Weight show strong correlation. Consider engineering BMI.
+#### Observation:
+
+✅ Height and Weight show strong correlation. Consider engineering BMI.
 
 
 Other features, such as Frequency of Vegetable Consumption (FCVC), Water Intake (CH2O), and Physical Activity Frequency (FAF), do not exhibit a clear linear relationship with other variables. However, their monolithic behavior (clustered values) suggests they may behave more like categorical features despite being numerical. This observation should be considered in the preprocessing and modeling stages to ensure these features are treated appropriately.
+
 
 ### 📊 Categorical Feature Distribution by Target
 
@@ -807,9 +797,9 @@ plt.show()
     
 ![alt text](/img/posts/combined_notebook_49_0.png)
     
+---
 
-
-# 🧠 Insights from Categorical Analysis
+## 🧠 Insights from Categorical Analysis
 
 - Gender: Slight imbalance in Obesity II & III (more males).
 
@@ -828,11 +818,9 @@ plt.show()
 - MTRANS: Walkers tend to be in lower obesity levels.
 
 
-
 ### 🔗 Correlation Matrix of Numerical Features
 
 We will perform correlation analysis between numerical features with using Pearson Correlation coefficent. 
-
 
 ```python
 # Create a heatmap for the correlation matrix using only numerical columns
@@ -844,7 +832,6 @@ plt.figure(figsize=(10, 8))
 sns.heatmap(numerical_correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f')
 plt.title('Correlation Matrix of Numerical Variables')
 plt.show()
-
 ```
 
 
@@ -858,19 +845,19 @@ plt.show()
 💡 We will define a new feature: BMI = Weight / Height² in the next section.
 
 
-### Feature Engineering: Body Mass Index (BMI)
+### 📐 Feature Engineering: Body Mass Index (BMI) Calculation
 
-In this section, we engineer a new feature: Body Mass Index (BMI). It’s a critical variable in obesity-related analysis as it combines weight and height to assess body fat composition.
-
+We introduce a new feature **BMI** (Body Mass Index) to better capture the interaction between weight and height, and explore its impact on obesity classification.
 
 ```python
 # Define new BMI feature
 data['BMI'] = data['Weight'] / (data['Height'] ** 2)
 ```
 
+
 ### 📊 Exploratory Analysis on BMI
 
-#### 📈 BMI Distribution by Obesity Level
+#### 📈 BMI Distribution Across Obesity Levels
 
 ```python
 
@@ -893,7 +880,6 @@ plt.show()
 
 ## Observation: 
 ✅ BMI increases consistently with obesity severity. Variability also rises at higher obesity levels, while normal and insufficient weight groups are more tightly distributed.
-
 
 #### 📈 BMI Distribution by Gender
 
@@ -918,7 +904,6 @@ plt.show()
 ## Observation:
 ✅ The plot shows that females, on average, tend to have a higher and more varied BMI compared to males. The broader spread of BMI values in females suggests more diversity in body composition within this group.</span>
 
-
 ```python
 plt.figure(figsize=(15,6))
 ax = sns.countplot(x = "Gender", hue = "Obesity_Level",hue_order=nobeyesdad_order, data = data, palette='Set3')
@@ -934,7 +919,6 @@ plt.title("Distribution of Obesity_Level across Gender")
 plt.xlabel('')
 plt.ylabel('')
 
-
 plt.show()
 ```
 
@@ -948,7 +932,7 @@ plt.show()
 ✅ Females exhibit a wider and higher range of BMI values than males, indicating greater variability in body composition.
 
 
-#### 📈 BMI distribution by Age 
+#### 📈 BMI Distribution by Age 
 
 
 ```python
@@ -973,7 +957,6 @@ plt.show()
 
 
 ```python
-
 nobe_bmi_mean = data.groupby('Obesity_Level')['Age'].mean().reset_index()
 
 nobe_bmi_mean_sorted = nobe_bmi_mean.sort_values(by='Age', ascending = False)
@@ -1006,7 +989,7 @@ plt.show()
 ✅ Normal Weight or Insufficient weight people seems to be younger on an average than the rest </span>
 
 
-#### 📈  BMI distribution by Family History with Overweight 
+#### 📈  BMI Distribution by Family History with Overweight 
 
 
 ```python
@@ -1041,9 +1024,7 @@ plt.show()
 
 ✅ No cases of obesity level III have been observed in individuals without a family history of overweight, suggesting that family history plays a significant role, at least in the development of obesity level III. </span>
 
-
-#### 📈 BMI distribution by Frequent Consumption of High-Calorie Food (FAVC) 
-
+#### 📈 BMI Distribution by Frequent Consumption of High-Calorie Food (FAVC) 
 
 ```python
 # Plot BMI distribution by Family History with Overweight across Obesity Levels
@@ -1075,8 +1056,7 @@ plt.show()
 ## Observation:
 ✅ There is only one case of Obesity Type III where frequent consumption of high-calorie food is not present, suggesting that frequent consumption of high-calorie food likely plays a key role in the development of Obesity Type III. For other types of obesity and normal weight individuals, the distribution of high-calorie food consumption appears to be similar across all levels.<span>
 
-
-#### 📈 BMI distribution by Number of Meals (NCP) 
+#### 📈 BMI Distribution by Number of Meals (NCP) 
 
 
 ```python
@@ -1102,8 +1082,7 @@ plt.show()
 ✅ Obestiy type III are mostly consuming 3 meals where as normal weight people are consuming 1, 3 or 4 meals </span>
 
 
-#### 📈 BMI distribution by Smoking Habit (SMOKE)
-
+#### 📈 BMI Distribution by Smoking Habit (SMOKE)
 
 ```python
 # Plot BMI distribution by Smoking across Obesity Levels
@@ -1134,7 +1113,6 @@ plt.show()
 
 ## Observation:
 ✅ There is insufficient evidence to conclude that smoking has a significant effect on obesity levels. The primary observation is that individuals in Obesity Level III are predominantly non-smokers.
-
 
 ```python
 def show_pie_chart(df, column_name):
@@ -1167,8 +1145,7 @@ def show_pie_chart(df, column_name):
     plt.show()
 ```
 
-#### 📈 BMI distribution by public transportation (MTRANS) 
-
+#### 📈 BMI Distribution by Public Transportation (MTRANS) 
 
 ```python
  #Create pie chart for MTRANS
@@ -1184,12 +1161,15 @@ show_pie_chart(data, 'Transportation')
 ## Observation:
 ✅ 97.6% use some form of vehicles while only ~2.7% prefers walking/using bike That's concerning!</span>
 
+---
 
 ## 📦 Export Cleaned Dataset
 
 ```python
 data.to_csv('clean_data.csv', index=False)
 ```
+
+---
 
 ## 📌 Summary
 
@@ -1200,20 +1180,21 @@ data.to_csv('clean_data.csv', index=False)
 5. Strong positive correlation observed between Weight and Height.
 6. Outliers present in Age distribution.
 
-
 ---
 
-# 🤖 Obesity Estimation - Feature Engineering & ML Models
+## 🤖 Obesity Estimation - Feature Engineering & ML Models
 
 We apply multiple classification models to identify the best-performing model for predicting obesity levels.
 
-## 🧠 Models Considered
+
+### 🧠 Models Considered
 1. Decision Tree
 2. Random Forest
 3. K-Nearest Neighbors (KNN)
 4. XGBoost (XGBClassifier)
 
-## 🧭 Workflow Steps
+
+### 🧭 Workflow Steps
 
 - **Train-Test Split** (Stratified)
 - **One-Hot Encoding** (categorical features)
@@ -1222,11 +1203,9 @@ We apply multiple classification models to identify the best-performing model fo
 - **GridSearchCV + 5-Fold CV** for performance tuning
 - **Feature Importance Analysis**
 
-
 ---
 
 ## 🔍 Load and Preprocess Data
-
 
 ```python
 import pandas as pd
@@ -1262,8 +1241,6 @@ clean_data_df.drop('BMI', axis='columns', inplace=True)
      17  BMI                        2087 non-null   float64
     dtypes: float64(9), object(9)
     memory usage: 293.6+ KB
-    
-
 
 ---
 
@@ -1280,7 +1257,6 @@ num_cols = ['Age', 'Height', 'Weight', 'Freq_Veg', 'Num_Meals','Water_Intake', '
 ## 🎯 Define Feature Matrix `X` and Target `y`
 
 ```python
-
 X = clean_data_df.drop('Obesity_Level',axis=1)  
 y = clean_data_df['Obesity_Level'] 
 
@@ -1289,14 +1265,13 @@ X.shape, y.shape
 
     ((2087, 16), (2087,))
 
-
 ---
 
 ## 🔄 Stratified Train-Test Split
+
 Stratified splitting means that when you generate a training / validation dataset split, it will attempt to keep the same percentages of classes in each split.
 
 These dataset divisions are usually generated randomly according to a target variable. However, when doing so, the proportions of the target variable among the different splits can differ, especially in the case of small datasets.
-
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -1306,9 +1281,7 @@ X_train,X_test,y_train,y_test=train_test_split(X,y,stratify=y,test_size=0.2,rand
 X_train.shape, X_test.shape, y_train.shape, y_test.shape
 ```
 
-
     ((1669, 16), (418, 16), (1669,), (418,))
-
 
 ---
 
@@ -1753,9 +1726,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                   verbose=True)</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label  sk-toggleable__label-arrow ">standardscaler</label><div class="sk-toggleable__content "><pre>[&#x27;Age&#x27;, &#x27;Height&#x27;, &#x27;Weight&#x27;, &#x27;Freq_Veg&#x27;, &#x27;Num_Meals&#x27;, &#x27;Water_Intake&#x27;, &#x27;Phys_Activity&#x27;, &#x27;Tech_Use&#x27;]</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-13" type="checkbox" ><label for="sk-estimator-id-13" class="sk-toggleable__label  sk-toggleable__label-arrow ">&nbsp;StandardScaler<a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></label><div class="sk-toggleable__content "><pre>StandardScaler()</pre></div> </div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-14" type="checkbox" ><label for="sk-estimator-id-14" class="sk-toggleable__label  sk-toggleable__label-arrow ">onehotencoder</label><div class="sk-toggleable__content "><pre>[&#x27;Gender&#x27;, &#x27;Family_History&#x27;, &#x27;High_Cal_Foods_Frequently&#x27;, &#x27;Snacking&#x27;, &#x27;Smoke&#x27;, &#x27;Calorie_Monitoring&#x27;, &#x27;Freq_Alcohol&#x27;, &#x27;Transportation&#x27;]</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-15" type="checkbox" ><label for="sk-estimator-id-15" class="sk-toggleable__label  sk-toggleable__label-arrow ">&nbsp;OneHotEncoder<a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></label><div class="sk-toggleable__content "><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;)</pre></div> </div></div></div></div></div></div></div></div></div>
 
 
-
-### X_train encoding
-
+### 🔄 X_train Encoding
 
 ```python
 # Transforming
@@ -1801,11 +1772,12 @@ print(X_train.shape)
            'onehotencoder__Transportation_Public_Transportation',
            'onehotencoder__Transportation_Walking'],
           dtype='object')
+          ```
+          
     (1669, 31)
     
 
-### X_test encoding
-
+### 🔄 X_test Encoding
 
 ```python
 # Transforming
@@ -2248,11 +2220,9 @@ X_train.head()
 </div>
 
 
+### 🧬 Apply Label Encoder
 
-### Apply Label encoder
-
-#### Encoding y_train
-
+#### 🔡 Encoding y_train
 
 ```python
 from sklearn.preprocessing import LabelEncoder
@@ -2261,22 +2231,15 @@ le = LabelEncoder()
 y_train_encoded = le.fit_transform(y_train)
 
 #y_train.head(10) , y_train_encoded[0:10]
-
-
-
 ```
 
-#### Encoding y_test
-
+#### 🔡 Encoding y_test
 
 ```python
 le_test = LabelEncoder()
 y_test_encoded = le_test.fit_transform(y_test)
 y_test.head(10) , y_test_encoded[0:10]
 ```
-
-
-
 
     (1153    Overweight_Level_II
      132          Obesity_Type_I
@@ -2292,9 +2255,7 @@ y_test.head(10) , y_test_encoded[0:10]
      array([6, 2, 4, 5, 2, 2, 2, 6, 4, 3]))
 
 
-
-### Classifier Models 
-
+### 🤖 Classifier Models
 
 ```python
 from sklearn.ensemble import RandomForestClassifier
@@ -2303,8 +2264,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from xgboost import XGBClassifier
 ```
 
-##### Models in consideration - RandomForest, DecisionTree, KNN, XGBoost
-
+#### 🧰 Models in Consideration
 
 ```python
 models={'RandomForest':RandomForestClassifier(),
@@ -2313,8 +2273,7 @@ models={'RandomForest':RandomForestClassifier(),
         'xgbc': XGBClassifier()}
 ```
 
-##### Scoring for measuring model performance
-
+#### 🧪 Scoring for Measuring Model Performance
 
 ```python
 from sklearn.metrics import make_scorer, precision_score, recall_score, f1_score
@@ -2325,8 +2284,7 @@ scoring = {
     'f1': make_scorer(f1_score, average='weighted')}
 ```
 
-##### Model Evalution
-
+#### 🧾 Model Evaluation
 
 ```python
 # %load ../models/Models_eval.py
@@ -2387,10 +2345,6 @@ def evaluate_models(X, Y, models, scorings, cross_validation):
         print(f"F1 Score: {model_scores['f1']:.4f}")
     
     return result
-```
-
-
-```python
 
 result = evaluate_models(X_train, y_train_encoded, models, scoring, 5)
 ```
@@ -2421,16 +2375,13 @@ result = evaluate_models(X_train, y_train_encoded, models, scoring, 5)
     F1 Score: 0.9628
     
 
-### Models Performance Visuals
-
+### 📊 Models Performance Visuals
 
 ```python
 result_df = pd.DataFrame(result).T
-
 ```
 
-#### Accuracy Comparison
-
+#### 📈 Accuracy Comparison
 
 ```python
 # Plot Accuracy
@@ -2446,21 +2397,13 @@ plt.tight_layout()
 plt.show()
 ```
 
-    /var/folders/mx/wmp0fhkx7bv5my3zvkgnkwj80000gn/T/ipykernel_64756/1895503191.py:5: FutureWarning: 
-    
-    Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
-    
-      sns.barplot(x=result_df.index, y='accuracy', data=result_df, palette="Blues_d")
-    
-
 
     
 ![alt text](/img/posts/combined_notebook_125_1.png)
     
 
 
-#### Precision Comparison
-
+#### 🎯 Precision Comparison
 
 ```python
 # Plot Precision
@@ -2474,12 +2417,6 @@ plt.tight_layout()
 plt.show()
 ```
 
-    /var/folders/mx/wmp0fhkx7bv5my3zvkgnkwj80000gn/T/ipykernel_64756/3424882693.py:3: FutureWarning: 
-    
-    Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
-    
-      sns.barplot(x=result_df.index, y='precision', data=result_df, palette="Greens_d")
-    
 
 
     
@@ -2487,8 +2424,7 @@ plt.show()
     
 
 
-#### Recall Comparison
-
+#### 🔁 Recall Comparison
 
 ```python
 # Plot Precision
@@ -2502,11 +2438,6 @@ plt.tight_layout()
 plt.show()
 ```
 
-    /var/folders/mx/wmp0fhkx7bv5my3zvkgnkwj80000gn/T/ipykernel_64756/900479777.py:3: FutureWarning: 
-    
-    Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
-    
-      sns.barplot(x=result_df.index, y='recall', data=result_df, palette="Oranges_d")
     
 
 
@@ -2515,10 +2446,11 @@ plt.show()
     
 
 
-### Based on Visuals above we can clearly notice that RandomForest and XGBC models are showing good results. We will tune the parameters next to find the best suitable model
+## Observation:
+✅ Based on Visuals above we can clearly notice that RandomForest and XGBC models are showing good results. We will tune the parameters next to find the best suitable model
 
-## Creating a comparison table for the Models
 
+### 📋 Creating a Comparison Table for the Models
 
 ```python
 models = ['RandomForest', 'DecisionTree', 'KNeighbors', 'xgbc']
@@ -2593,18 +2525,16 @@ display(result_df)
 </div>
 
 
-The results highlight that the xgbc model outperforms others with the highest accuracy (96.3%), precision (96.3%), recall (96.3%), and F1 score (96.3%), demonstrating its superior ability to classify data correctly. The RandomForest model also shows strong performance, achieving an accuracy of 93.7%, making it a competitive alternative. In comparison, the DecisionTree model and KNeighbors model perform slightly lower, with accuracies of 92.2% and 81.1%, respectively. Based on these findings, we have decided to conduct further comparisons between RandomForest and XGBoost to refine our model selection process.
+## Observation:
+✅ The results highlight that the xgbc model outperforms others with the highest accuracy (96.3%), precision (96.3%), recall (96.3%), and F1 score (96.3%), demonstrating its superior ability to classify data correctly. The RandomForest model also shows strong performance, achieving an accuracy of 93.7%, making it a competitive alternative. In comparison, the DecisionTree model and KNeighbors model perform slightly lower, with accuracies of 92.2% and 81.1%, respectively. Based on these findings, we have decided to conduct further comparisons between RandomForest and XGBoost to refine our model selection process.
 
-#### Hyper tuning the two best models - Random Forest and XGBC
 
+### ⚙️ Hyperparameter Tuning: Random Forest & XGBoost
 
 ```python
 models={'RandomForest_hyper_tuned':RandomForestClassifier(),
         'xgbc_hyper_tuned': XGBClassifier()}
-```
 
-
-```python
 # Hyperparameter grids for tuning models
 param_grids = {
     # Random Forest Hyperparameter Grid
@@ -2624,10 +2554,7 @@ param_grids = {
         'random_state': [42]                               # Ensure reproducibility
     }
 }
-```
 
-
-```python
 best_models_hyper_tuned, result_hyper_tuned = grid_search_cv_eval(X_train, y_train_encoded, models, param_grids, scoring, cross_validation=5)
 best_models_hyper_tuned, result_hyper_tuned
 ```
@@ -2659,9 +2586,6 @@ best_models_hyper_tuned, result_hyper_tuned
     Best recall: 0.9664
     
 
-
-
-
     ({'RandomForest_hyper_tuned': RandomForestClassifier(max_depth=50, min_samples_split=5, n_estimators=400),
       'xgbc_hyper_tuned': XGBClassifier(base_score=None, booster=None, callbacks=None,
                     colsample_bylevel=None, colsample_bynode=None,
@@ -2692,9 +2616,7 @@ best_models_hyper_tuned, result_hyper_tuned
        'recall': 0.9664472856089622}})
 
 
-
-## Confusion Matrix
-
+### 📉 Confusion Matrix
 
 ```python
 from sklearn.metrics import confusion_matrix
@@ -2720,8 +2642,7 @@ plt.show()
     
 
 
-### Feature Importance
-
+### 🌲 Feature Importance (Random Forest)
 
 ```python
 from sklearn.ensemble import RandomForestClassifier
@@ -2742,32 +2663,20 @@ plt.title("Feature importance")
 ax = sns.barplot(y=fimp.index, x=fimp.values, palette=palette, orient='h')
 ```
 
-    /var/folders/mx/wmp0fhkx7bv5my3zvkgnkwj80000gn/T/ipykernel_64756/857603233.py:16: FutureWarning: 
-    
-    Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `y` variable to `hue` and set `legend=False` for the same effect.
-    
-      ax = sns.barplot(y=fimp.index, x=fimp.values, palette=palette, orient='h')
-    /var/folders/mx/wmp0fhkx7bv5my3zvkgnkwj80000gn/T/ipykernel_64756/857603233.py:16: UserWarning: 
-    The palette list has fewer values (4) than needed (31) and will cycle, which may produce an uninterpretable plot.
-      ax = sns.barplot(y=fimp.index, x=fimp.values, palette=palette, orient='h')
-    
-
+ 
 
     
 ![alt text](/img/posts/combined_notebook_141_1.png)
     
 
 
-#### Classic feature attributions
+#### 🎯 Classic Feature Attributions (XGBoost)
 Here we try out the global feature importance calcuations that come with XGBoost. 
-
 
 ```python
 xgboot_model = best_models_hyper_tuned.get('xgbc_hyper_tuned')
 xgboot_model
 ```
-
-
 
 
 <style>#sk-container-id-4 {
@@ -3197,8 +3106,6 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
               num_parallel_tree=None, ...)</pre></div> </div></div></div></div>
 
 
-
-
 ```python
 import xgboost
 xgboost.plot_importance(xgboot_model)
@@ -3238,11 +3145,9 @@ plt.show()
     
 
 
-### SHAP Explainibity
-
+### 🧠 SHAP Explainability Setup
 
 ```python
-### code here
 
 import shap
 
@@ -3250,8 +3155,7 @@ import shap
 shap.initjs()
 ```
 
-    IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-    
+   
 
 
 <div align='center'><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAWCAYAAAA1vze2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAdxJREFUeNq0Vt1Rg0AQJjcpgBJiBWIFkgoMFYhPPAIVECogPuYpdJBYgXQQrMCUkA50V7+d2ZwXuXPGm9khHLu3f9+3l1nkWNvtNqfHLgpfQ1EUS3tz5nAQ0+NIsiAZSc6eDlI8M3J00B/mDuUKDk6kfOebAgW3pkdD0pFcODGW4gKKvOrAUm04MA4QDt1OEIXU9hDigfS5rC1eS5T90gltck1Xrizo257kgySZcNRzgCSxCvgiE9nckPJo2b/B2AcEkk2OwL8bD8gmOKR1GPbaCUqxEgTq0tLvgb6zfo7+DgYGkkWL2tqLDV4RSITfbHPPfJKIrWz4nJQTMPAWA7IbD6imcNaDeDfgk+4No+wZr40BL3g9eQJJCFqRQ54KiSt72lsLpE3o3MCBSxDuq4yOckU2hKXRuwBH3OyMR4g1UpyTYw6mlmBqNdUXRM1NfyF5EPI6JkcpIDBIX8jX6DR/6ckAZJ0wEAdLR8DEk6OfC1Pp8BKo6TQIwPJbvJ6toK5lmuvJoRtfK6Ym1iRYIarRo2UyYHvRN5qpakR3yoizWrouoyuXXQqI185LCw07op5ZyCRGL99h24InP0e9xdQukEKVmhzrqZuRIfwISB//cP3Wk3f8f/yR+BRgAHu00HjLcEQBAAAAAElFTkSuQmCC' /></div><script charset='utf-8'>/*! For license information please see bundle.js.LICENSE.txt */
@@ -3259,12 +3163,14 @@ shap.initjs()
 </script>
 
 
+### 🧠 SHAP Explainability – TreeExplainer (XGBoost)
 
 ```python
 explainer = shap.TreeExplainer(xgboot_model)
 shap_values = explainer.shap_values(X_train)
 ```
 
+####📌 SHAP Summary Plot (All Features)
 
 ```python
 shap.summary_plot(shap_values, X_train, plot_type="bar")
@@ -3287,31 +3193,30 @@ class_mapping = {
     'Obesity_Type_II': 5,
     'Obesity_Type_III': 6
 }
-
 ```
 
-In this above plot here are the key outputs;
+
+### 🧠 Feature Importance Insights
 
 **Top Features:**
 
-- Weight is the most dominant feature, influencing predictions for all classes substantially.
-- Height and Freq_Veg also have strong impacts across multiple classes.
+- Weight is the most dominant feature, influencing predictions across all classes substantially.
+- Height and Freq_Veg also show strong predictive power across multiple obesity levels.
 
 **Lower Features:**
 
 - Features like Transportation_Walking, Snacking_Always, and Calorie_Monitoring_no contribute very little to    predictions and may not add significant predictive power.
 
-**Class-Specific Feature Importance:**
+**Class-Specific Observations:**
 
-Features like Weight and Height have significant contributions to multiple classes (e.g., Class 0 (insuffcient weight) and Class 4- Obesity_Type 1).
-Some features may contribute more selectively to certain classes (e.g., Transportation_Public_Transportation is minimal overall but may still have some relevance for a specific class).
+- Weight and Height influence multiple classes, especially Class 0 (Insufficient_Weight) and Class 4 (Obesity_Type_I).
+- Some features (e.g., Transportation_Public_Transportation) may have niche relevance to specific classes.
+- Overall, feature contribution patterns are fairly consistent across obesity levels.
 
-Overall all classes look like a similar contribution.
 
-## Feature Engineering
+### 🛠️ Feature Engineering (Without Height & Weight)
 
-Here I will remove the height and weight from the dataset to clearly give indications which parameter has the main effect on the obesity. After Now I will train the XGBoost one more time with new dataset.
-
+To assess the true impact of lifestyle and behavioral factors on obesity prediction, we retrain the XGBoost model after removing Weight and Height from the dataset.
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -3324,24 +3229,14 @@ dataset_cleaned = clean_data_df.drop(columns=['Weight', 'Height'])
 #  Separate features and target variable
 X_new = dataset_cleaned.drop(columns=['Obesity_Level'])
 y_new = dataset_cleaned['Obesity_Level']
-```
 
-
-```python
 # Encode categorical target variable
 le = LabelEncoder()
 y_encoded_new = le.fit_transform(y)
-```
 
-
-```python
 # Split data into training and testing sets
 X_train_new, X_test_new, y_train_new, y_test_new = train_test_split(X_new, y_encoded_new, stratify=y_encoded_new, test_size=0.2, random_state=42)
 
-```
-
-
-```python
 # One-Hot Encode Categorical Features
 categorical_features = ['Gender', 'Family_History', 'High_Cal_Foods_Frequently', 'Snacking', 
                         'Smoke', 'Calorie_Monitoring', 'Freq_Alcohol', 'Transportation']
@@ -3358,10 +3253,6 @@ scaler = MinMaxScaler()
 X_train_new[num_cols] = scaler.fit_transform(X_train_new[num_cols])
 X_test_new[num_cols] = scaler.transform(X_test_new[num_cols])
 
-```
-
-
-```python
 xgb_params = {
     'learning_rate': 0.3,
     'n_estimators': 200,
@@ -3371,10 +3262,6 @@ xgb_params = {
     'verbosity': 0
 }
 
-```
-
-
-```python
 #xgb_model = XGBClassifier(xgb_params)
 xgb_model = xgboot_model
 xgb_model.fit(X_train_new, y_train_new)
@@ -3840,7 +3727,8 @@ xgb_metrics
 
 
 
-#### All performance metrics dropped as expected but at least know we have a real persepective of real cause of the obersity levels.
+## Observation:
+✅ All performance metrics dropped as expected but at least know we have a real persepective of real cause of the obersity levels.
 
 Let's also try the Random Forest
 
@@ -3886,9 +3774,7 @@ rf_metrics
      'F1 Score': 0.8368984104506949}
 
 
-
-Comparison of XGBoost and Random Forest with their performance metrics
-
+### 🔍 Comparison of XGBoost and Random Forest with their performance metrics
 
 ```python
 # Combine metrics into a DataFrame for comparison which exclude Weight and Height
@@ -3948,8 +3834,8 @@ comparison_df
 
 From this comparison, we observe that the Random Forest model demonstrates better performance. Therefore, we will proceed with using the Random Forest model's output for feature selection.
 
-## Feature Importance with using Random Forest, XGBoost and SHAP
 
+### 📌 Feature Importance with Random Forest, XGBoost, and SHAP
 
 ```python
 # Compute Random Forest feature importance
@@ -3960,10 +3846,7 @@ rf_feature_importance_df = pd.DataFrame({
     'Feature': X_train_new.columns,
     'Importance': rf_feature_importance
 }).sort_values(by='Importance', ascending=False)
-```
 
-
-```python
 # Sort the feature importances for better visualization
 rf_feature_importance_df = rf_feature_importance_df.sort_values(by="Importance", ascending=False)
 
@@ -3977,7 +3860,7 @@ plt.gca().invert_yaxis()  # Highest importance at the top
 plt.tight_layout()
 plt.show()
 ```
-
+#### 🌲 Random Forest Feature Importance
 
     
 !![alt text](/img/posts/combined_notebook_170_0.png)
@@ -4006,13 +3889,12 @@ plt.title('XGBoost Feature Importance (Gain)')
 plt.gca().invert_yaxis()
 plt.tight_layout()
 plt.show()
-
 ```
 
 
     <Figure size 1200x800 with 0 Axes>
 
-
+#### ⚡ XGBoost Feature Importance
 
     
 !![alt text](/img/posts/combined_notebook_171_1.png)
@@ -4027,7 +3909,6 @@ plt.show()
 
 
 ```python
-
 # SHAP for Random Forest
 explainer_rf = shap.TreeExplainer(rf_model)
 shap_values_rf = explainer_rf.shap_values(X_train_new)
@@ -4035,10 +3916,10 @@ shap_values_rf = explainer_rf.shap_values(X_train_new)
 # SHAP for XGBoost
 explainer_xgb = shap.TreeExplainer(xgb_model)
 shap_values_xgb = explainer_xgb.shap_values(X_train_new)
-
 ```
 
-## SHAP Values for Multi-Class Classification
+
+### 🔍 SHAP Values for Multi-Class Classification
 
 Refer: https://medium.com/biased-algorithms/shap-values-for-multiclass-classification-2a1b93f69c63
 
@@ -4078,54 +3959,53 @@ shap.summary_plot(shap_values_xgb, X_train_new, plot_type="bar")
     
 
 
-## Key outputs from multi-class SHAP visualitions.
+### 🧠 SHAP Class-wise Contributions
 
-### Class-wise Feature Contributions
-
-#### Class 0 (Insufficient Weight)
+#### 🎯 Class 0 (Insufficient Weight)
 **Top contributing features:**
 - **Age**: Significant impact for Class 0 (blue bar is prominent for this feature).
 - **Freq_Veg**: Positive contribution, showing a noticeable influence on predictions for this class.
 - **Water_Intake**: Moderate contribution, likely affecting predictions toward Class 0.
 
-#### Class 1 (Normal Weight)
+#### 🎯 Class 1 (Normal Weight)
 **Top contributing features:**
 - **Freq_Veg**: Strong influence on predictions for Class 1 (pink bar is prominent).
 - **Age**: Also contributes notably to predictions for this class.
 - **Gender_Male**: Adds some effect, as seen by the visible pink bar for Class 1.
 
-#### Class 2 (Overweight Level I)
+#### 🎯 Class 2 (Overweight Level I)
 **Top contributing features:**
 - **Age**: Strong effect, indicated by a visible green bar for this class.
 - **Gender_Male**: Noticeable contribution to Class 2 predictions.
 - **Freq_Veg**: Moderately affects predictions.
 
-#### Class 3 (Overweight Level II)
+#### 🎯 Class 3 (Overweight Level II)
 **Top contributing features:**
 - **Age**: Significant contribution for Class 3 (orange bar is prominent).
 - **Gender_Male**: Adds noticeable effect to Class 3 predictions.
 - **Freq_Veg**: Also contributes moderately.
 
-#### Class 4 (Obesity Type I)
+#### 🎯 Class 4 (Obesity Type I)
 **Top contributing features:**
 - **Age**: The strongest feature for this class, with a visible purple bar.
 - **Water_Intake**: Moderate influence for Class 4 predictions.
 - **Gender_Male**: Somewhat affects predictions for Class 4.
 
-#### Class 5 (Obesity Type II)
+#### 🎯 Class 5 (Obesity Type II)
 **Top contributing features:**
 - **Age**: Significant effect, shown by a brown bar for this class.
 - **Tech_Use**: Noticeable contribution to Class 5 predictions.
 - **Freq_Veg**: Moderate influence for this class.
 
-#### Class 6 (Obesity Type III)
+#### 🎯 Class 6 (Obesity Type III)
 **Top contributing features:**
 - **Age**: Strongest influence, indicated by a teal bar.
 - **Freq_Veg**: Noticeable contribution to Class 6 predictions.
 - **Water_Intake**: Adds a moderate effect.
 
 
-## Feature Selection
+### 🔧 Feature Selection Based on SHAP
+
 In this section, we will select some of the key features and rerun the code using the selected features to make a comparison. From the previous SHAP visualizations, we observed that the top contributors are 
 - Age, 
 - Frequency of Vegetables (Freq_Veg), 
@@ -4182,9 +4062,7 @@ rf_metrics_selected
      'F1 Score': 0.7975809440301639}
 
 
-
-### Comparison of Baseline Random Forest Model vs Selected features Model
-
+### 📊 Model Performance Comparison
 
 ```python
 # Combine metrics into a DataFrame for comparison
@@ -4405,15 +4283,11 @@ styled_table
   </tbody>
 </table>
 
+---
 
-
-
-## Conclusion
-
+## 🧾 Conclusion
 
 Based on the results and observations from the above tables and SHAP visualizations, here is the overall analysis and conclusion:
-
----
 
 ### 1. XGBoost Performance
 - **Best Overall Performance**: XGBoost (`XGBoost all features`) consistently outperformed all other models across all metrics, achieving the highest:
@@ -4423,10 +4297,9 @@ Based on the results and observations from the above tables and SHAP visualizati
   - **F1 Score**: 96.3%
 - **Conclusion**: XGBoost is the most robust and reliable model for this dataset when using all features. It should be considered as the primary model for deployment or further analysis.
 
----
 
 ### 2. Random Forest Models
-#### Baseline Random Forest (`Random Forest all features`)
+#### 2.1. Baseline Random Forest (`Random Forest all features`)
 - Achieved strong performance, second only to XGBoost, with:
   - **Accuracy**: 93.2%
   - **Precision**: 93.9%
@@ -4434,7 +4307,7 @@ Based on the results and observations from the above tables and SHAP visualizati
   - **F1 Score**: 93.6%
 - **Conclusion**: Random Forest all features is a strong alternative to XGBoost, offering a balance between accuracy and simplicity.
 
-#### Random Forest EWH (Excluding Weight and Height)
+#### 2.2. Random Forest EWH (Excluding Weight and Height)
 **Note**: `Weight` and `6eight` were excluded from this model to reduce potential bias in the dataset before final feature selection.
 - While its performance dropped slightly compared to the full-feature model, it still performed reasonably well:
   - **Accuracy**: 83.7%
@@ -4446,7 +4319,7 @@ Based on the results and observations from the above tables and SHAP visualizati
 ---
 
 ### 3. Decision Tree and K-Nearest Neighbors
-#### Decision Tree
+#### 3.1. Decision Tree
 - Performed moderately well with:
   - **Accuracy**: 91.9%
   - **Precision**: 92.3%
@@ -4454,7 +4327,7 @@ Based on the results and observations from the above tables and SHAP visualizati
   - **F1 Score**: 91.9%
 - **Conclusion**: The Decision Tree is a simpler model with relatively high performance but lags behind Random Forest and XGBoost. It could be a good choice if interpretability is a priority.
 
-#### K-Nearest Neighbors
+#### 3.2. K-Nearest Neighbors
 - Showed the weakest performance with:
   - **Accuracy**: 81.1%
   - **Precision**: 81.0%
