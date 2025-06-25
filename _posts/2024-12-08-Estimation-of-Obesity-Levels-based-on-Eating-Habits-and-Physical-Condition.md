@@ -1053,7 +1053,7 @@ plt.show()
 ![alt text](/img/posts/combined_notebook_74_0.png)
     
 
-## Observation:
+#### Observation:
 ✅ There is only one case of Obesity Type III where frequent consumption of high-calorie food is not present, suggesting that frequent consumption of high-calorie food likely plays a key role in the development of Obesity Type III. For other types of obesity and normal weight individuals, the distribution of high-calorie food consumption appears to be similar across all levels.<span>
 
 #### 📈 BMI Distribution by Number of Meals (NCP) 
@@ -1078,7 +1078,7 @@ plt.show()
     
 
 
-## Observation:
+#### Observation:
 ✅ Obestiy type III are mostly consuming 3 meals where as normal weight people are consuming 1, 3 or 4 meals </span>
 
 
@@ -1111,7 +1111,7 @@ plt.show()
 ![alt text](/img/posts/combined_notebook_80_0.png)
     
 
-## Observation:
+#### Observation:
 ✅ There is insufficient evidence to conclude that smoking has a significant effect on obesity levels. The primary observation is that individuals in Obesity Level III are predominantly non-smokers.
 
 ```python
